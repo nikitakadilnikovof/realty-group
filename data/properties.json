@@ -76,6 +76,7 @@
       "createdAt": "2026-05-25",
       "updatedAt": "2026-05-25"
     },
+    
     {
       "id": "tr-antalya-aksu-altintas-001",
       "status": "sale",
@@ -203,6 +204,7 @@
         "furnished": true,
         "parking": false
       },
+      
       "details": {
         "tr": ["65 m2", "Esyali", "Aylik kira"],
         "ru": ["65 м²", "Меблирована", "Помесячно"],

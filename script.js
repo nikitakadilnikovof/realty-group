@@ -1,10 +1,10 @@
-const SUPPORTED_LANGUAGES = {
-  tr: { name: 'Türkçe', page: 'index.html', locale: 'tr-TR' },
+﻿const SUPPORTED_LANGUAGES = {
+  tr: { name: 'Turkce', page: 'index.html', locale: 'tr-TR' },
   ru: { name: 'Русский', page: 'ru.html', locale: 'ru-RU' },
   en: { name: 'English', page: 'en.html', locale: 'en-US' },
-  fr: { name: 'Français', page: 'fr.html', locale: 'fr-FR' },
+  fr: { name: 'Francais', page: 'fr.html', locale: 'fr-FR' },
   de: { name: 'Deutsch', page: 'de.html', locale: 'de-DE' },
-  ar: { name: 'العربية', page: 'ar.html', locale: 'ar' }
+  ar: { name: 'Arabic', page: 'ar.html', locale: 'ar' }
 };
 
 const SUPPORTED_CURRENCIES = ['USD', 'TRY', 'EUR', 'RUB', 'GBP', 'CHF', 'CAD', 'SEK'];
@@ -22,310 +22,247 @@ const FALLBACK_RATES = {
 
 const I18N = {
   tr: {
-    languageName: 'Türkçe',
-    callNow: 'HEMEN ARAYIN',
-    buy: 'SATIN AL',
-    sell: 'SAT',
-    rent: 'KIRALA',
-    contacts: 'ILETISIM',
-    appointment: 'RANDEVU AL',
-    siteLanguage: 'SITE DILI',
-    currency: 'PARA BIRIMI',
-    measurement: 'OLCU BIRIMI',
-    heroTitle: "Antalya'da satilik ve kiralik gayrimenkuller",
-    heroText: 'Bolge, butce ve yasam tarzina gore secilmis guncel portfoy.',
-    filters: 'FILTRELER',
-    propertyType: 'Emlak tipi',
-    allTypes: 'Tumu',
-    land: 'Arsa',
-    apartment: 'Daire',
-    price: 'Fiyat',
-    area: 'Alan (m2)',
-    from: 'Min',
-    to: 'Max',
-    resetFilters: 'Filtreleri sifirla',
-    catalogEyebrow: 'Katalog',
-    catalogTitle: 'Antalya gayrimenkulleri',
-    sortNewest: 'Once yeni',
-    sortPriceAsc: 'Ucuzdan pahaliya',
-    sortPriceDesc: 'Pahalidan ucuza',
-    emptyState: 'Uygun ilan bulunamadi.',
-    details: 'Detaylari gor',
-    appointmentTitle: 'Randevu olustur',
-    firstName: 'Ad',
-    lastName: 'Soyad',
-    phone: 'Telefon',
-    message: 'Mesaj',
-    send: 'GONDER',
-    description: 'Aciklama',
-    features: 'Ozellikler',
-    gallery: 'Galeri',
-    backToCatalog: 'Kataloga don',
-    notFound: 'Ilan bulunamadi',
-    rooms: 'Oda',
-    floor: 'Kat',
-    bedrooms: 'Yatak odasi',
-    bathrooms: 'Banyo',
-    furnished: 'Esyali',
-    parking: 'Otopark',
-    yes: 'Evet',
-    no: 'Hayir',
-    month: '/ay'
+    languageName: 'Turkce', callNow: 'HEMEN ARAYIN', buy: 'SATIN AL', sell: 'SAT', rent: 'KIRALA', contacts: 'ILETISIM', appointment: 'RANDEVU AL', siteLanguage: 'SITE DILI', currency: 'PARA BIRIMI', measurement: 'OLCU BIRIMI', heroTitle: "Antalya'da satilik ve kiralik gayrimenkuller", heroText: 'Bolge, butce ve yasam tarzina gore secilmis guncel portfoy.', filters: 'FILTRELER', propertyType: 'Emlak tipi', allTypes: 'Tumu', land: 'Arsa', apartment: 'Daire', price: 'Fiyat', area: 'Alan (m2)', from: 'Min', to: 'Max', resetFilters: 'Filtreleri sifirla', catalogEyebrow: 'Katalog', catalogTitle: 'Antalya gayrimenkulleri', sortNewest: 'Once yeni', sortPriceAsc: 'Ucuzdan pahaliya', sortPriceDesc: 'Pahalidan ucuza', emptyState: 'Uygun ilan bulunamadi.', details: 'Detaylari gor', appointmentTitle: 'Randevu olustur', firstName: 'Ad', lastName: 'Soyad', phone: 'Telefon', message: 'Mesaj', send: 'GONDER', description: 'Aciklama', features: 'Ozellikler', gallery: 'Galeri', backToCatalog: 'Kataloga don', notFound: 'Ilan bulunamadi', rooms: 'Oda', floor: 'Kat', bedrooms: 'Yatak odasi', bathrooms: 'Banyo', furnished: 'Esyali', parking: 'Otopark', yes: 'Evet', no: 'Hayir', month: '/ay'
   },
   ru: {
-    languageName: 'Русский',
-    callNow: 'ПОЗВОНИТЕ НАМ',
-    buy: 'КУПИТЬ',
-    sell: 'ПРОДАТЬ',
-    rent: 'АРЕНДА',
-    contacts: 'КОНТАКТЫ',
-    appointment: 'Записаться',
-    siteLanguage: 'ЯЗЫК САЙТА',
-    currency: 'ВАЛЮТА',
-    measurement: 'ЕДИНИЦЫ',
-    heroTitle: 'Недвижимость в Анталии для покупки и аренды',
-    heroText: 'Актуальная база объектов, подобранных по району, бюджету и стилю жизни.',
-    filters: 'ФИЛЬТРЫ',
-    propertyType: 'Тип недвижимости',
-    allTypes: 'Все',
-    land: 'Земля',
-    apartment: 'Квартира',
-    price: 'Стоимость',
-    area: 'Площадь (м²)',
-    from: 'От',
-    to: 'До',
-    resetFilters: 'Сбросить фильтры',
-    catalogEyebrow: 'Каталог',
-    catalogTitle: 'Недвижимость в Анталии',
-    sortNewest: 'Сначала новые',
-    sortPriceAsc: 'Дешевле',
-    sortPriceDesc: 'Дороже',
-    emptyState: 'Подходящих объектов не найдено.',
-    details: 'Подробнее',
-    appointmentTitle: 'Назначить встречу',
-    firstName: 'Имя',
-    lastName: 'Фамилия',
-    phone: 'Телефон',
-    message: 'Сообщение',
-    send: 'ОТПРАВИТЬ',
-    description: 'Описание',
-    features: 'Характеристики',
-    gallery: 'Галерея',
-    backToCatalog: 'Вернуться в каталог',
-    notFound: 'Объект не найден',
-    rooms: 'Комнаты',
-    floor: 'Этаж',
-    bedrooms: 'Спальни',
-    bathrooms: 'Ванные',
-    furnished: 'Мебель',
-    parking: 'Парковка',
-    yes: 'Да',
-    no: 'Нет',
-    month: '/мес'
+    languageName: 'Русский', callNow: 'ПОЗВОНИТЕ НАМ', buy: 'КУПИТЬ', sell: 'ПРОДАТЬ', rent: 'АРЕНДА', contacts: 'КОНТАКТЫ', appointment: 'Записаться', siteLanguage: 'ЯЗЫК САЙТА', currency: 'ВАЛЮТА', measurement: 'ЕДИНИЦЫ', heroTitle: 'Недвижимость в Анталии для покупки и аренды', heroText: 'Актуальная база объектов, подобранных по району, бюджету и стилю жизни.', filters: 'ФИЛЬТРЫ', propertyType: 'Тип недвижимости', allTypes: 'Все', land: 'Земля', apartment: 'Квартира', price: 'Стоимость', area: 'Площадь (м²)', from: 'От', to: 'До', resetFilters: 'Сбросить фильтры', catalogEyebrow: 'Каталог', catalogTitle: 'Недвижимость в Анталии', sortNewest: 'Сначала новые', sortPriceAsc: 'Дешевле', sortPriceDesc: 'Дороже', emptyState: 'Подходящих объектов не найдено.', details: 'Подробнее', appointmentTitle: 'Назначить встречу', firstName: 'Имя', lastName: 'Фамилия', phone: 'Телефон', message: 'Сообщение', send: 'ОТПРАВИТЬ', description: 'Описание', features: 'Характеристики', gallery: 'Галерея', backToCatalog: 'Вернуться в каталог', notFound: 'Объект не найден', rooms: 'Комнаты', floor: 'Этаж', bedrooms: 'Спальни', bathrooms: 'Ванные', furnished: 'Мебель', parking: 'Парковка', yes: 'Да', no: 'Нет', month: '/мес'
   },
   en: {
-    languageName: 'English',
-    callNow: 'CALL US NOW',
-    buy: 'BUY',
-    sell: 'SELL',
-    rent: 'RENT',
-    contacts: 'CONTACTS',
-    appointment: 'BOOK APPOINTMENT',
-    siteLanguage: 'SITE LANGUAGE',
-    currency: 'CURRENCY',
-    measurement: 'MEASUREMENT',
-    heroTitle: 'Properties for sale and rent in Antalya',
-    heroText: 'A current portfolio selected by district, budget and lifestyle.',
-    filters: 'FILTERS',
-    propertyType: 'Property type',
-    allTypes: 'All',
-    land: 'Land',
-    apartment: 'Apartment',
-    price: 'Price',
-    area: 'Area (m2)',
-    from: 'From',
-    to: 'To',
-    resetFilters: 'Reset filters',
-    catalogEyebrow: 'Catalog',
-    catalogTitle: 'Antalya properties',
-    sortNewest: 'Newest first',
-    sortPriceAsc: 'Price low to high',
-    sortPriceDesc: 'Price high to low',
-    emptyState: 'No matching properties found.',
-    details: 'View details',
-    appointmentTitle: 'Book an appointment',
-    firstName: 'First name',
-    lastName: 'Last name',
-    phone: 'Phone',
-    message: 'Message',
-    send: 'SEND',
-    description: 'Description',
-    features: 'Features',
-    gallery: 'Gallery',
-    backToCatalog: 'Back to catalog',
-    notFound: 'Property not found',
-    rooms: 'Rooms',
-    floor: 'Floor',
-    bedrooms: 'Bedrooms',
-    bathrooms: 'Bathrooms',
-    furnished: 'Furnished',
-    parking: 'Parking',
-    yes: 'Yes',
-    no: 'No',
-    month: '/month'
+    languageName: 'English', callNow: 'CALL US NOW', buy: 'BUY', sell: 'SELL', rent: 'RENT', contacts: 'CONTACTS', appointment: 'BOOK APPOINTMENT', siteLanguage: 'SITE LANGUAGE', currency: 'CURRENCY', measurement: 'MEASUREMENT', heroTitle: 'Properties for sale and rent in Antalya', heroText: 'A current portfolio selected by district, budget and lifestyle.', filters: 'FILTERS', propertyType: 'Property type', allTypes: 'All', land: 'Land', apartment: 'Apartment', price: 'Price', area: 'Area (m2)', from: 'From', to: 'To', resetFilters: 'Reset filters', catalogEyebrow: 'Catalog', catalogTitle: 'Antalya properties', sortNewest: 'Newest first', sortPriceAsc: 'Price low to high', sortPriceDesc: 'Price high to low', emptyState: 'No matching properties found.', details: 'View details', appointmentTitle: 'Book an appointment', firstName: 'First name', lastName: 'Last name', phone: 'Phone', message: 'Message', send: 'SEND', description: 'Description', features: 'Features', gallery: 'Gallery', backToCatalog: 'Back to catalog', notFound: 'Property not found', rooms: 'Rooms', floor: 'Floor', bedrooms: 'Bedrooms', bathrooms: 'Bathrooms', furnished: 'Furnished', parking: 'Parking', yes: 'Yes', no: 'No', month: '/month'
   },
   fr: {
-    languageName: 'Français',
-    callNow: 'APPELEZ-NOUS',
-    buy: 'ACHETER',
-    sell: 'VENDRE',
-    rent: 'LOUER',
-    contacts: 'CONTACTS',
-    appointment: 'RENDEZ-VOUS',
-    siteLanguage: 'LANGUE DU SITE',
-    currency: 'DEVISE',
-    measurement: 'MESURE',
-    heroTitle: 'Biens a vendre et a louer a Antalya',
-    heroText: 'Un portefeuille actuel selectionne par quartier, budget et style de vie.',
-    filters: 'FILTRES',
-    propertyType: 'Type de bien',
-    allTypes: 'Tous',
-    land: 'Terrain',
-    apartment: 'Appartement',
-    price: 'Prix',
-    area: 'Surface (m2)',
-    from: 'Min',
-    to: 'Max',
-    resetFilters: 'Reinitialiser',
-    catalogEyebrow: 'Catalogue',
-    catalogTitle: 'Immobilier a Antalya',
-    sortNewest: 'Plus recents',
-    sortPriceAsc: 'Prix croissant',
-    sortPriceDesc: 'Prix decroissant',
-    emptyState: 'Aucun bien correspondant.',
-    details: 'Voir details',
-    appointmentTitle: 'Prendre rendez-vous',
-    firstName: 'Prenom',
-    lastName: 'Nom',
-    phone: 'Telephone',
-    message: 'Message',
-    send: 'ENVOYER',
-    description: 'Description',
-    features: 'Caracteristiques',
-    gallery: 'Galerie',
-    backToCatalog: 'Retour au catalogue',
-    notFound: 'Bien introuvable',
-    rooms: 'Pieces',
-    floor: 'Etage',
-    bedrooms: 'Chambres',
-    bathrooms: 'Salles de bain',
-    furnished: 'Meuble',
-    parking: 'Parking',
-    yes: 'Oui',
-    no: 'Non',
-    month: '/mois'
+    languageName: 'Francais', callNow: 'APPELEZ-NOUS', buy: 'ACHETER', sell: 'VENDRE', rent: 'LOUER', contacts: 'CONTACTS', appointment: 'RENDEZ-VOUS', siteLanguage: 'LANGUE DU SITE', currency: 'DEVISE', measurement: 'MESURE', heroTitle: 'Biens a vendre et a louer a Antalya', heroText: 'Un portefeuille actuel selectionne par quartier, budget et style de vie.', filters: 'FILTRES', propertyType: 'Type de bien', allTypes: 'Tous', land: 'Terrain', apartment: 'Appartement', price: 'Prix', area: 'Surface (m2)', from: 'Min', to: 'Max', resetFilters: 'Reinitialiser', catalogEyebrow: 'Catalogue', catalogTitle: 'Immobilier a Antalya', sortNewest: 'Plus recents', sortPriceAsc: 'Prix croissant', sortPriceDesc: 'Prix decroissant', emptyState: 'Aucun bien correspondant.', details: 'Voir details', appointmentTitle: 'Prendre rendez-vous', firstName: 'Prenom', lastName: 'Nom', phone: 'Telephone', message: 'Message', send: 'ENVOYER', description: 'Description', features: 'Caracteristiques', gallery: 'Galerie', backToCatalog: 'Retour au catalogue', notFound: 'Bien introuvable', rooms: 'Pieces', floor: 'Etage', bedrooms: 'Chambres', bathrooms: 'Salles de bain', furnished: 'Meuble', parking: 'Parking', yes: 'Oui', no: 'Non', month: '/mois'
   },
   de: {
-    languageName: 'Deutsch',
-    callNow: 'RUFEN SIE UNS AN',
-    buy: 'KAUFEN',
-    sell: 'VERKAUFEN',
-    rent: 'MIETEN',
-    contacts: 'KONTAKT',
-    appointment: 'TERMIN',
-    siteLanguage: 'SPRACHE',
-    currency: 'WAEHRUNG',
-    measurement: 'MASSEINHEIT',
-    heroTitle: 'Immobilien zum Kauf und zur Miete in Antalya',
-    heroText: 'Aktuelles Portfolio nach Bezirk, Budget und Lebensstil.',
-    filters: 'FILTER',
-    propertyType: 'Immobilientyp',
-    allTypes: 'Alle',
-    land: 'Grundstueck',
-    apartment: 'Wohnung',
-    price: 'Preis',
-    area: 'Flaeche (m2)',
-    from: 'Min',
-    to: 'Max',
-    resetFilters: 'Filter zuruecksetzen',
-    catalogEyebrow: 'Katalog',
-    catalogTitle: 'Immobilien in Antalya',
-    sortNewest: 'Neueste zuerst',
-    sortPriceAsc: 'Preis aufsteigend',
-    sortPriceDesc: 'Preis absteigend',
-    emptyState: 'Keine passenden Immobilien gefunden.',
-    details: 'Details ansehen',
-    appointmentTitle: 'Termin vereinbaren',
-    firstName: 'Vorname',
-    lastName: 'Nachname',
-    phone: 'Telefon',
-    message: 'Nachricht',
-    send: 'SENDEN',
-    description: 'Beschreibung',
-    features: 'Merkmale',
-    gallery: 'Galerie',
-    backToCatalog: 'Zurueck zum Katalog',
-    notFound: 'Immobilie nicht gefunden',
-    rooms: 'Zimmer',
-    floor: 'Etage',
-    bedrooms: 'Schlafzimmer',
-    bathrooms: 'Baeder',
-    furnished: 'Moebliert',
-    parking: 'Parkplatz',
-    yes: 'Ja',
-    no: 'Nein',
-    month: '/Monat'
+    languageName: 'Deutsch', callNow: 'RUFEN SIE UNS AN', buy: 'KAUFEN', sell: 'VERKAUFEN', rent: 'MIETEN', contacts: 'KONTAKT', appointment: 'TERMIN', siteLanguage: 'SPRACHE', currency: 'WAEHRUNG', measurement: 'MASSEINHEIT', heroTitle: 'Immobilien zum Kauf und zur Miete in Antalya', heroText: 'Aktuelles Portfolio nach Bezirk, Budget und Lebensstil.', filters: 'FILTER', propertyType: 'Immobilientyp', allTypes: 'Alle', land: 'Grundstueck', apartment: 'Wohnung', price: 'Preis', area: 'Flaeche (m2)', from: 'Min', to: 'Max', resetFilters: 'Filter zuruecksetzen', catalogEyebrow: 'Katalog', catalogTitle: 'Immobilien in Antalya', sortNewest: 'Neueste zuerst', sortPriceAsc: 'Preis aufsteigend', sortPriceDesc: 'Preis absteigend', emptyState: 'Keine passenden Immobilien gefunden.', details: 'Details ansehen', appointmentTitle: 'Termin vereinbaren', firstName: 'Vorname', lastName: 'Nachname', phone: 'Telefon', message: 'Nachricht', send: 'SENDEN', description: 'Beschreibung', features: 'Merkmale', gallery: 'Galerie', backToCatalog: 'Zurueck zum Katalog', notFound: 'Immobilie nicht gefunden', rooms: 'Zimmer', floor: 'Etage', bedrooms: 'Schlafzimmer', bathrooms: 'Baeder', furnished: 'Moebliert', parking: 'Parkplatz', yes: 'Ja', no: 'Nein', month: '/Monat'
   },
   ar: {
-    languageName: 'العربية',
-    callNow: 'اتصل بنا',
-    buy: 'شراء',
-    sell: 'بيع',
-    rent: 'ايجار',
-    contacts: 'تواصل',
-    appointment: 'موعد',
-    siteLanguage: 'لغة الموقع',
-    currency: 'العملة',
-    measurement: 'وحدة القياس',
-    heroTitle: 'عقارات للبيع والايجار في أنطاليا',
-    heroText: 'محفظة محدثة حسب المنطقة والميزانية ونمط الحياة.',
-    filters: 'الفلاتر',
-    propertyType: 'نوع العقار',
-    allTypes: 'الكل',
-    land: 'أرض',
-    apartment: 'شقة',
-    price: 'السعر',
-    area: 'المساحة (م2)',
-    from: 'من',
-    to: 'الى',
-    resetFilters: 'مسح الفلاتر',
-    catalogEyebrow: 'الكتالوج',
-    catalogTitle: 'عقارات أنطاليا',
-    sortNewest: 'الأحدث أولا',
-    sortPriceAsc: 'الأرخص أولا',
-    sortPriceDesc: 'الأغلى أولا',
-    emptyState: 'لا توجد عقارات مطابقة.',
-    details: 'عرض التفاصيل',
-    appointmentTitle: 'حجز موعد',
-    firstName: 'الاسم',
-    lastName: 'اللقب',
-    phone: 'الهاتف',
-    message: 'الرسالة',
-    send: 'ارسال',
-    description: 'الوصف',
-    features: 'المواصفات',
-    gallery: 'المعرض',
-    backToCatalog: 'العودة الى الكتالوج',
-    notFound: 'العقار غير موجود',
-    rooms: 'الغرف',
-    floor: 'الطابق',
-    bedrooms: 'غرف النوم',
-    bathrooms: 'الحمامات',
-    furnished: 'مفروش',
-    parking: 'موقف',
-    yes: 'نعم',
-    no: 'لا',
-    month: '/شهر'
+    languageName: 'Arabic', callNow: 'CALL US NOW', buy: 'BUY', sell: 'SELL', rent: 'RENT', contacts: 'CONTACTS', appointment: 'APPOINTMENT', siteLanguage: 'SITE LANGUAGE', currency: 'CURRENCY', measurement: 'MEASUREMENT', heroTitle: 'Antalya properties', heroText: 'A current portfolio selected by district, budget and lifestyle.', filters: 'FILTERS', propertyType: 'Property type', allTypes: 'All', land: 'Land', apartment: 'Apartment', price: 'Price', area: 'Area (m2)', from: 'From', to: 'To', resetFilters: 'Reset filters', catalogEyebrow: 'Catalog', catalogTitle: 'Antalya properties', sortNewest: 'Newest first', sortPriceAsc: 'Price low to high', sortPriceDesc: 'Price high to low', emptyState: 'No matching properties found.', details: 'View details', appointmentTitle: 'Book an appointment', firstName: 'First name', lastName: 'Last name', phone: 'Phone', message: 'Message', send: 'SEND', description: 'Description', features: 'Features', gallery: 'Gallery', backToCatalog: 'Back to catalog', notFound: 'Property not found', rooms: 'Rooms', floor: 'Floor', bedrooms: 'Bedrooms', bathrooms: 'Bathrooms', furnished: 'Furnished', parking: 'Parking', yes: 'Yes', no: 'No', month: '/month'
+  }
+};
+const EXTRA_TRANSLATIONS = {
+  districtSearch: {
+    tr: 'Bolge ara',
+    ru: 'Поиск по району',
+    en: 'Search by district',
+    fr: 'Recherche par quartier',
+    de: 'Bezirk suchen',
+    ar: 'ШЁШ­Ш« Ш­ШіШЁ Ш§Щ„Щ…Щ†Ш·Щ‚Ш©'
+  },
+  districtSearchPlaceholder: {
+    tr: 'Konyaalti, Hurma, Lara',
+    ru: 'Коньяалты, Хурма, Лара',
+    en: 'Konyaalti, Hurma, Lara',
+    fr: 'Konyaalti, Hurma, Lara',
+    de: 'Konyaalti, Hurma, Lara',
+    ar: 'Konyaalti, Hurma, Lara'
+  },
+  dealType: {
+    tr: 'Islem tipi',
+    ru: 'Тип сделки',
+    en: 'Deal type',
+    fr: 'Type d offre',
+    de: 'Angebotstyp',
+    ar: 'Deal type'
+  },
+  buyFilter: {
+    tr: 'Satin al',
+    ru: 'Купить',
+    en: 'Buy',
+    fr: 'Acheter',
+    de: 'Kaufen',
+    ar: 'Buy'
+  },
+  rentFilter: {
+    tr: 'Kirala',
+    ru: 'Арендовать',
+    en: 'Rent',
+    fr: 'Louer',
+    de: 'Mieten',
+    ar: 'Rent'
+  },
+  aboutNav: {
+    tr: 'Hakkimizda',
+    ru: 'О нас',
+    en: 'About us',
+    fr: 'A propos',
+    de: 'Uber uns',
+    ar: 'About us'
+  },
+  savedProjects: {
+    tr: 'Kaydedilenler',
+    ru: 'Сохранённые',
+    en: 'Saved',
+    fr: 'Favoris',
+    de: 'Gespeichert',
+    ar: 'Ш§Щ„Щ…Ш­ЩЃЩ€ШёШ§ШЄ'
+  },
+  saveProperty: {
+    tr: 'Kaydet',
+    ru: 'Сохранить',
+    en: 'Save',
+    fr: 'Enregistrer',
+    de: 'Speichern',
+    ar: 'Ш­ЩЃШё'
+  },
+  savedProperty: {
+    tr: 'Kaydedildi',
+    ru: 'Сохранено',
+    en: 'Saved',
+    fr: 'Enregistre',
+    de: 'Gespeichert',
+    ar: 'Щ…Ш­ЩЃЩ€Шё'
+  },
+  removeSaved: {
+    tr: 'Kaldir',
+    ru: 'Удалить',
+    en: 'Remove',
+    fr: 'Retirer',
+    de: 'Entfernen',
+    ar: 'ШҐШІШ§Щ„Ш©'
+  },
+  noSavedProjects: {
+    tr: 'Henuz kaydedilen ilan yok.',
+    ru: 'Пока нет сохранённых объектов.',
+    en: 'No saved properties yet.',
+    fr: 'Aucun bien enregistre.',
+    de: 'Noch keine Immobilien gespeichert.',
+    ar: 'Щ„Ш§ ШЄЩ€Ш¬ШЇ Ш№Щ‚Ш§Ш±Ш§ШЄ Щ…Ш­ЩЃЩ€ШёШ© ШЁШ№ШЇ.'
+  }
+};
+
+const ABOUT_CONTENT = {
+  tr: {
+    heroTitle: "Antalya'da gayrimenkul secimini sakin, seffaf ve yerel uzmanlikla yapiyoruz",
+    heroText: 'Ekibimiz alicilara, yatirimcilara ve mulk sahiplerine bolge seciminden tapu surecine, satis sonrasi hizmete ve mulk yonetimine kadar eslik eder.',
+    introEyebrow: 'Sirket hakkinda',
+    introTitle: 'Antalya Realty Group, sadece guzel fotograflari degil, bir mulkun gercek degerini gormek isteyenler icin calisir.',
+    introText: 'Bolgeyi, likiditeyi, belgeleri, altyapiyi, kira potansiyelini ve gelecekteki satis ihtimalini birlikte degerlendiririz. Boylece karar daha sakin, daha olculebilir ve daha guvenli olur.',
+    stats: [
+      ['8+', "Antalya'da yerel deneyim"],
+      ['340+', 'kontrol edilmis islem ve secim'],
+      ['24/7', 'secim sonrasi destek']
+    ],
+    approachEyebrow: 'Yaklasimimiz',
+    approachTitle: 'Hizli karar baskisi kurmayiz. Secenekleri gosterir, riskleri anlatir ve karsilastirmaniza yardim ederiz.',
+    benefits: [
+      ['fa-location-dot', 'Bolgelere hakimiz', 'Konyaalti, Lara, Muratpasa, Altintas ve diger bolgeleri reklam vaatlerine gore degil, gercek talep, ulasim, okul, plaj ve insaat kalitesine gore okuruz.'],
+      ['fa-file-shield', 'Belgeleri kontrol ederiz', 'Tavsiye etmeden once tapu, teknik bilgiler, kisitlamalar, odeme kosullari ve islemin anlasilirligini inceleriz.'],
+      ['fa-chart-line', 'Yatirim mantigini hesaplariz', 'Kira potansiyeli, sezonluk talep, bakim giderleri ve bolgedeki deger artis ihtimalini acikca gosteririz.']
+    ],
+    ctaEyebrow: 'Sonraki adim',
+    ctaTitle: 'Denize yakin daire, proje icin arsa, kiralik gelirli mulk veya tasinmak icin sakin bir ev ariyorsaniz bize anlatin.',
+    ctaText: 'Size kisa bir secenek listesi hazirlayalim, bolgeler arasindaki farklari anlatalim ve fiyat-kalite dengesinin nerede guclu oldugunu gosterelim.'
+  },
+  ru: {
+    heroTitle: 'Мы помогаем выбирать недвижимость в Анталии спокойно, прозрачно и с сильной локальной экспертизой',
+    heroText: 'Мы сопровождаем покупателей, инвесторов и собственников от первого подбора района до сделки, послепродажного сервиса и управления объектом.',
+    introEyebrow: 'О компании',
+    introTitle: 'Antalya Realty Group работает для тех, кто хочет видеть не просто красивые фотографии, а реальную ценность объекта.',
+    introText: 'Мы анализируем районы, ликвидность, документы, инфраструктуру, перспективы аренды и будущую перепродажу. Для клиента это значит меньше случайных решений и больше уверенности: вы понимаете, почему объект подходит именно вам.',
+    stats: [
+      ['8+', 'лет локального опыта в Анталии'],
+      ['340+', 'проверенных сделок и подборов'],
+      ['24/7', 'поддержка клиентов после выбора']
+    ],
+    approachEyebrow: 'Наш подход',
+    approachTitle: 'Мы не давим на быстрые решения. Мы показываем варианты, объясняем риски и помогаем сравнить.',
+    benefits: [
+      ['fa-location-dot', 'Знаем районы изнутри', 'Коньяалты, Лара, Муратпаша, Алтынташ, Дошемеалты и другие зоны мы оцениваем по реальному спросу, транспорту, школам, пляжам и качеству застройки.'],
+      ['fa-file-shield', 'Проверяем документы', 'Перед рекомендацией объекта мы смотрим юридическую чистоту, ограничения, технические параметры, условия оплаты и понятность сделки.'],
+      ['fa-chart-line', 'Считаем инвестиционный смысл', 'Помогаем понять потенциал аренды, сезонность, расходы на содержание и перспективу роста стоимости в конкретном районе.']
+    ],
+    ctaEyebrow: 'Следующий шаг',
+    ctaTitle: 'Расскажите, что вы ищете: квартиру у моря, участок под проект, объект для аренды или спокойный дом для переезда.',
+    ctaText: 'Мы соберём короткий список вариантов, объясним различия между районами и покажем, где цена действительно соответствует качеству.'
+  },
+  en: {
+    heroTitle: 'We help you choose Antalya real estate calmly, transparently and with strong local expertise',
+    heroText: 'We guide buyers, investors and owners from the first district shortlist to the deal, after-sales service and property management.',
+    introEyebrow: 'About the company',
+    introTitle: 'Antalya Realty Group is for clients who want to see real property value, not just attractive photos.',
+    introText: 'We analyze districts, liquidity, documents, infrastructure, rental potential and future resale value. That gives clients fewer random decisions and more confidence in every step.',
+    stats: [
+      ['8+', 'years of local Antalya experience'],
+      ['340+', 'checked deals and shortlists'],
+      ['24/7', 'support after selection']
+    ],
+    approachEyebrow: 'Our approach',
+    approachTitle: 'We do not push rushed decisions. We show options, explain risks and help you compare clearly.',
+    benefits: [
+      ['fa-location-dot', 'We know the districts', 'Konyaalti, Lara, Muratpasa, Altintas and other areas are assessed by real demand, transport, schools, beaches and construction quality.'],
+      ['fa-file-shield', 'We check documents', 'Before recommending a property, we review legal clarity, restrictions, technical details, payment terms and deal transparency.'],
+      ['fa-chart-line', 'We calculate investment sense', 'We explain rental potential, seasonality, maintenance costs and realistic value growth in each district.']
+    ],
+    ctaEyebrow: 'Next step',
+    ctaTitle: 'Tell us what you are looking for: a seaside apartment, land for a project, rental income or a calm home for relocation.',
+    ctaText: 'We will prepare a focused shortlist, explain district differences and show where price and quality truly align.'
+  },
+  fr: {
+    heroTitle: 'Nous vous aidons a choisir un bien a Antalya avec calme, transparence et expertise locale',
+    heroText: 'Nous accompagnons acheteurs, investisseurs et proprietaires du choix du quartier jusqu a la transaction, au service apres-vente et a la gestion du bien.',
+    introEyebrow: 'A propos',
+    introTitle: 'Antalya Realty Group s adresse aux clients qui veulent comprendre la vraie valeur d un bien, pas seulement regarder de belles photos.',
+    introText: 'Nous analysons les quartiers, la liquidite, les documents, les infrastructures, le potentiel locatif et la revente future. Vous prenez ainsi une decision plus claire et plus sure.',
+    stats: [
+      ['8+', 'ans d experience locale a Antalya'],
+      ['340+', 'transactions et selections verifiees'],
+      ['24/7', 'accompagnement apres selection']
+    ],
+    approachEyebrow: 'Notre approche',
+    approachTitle: 'Nous ne poussons pas aux decisions rapides. Nous montrons les options, expliquons les risques et aidons a comparer.',
+    benefits: [
+      ['fa-location-dot', 'Nous connaissons les quartiers', 'Konyaalti, Lara, Muratpasa, Altintas et les autres zones sont evaluees selon la demande reelle, les transports, les ecoles, les plages et la qualite de construction.'],
+      ['fa-file-shield', 'Nous verifions les documents', 'Avant de recommander un bien, nous examinons la situation juridique, les restrictions, les details techniques, les conditions de paiement et la clarte de la transaction.'],
+      ['fa-chart-line', 'Nous evaluons le potentiel', 'Nous expliquons le potentiel locatif, la saisonnalite, les charges et les perspectives de valeur dans chaque quartier.']
+    ],
+    ctaEyebrow: 'Prochaine etape',
+    ctaTitle: 'Dites-nous ce que vous cherchez : appartement pres de la mer, terrain, bien locatif ou maison calme pour vous installer.',
+    ctaText: 'Nous preparerons une selection courte, expliquerons les differences entre quartiers et montrerons ou le rapport prix-qualite est solide.'
+  },
+  de: {
+    heroTitle: 'Wir helfen Ihnen, Immobilien in Antalya ruhig, transparent und mit lokaler Expertise auszuwahlen',
+    heroText: 'Wir begleiten Kaufer, Investoren und Eigentumer von der ersten Gebietsauswahl bis zum Abschluss, After-Sales-Service und Objektmanagement.',
+    introEyebrow: 'Uber das Unternehmen',
+    introTitle: 'Antalya Realty Group arbeitet fur Kunden, die den echten Wert einer Immobilie sehen wollen, nicht nur schone Fotos.',
+    introText: 'Wir analysieren Stadtteile, Liquiditat, Dokumente, Infrastruktur, Mietpotenzial und den spateren Wiederverkauf. So treffen Sie weniger zufallige und deutlich sichere Entscheidungen.',
+    stats: [
+      ['8+', 'Jahre lokale Erfahrung in Antalya'],
+      ['340+', 'geprufte Abschlusse und Auswahlen'],
+      ['24/7', 'Support nach der Auswahl']
+    ],
+    approachEyebrow: 'Unser Ansatz',
+    approachTitle: 'Wir drangen nicht zu schnellen Entscheidungen. Wir zeigen Optionen, erklaren Risiken und helfen beim Vergleich.',
+    benefits: [
+      ['fa-location-dot', 'Wir kennen die Stadtteile', 'Konyaalti, Lara, Muratpasa, Altintas und andere Lagen bewerten wir nach echter Nachfrage, Verkehr, Schulen, Stranden und Bauqualitat.'],
+      ['fa-file-shield', 'Wir prufen Dokumente', 'Vor einer Empfehlung prufen wir rechtliche Klarheit, Einschrankungen, technische Details, Zahlungsbedingungen und Transparenz.'],
+      ['fa-chart-line', 'Wir berechnen den Investment-Sinn', 'Wir erklaren Mietpotenzial, Saison, laufende Kosten und realistische Wertentwicklung im jeweiligen Gebiet.']
+    ],
+    ctaEyebrow: 'Nachster Schritt',
+    ctaTitle: 'Sagen Sie uns, was Sie suchen: Wohnung am Meer, Grundstuck, Mietobjekt oder ein ruhiges Zuhause fur den Umzug.',
+    ctaText: 'Wir erstellen eine kurze Auswahl, erklaren die Unterschiede der Stadtteile und zeigen, wo Preis und Qualitat wirklich passen.'
+  },
+  ar: {
+    heroTitle: 'نساعدك على اختيار عقارات أنطاليا بهدوء وشفافية وخبرة محلية قوية',
+    heroText: 'نرافق المشترين والمستثمرين والمالكين من اختيار المنطقة إلى إتمام الصفقة وخدمة ما بعد البيع وإدارة العقار.',
+    introEyebrow: 'عن الشركة',
+    introTitle: 'Antalya Realty Group مخصصة لمن يريد فهم القيمة الحقيقية للعقار وليس مشاهدة الصور الجميلة فقط.',
+    introText: 'نحلل المناطق والسيولة والوثائق والبنية التحتية وإمكانات الإيجار وإعادة البيع. هذا يمنح العميل قرارا أوضح وثقة أكبر.',
+    stats: [
+      ['8+', 'سنوات خبرة محلية في أنطاليا'],
+      ['340+', 'صفقات واختيارات تم التحقق منها'],
+      ['24/7', 'دعم بعد اختيار العقار']
+    ],
+    approachEyebrow: 'طريقتنا',
+    approachTitle: 'لا نضغط لاتخاذ قرارات سريعة. نعرض الخيارات ونشرح المخاطر ونساعدك على المقارنة.',
+    benefits: [
+      ['fa-location-dot', 'نعرف المناطق جيدا', 'نقيّم كونيالتي ولارا ومراد باشا وألتنتاش وغيرها حسب الطلب الحقيقي والمواصلات والمدارس والشواطئ وجودة البناء.'],
+      ['fa-file-shield', 'نفحص الوثائق', 'قبل التوصية بأي عقار نراجع الوضوح القانوني والقيود والتفاصيل الفنية وشروط الدفع.'],
+      ['fa-chart-line', 'نحسب الجدوى الاستثمارية', 'نوضح إمكانات الإيجار والموسمية وتكاليف الصيانة وفرص نمو القيمة في كل منطقة.']
+    ],
+    ctaEyebrow: 'الخطوة التالية',
+    ctaTitle: 'أخبرنا بما تبحث عنه: شقة قرب البحر، أرض لمشروع، عقار للإيجار أو منزل هادئ للانتقال.',
+    ctaText: 'سنجهز لك قائمة مختصرة ونشرح الفروق بين المناطق ونوضح أين تتوازن الجودة مع السعر.'
   }
 };
 
@@ -333,9 +270,13 @@ let properties = [];
 let rates = { ...FALLBACK_RATES };
 let currentLanguage = document.body.dataset.lang || document.documentElement.lang || 'tr';
 let currentCurrency = localStorage.getItem('currency') || 'USD';
+let savedPropertyIds = new Set();
+let lightboxImages = [];
+let lightboxIndex = 0;
+const LOCAL_SAVED_KEY = 'arg-local-saved-properties';
 
 function t(key) {
-  return I18N[currentLanguage]?.[key] || I18N.tr[key] || key;
+  return I18N[currentLanguage]?.[key] || EXTRA_TRANSLATIONS[key]?.[currentLanguage] || EXTRA_TRANSLATIONS[key]?.tr || I18N.tr[key] || key;
 }
 
 function getLocalized(value) {
@@ -352,6 +293,42 @@ function escapeHtml(value) {
     .replaceAll("'", '&#039;');
 }
 
+function normalizeSearchTerm(value) {
+  return String(value ?? '')
+    .toLocaleLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '');
+}
+
+function localizedSearchValues(value) {
+  if (!value || typeof value !== 'object') return [value];
+  return Object.values(value);
+}
+
+function searchTokens(value) {
+  return normalizeSearchTerm(value).split(/[^\p{L}\p{N}]+/u).filter(Boolean);
+}
+
+function propertySearchText(property) {
+  return normalizeSearchTerm([
+    property.location?.city,
+    property.location?.district,
+    property.location?.subdistrict,
+    getLocalized(property.location?.display),
+    ...localizedSearchValues(property.location?.display),
+    ...localizedSearchValues(property.title),
+    ...localizedSearchValues(property.description)
+  ].filter(Boolean).join(' '));
+}
+
+function propertyMatchesSearch(property, query) {
+  const queryTokens = searchTokens(query);
+  if (!queryTokens.length) return true;
+
+  const propertyTokens = searchTokens(propertySearchText(property));
+  return queryTokens.every(queryToken => propertyTokens.some(propertyToken => propertyToken.startsWith(queryToken)));
+}
+
 function pageForLanguage(language) {
   const page = document.body.dataset.page;
   const params = new URLSearchParams(window.location.search);
@@ -359,6 +336,10 @@ function pageForLanguage(language) {
 
   if (page === 'detail') {
     return `property.html?id=${encodeURIComponent(id || '')}&lang=${language}`;
+  }
+
+  if (page === 'about') {
+    return `about.html?lang=${language}`;
   }
 
   return SUPPORTED_LANGUAGES[language]?.page || 'index.html';
@@ -393,6 +374,10 @@ function applyTranslations() {
   document.title = currentLanguage === 'tr'
     ? 'Antalya Realty Group'
     : `${t('catalogTitle')} | Antalya Realty Group`;
+
+  document.querySelectorAll('[data-i18n="aboutNav"]').forEach(link => {
+    link.setAttribute('href', `./about.html?lang=${currentLanguage}`);
+  });
 }
 
 function setupFavicon() {
@@ -430,7 +415,7 @@ function setupCatalogFilterToggle() {
   }
 
   filters.id = filters.id || 'catalogFilters';
-  toggle.textContent = t('filters');
+  toggle.innerHTML = '<i class="fa-solid fa-sliders" aria-hidden="true"></i>';
   toggle.setAttribute('aria-label', t('filters'));
   toggle.setAttribute('aria-expanded', filters.classList.contains('is-open') ? 'true' : 'false');
 
@@ -549,7 +534,9 @@ function formatPrice(price) {
 }
 
 function getFilteredProperties() {
+  const status = document.querySelector('input[name="property-status"]:checked')?.value || 'sale';
   const type = document.querySelector('input[name="property-type"]:checked')?.value || 'all';
+  const locationQuery = normalizeSearchTerm(document.getElementById('locationSearch')?.value || '');
   const priceMin = Number(document.getElementById('priceMin')?.value) || 0;
   const priceMax = Number(document.getElementById('priceMax')?.value) || Infinity;
   const areaMin = Number(document.getElementById('areaMin')?.value) || 0;
@@ -557,7 +544,9 @@ function getFilteredProperties() {
   const sort = document.getElementById('sortSelect')?.value || 'newest';
 
   return properties
+    .filter(property => property.status === status)
     .filter(property => type === 'all' || property.type === type)
+    .filter(property => propertyMatchesSearch(property, locationQuery))
     .filter(property => {
       const price = convertFromUsd(property.price?.value || 0);
       return price >= priceMin && price <= priceMax;
@@ -571,6 +560,243 @@ function getFilteredProperties() {
       if (sort === 'priceDesc') return (b.price?.value || 0) - (a.price?.value || 0);
       return new Date(b.createdAt) - new Date(a.createdAt);
     });
+}
+
+function isPropertySaved(propertyId) {
+  return savedPropertyIds.has(propertyId);
+}
+
+function savedProperties() {
+  return properties.filter(property => savedPropertyIds.has(property.id));
+}
+
+function loadLocalSavedProperties() {
+  try {
+    savedPropertyIds = new Set(JSON.parse(localStorage.getItem(LOCAL_SAVED_KEY) || '[]'));
+  } catch (error) {
+    savedPropertyIds = new Set();
+  }
+}
+
+function persistLocalSavedProperties() {
+  localStorage.setItem(LOCAL_SAVED_KEY, JSON.stringify([...savedPropertyIds]));
+}
+
+function updateSavedUi() {
+  document.querySelectorAll('[data-saved-count]').forEach(element => {
+    element.textContent = String(savedPropertyIds.size);
+  });
+
+  document.querySelectorAll('.save-property-button[data-save-property]').forEach(button => {
+    const propertyId = button.dataset.saveProperty;
+    const saved = isPropertySaved(propertyId);
+    button.classList.toggle('is-saved', saved);
+    button.setAttribute('aria-label', saved ? t('savedProperty') : t('saveProperty'));
+    button.setAttribute('title', saved ? t('savedProperty') : t('saveProperty'));
+    button.innerHTML = `<i class="${saved ? 'fa-solid' : 'fa-regular'} fa-bookmark" aria-hidden="true"></i>`;
+  });
+
+  renderSavedPanel();
+}
+
+function openSavedPanel() {
+  const overlay = document.getElementById('savedOverlay');
+  if (!overlay) return;
+  overlay.classList.add('active');
+  document.body.classList.add('modal-open');
+  renderSavedPanel();
+}
+
+function closeSavedPanel() {
+  document.getElementById('savedOverlay')?.classList.remove('active');
+  document.body.classList.remove('modal-open');
+}
+
+function toggleSavedProperty(propertyId) {
+  if (savedPropertyIds.has(propertyId)) {
+    savedPropertyIds.delete(propertyId);
+  } else {
+    savedPropertyIds.add(propertyId);
+  }
+
+  persistLocalSavedProperties();
+  updateSavedUi();
+}
+
+function showLightboxImage() {
+  const image = document.getElementById('lightboxImage');
+  const counter = document.getElementById('lightboxCounter');
+  if (!image || !lightboxImages.length) return;
+
+  const current = lightboxImages[lightboxIndex];
+  image.classList.remove('is-dragging');
+  image.style.transform = '';
+  image.src = current.src;
+  image.alt = current.alt;
+  if (counter) counter.textContent = `${lightboxIndex + 1} / ${lightboxImages.length}`;
+}
+
+function openLightbox(index) {
+  if (!lightboxImages.length) return;
+
+  lightboxIndex = (index + lightboxImages.length) % lightboxImages.length;
+  document.getElementById('galleryLightbox')?.classList.add('active');
+  document.body.classList.add('modal-open');
+  showLightboxImage();
+}
+
+function closeLightbox() {
+  document.getElementById('galleryLightbox')?.classList.remove('active');
+  document.body.classList.remove('modal-open');
+}
+
+function moveLightbox(direction) {
+  if (!lightboxImages.length) return;
+  lightboxIndex = (lightboxIndex + direction + lightboxImages.length) % lightboxImages.length;
+  showLightboxImage();
+}
+
+function bindLightbox() {
+  const image = document.getElementById('lightboxImage');
+  let startX = 0;
+  let startY = 0;
+  let currentX = 0;
+  let swiping = false;
+
+  const startSwipe = event => {
+    const touch = event.changedTouches?.[0];
+    if (!touch || !image) return;
+    startX = touch.clientX;
+    startY = touch.clientY;
+    currentX = touch.clientX;
+    swiping = true;
+    image.classList.add('is-dragging');
+  };
+
+  const moveSwipe = event => {
+    if (!swiping || !image) return;
+
+    const touch = event.changedTouches?.[0];
+    if (!touch) return;
+
+    const deltaX = touch.clientX - startX;
+    const deltaY = touch.clientY - startY;
+    currentX = touch.clientX;
+
+    if (Math.abs(deltaX) < Math.abs(deltaY)) return;
+
+    event.preventDefault();
+    image.style.transform = `translateX(${deltaX * 0.35}px)`;
+  };
+
+  const endSwipe = () => {
+    if (!swiping || !image) return;
+
+    const deltaX = currentX - startX;
+    swiping = false;
+    image.classList.remove('is-dragging');
+    image.style.transform = '';
+
+    if (Math.abs(deltaX) < 55) return;
+    moveLightbox(deltaX < 0 ? 1 : -1);
+  };
+
+  document.getElementById('lightboxClose')?.addEventListener('click', closeLightbox);
+  document.getElementById('lightboxPrev')?.addEventListener('click', () => moveLightbox(-1));
+  document.getElementById('lightboxNext')?.addEventListener('click', () => moveLightbox(1));
+  document.getElementById('galleryLightbox')?.addEventListener('click', event => {
+    if (event.target === event.currentTarget) closeLightbox();
+  });
+  image?.addEventListener('touchstart', startSwipe, { passive: true });
+  image?.addEventListener('touchmove', moveSwipe, { passive: false });
+  image?.addEventListener('touchend', endSwipe);
+  image?.addEventListener('touchcancel', endSwipe);
+}
+
+document.addEventListener('keydown', event => {
+  const lightbox = document.getElementById('galleryLightbox');
+  if (!lightbox?.classList.contains('active')) return;
+
+  if (event.key === 'Escape') closeLightbox();
+  if (event.key === 'ArrowLeft') moveLightbox(-1);
+  if (event.key === 'ArrowRight') moveLightbox(1);
+});
+
+function renderSavedPanel() {
+  const list = document.getElementById('savedList');
+  if (!list) return;
+
+  const items = savedProperties();
+  if (!items.length) {
+    list.innerHTML = `<p class="saved-empty">${escapeHtml(t('noSavedProjects'))}</p>`;
+    return;
+  }
+
+  list.innerHTML = items.map(property => {
+    const title = getLocalized(property.title);
+    const location = getLocalized(property.location?.display);
+    const image = property.media?.preview?.[0] || property.media?.gallery?.[0] || '';
+    const detailUrl = `property.html?id=${encodeURIComponent(property.id)}&lang=${currentLanguage}`;
+
+    return `
+      <article class="saved-item">
+        <img src="${escapeHtml(image)}" alt="${escapeHtml(title)}" loading="lazy">
+        <div>
+          <p>${escapeHtml(location)}</p>
+          <h3>${escapeHtml(title)}</h3>
+          <strong>${escapeHtml(formatPrice(property.price))}</strong>
+          <div class="saved-actions-row">
+            <a href="./${detailUrl}">${escapeHtml(t('details'))}</a>
+            <button type="button" data-save-property="${escapeHtml(property.id)}">${escapeHtml(t('removeSaved'))}</button>
+          </div>
+        </div>
+      </article>
+    `;
+  }).join('');
+}
+
+function createSavedUi() {
+  const nav = document.querySelector('.nav-container');
+  if (nav && !document.getElementById('savedActions')) {
+    const actions = document.createElement('div');
+    actions.className = 'saved-actions';
+    actions.id = 'savedActions';
+    actions.innerHTML = `
+      <button class="saved-button" id="openSaved" type="button">
+        <span>${escapeHtml(t('savedProjects'))}</span>
+        <strong data-saved-count>0</strong>
+      </button>
+    `;
+    nav.insertBefore(actions, document.getElementById('openAppointment'));
+  }
+
+  if (!document.getElementById('savedOverlay')) {
+    document.body.insertAdjacentHTML('beforeend', `
+      <div class="saved-overlay" id="savedOverlay">
+        <aside class="saved-panel">
+          <button class="appointment-close" id="savedClose" type="button" aria-label="Close"></button>
+          <div class="saved-heading">
+            <h2>${escapeHtml(t('savedProjects'))}</h2>
+            <span><strong data-saved-count>0</strong></span>
+          </div>
+          <div class="saved-list" id="savedList"></div>
+        </aside>
+      </div>
+    `);
+  }
+
+  document.getElementById('openSaved')?.addEventListener('click', openSavedPanel);
+  document.getElementById('savedClose')?.addEventListener('click', closeSavedPanel);
+  document.getElementById('savedOverlay')?.addEventListener('click', event => {
+    if (event.target === event.currentTarget) closeSavedPanel();
+  });
+
+  document.addEventListener('click', event => {
+    const saveButton = event.target.closest('[data-save-property]');
+    if (!saveButton) return;
+    event.preventDefault();
+    toggleSavedProperty(saveButton.dataset.saveProperty);
+  });
 }
 
 function renderPropertyCard(property) {
@@ -600,7 +826,12 @@ function renderPropertyCard(property) {
         </div>
         <div class="card-footer">
           <div class="price">${escapeHtml(formatPrice(property.price))}</div>
-          <a class="details-link" href="./${detailUrl}">${escapeHtml(t('details'))}</a>
+          <div class="card-actions">
+            <a class="details-link" href="./${detailUrl}">${escapeHtml(t('details'))}</a>
+            <button class="save-property-button ${isPropertySaved(property.id) ? 'is-saved' : ''}" type="button" data-save-property="${escapeHtml(property.id)}" aria-label="${escapeHtml(isPropertySaved(property.id) ? t('savedProperty') : t('saveProperty'))}" title="${escapeHtml(isPropertySaved(property.id) ? t('savedProperty') : t('saveProperty'))}">
+              <i class="${isPropertySaved(property.id) ? 'fa-solid' : 'fa-regular'} fa-bookmark" aria-hidden="true"></i>
+            </button>
+          </div>
         </div>
       </div>
     </article>
@@ -627,8 +858,9 @@ function bindFilters() {
   });
 
   document.getElementById('resetFilters')?.addEventListener('click', () => {
+    document.querySelector('input[name="property-status"][value="sale"]').checked = true;
     document.querySelector('input[name="property-type"][value="all"]').checked = true;
-    ['priceMin', 'priceMax', 'areaMin', 'areaMax'].forEach(id => {
+    ['locationSearch', 'priceMin', 'priceMax', 'areaMin', 'areaMax'].forEach(id => {
       const input = document.getElementById(id);
       if (input) input.value = '';
     });
@@ -758,23 +990,34 @@ function renderDetail() {
   const location = getLocalized(property.location?.display);
   const description = getLocalized(property.description);
   const images = property.media?.gallery || property.media?.preview || [];
+  lightboxImages = images.map((image, index) => ({
+    src: image,
+    alt: `${title} ${index + 1}`
+  }));
 
   document.title = `${title} | Antalya Realty Group`;
 
   container.innerHTML = `
     <section class="detail-shell">
-      <a href="./${catalogPageForLanguage(currentLanguage)}" class="back-link">${escapeHtml(t('backToCatalog'))}</a>
+      <a href="./${catalogPageForLanguage(currentLanguage)}" class="back-link"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i><span>${escapeHtml(t('backToCatalog'))}</span></a>
       <div class="detail-heading">
         <div>
           <p class="eyebrow">${escapeHtml(location)}</p>
           <h1>${escapeHtml(title)}</h1>
         </div>
-        <div class="detail-price">${escapeHtml(formatPrice(property.price))}</div>
+        <div class="detail-side-actions">
+          <div class="detail-price">${escapeHtml(formatPrice(property.price))}</div>
+          <button class="save-property-button ${isPropertySaved(property.id) ? 'is-saved' : ''}" type="button" data-save-property="${escapeHtml(property.id)}" aria-label="${escapeHtml(isPropertySaved(property.id) ? t('savedProperty') : t('saveProperty'))}" title="${escapeHtml(isPropertySaved(property.id) ? t('savedProperty') : t('saveProperty'))}">
+            <i class="${isPropertySaved(property.id) ? 'fa-solid' : 'fa-regular'} fa-bookmark" aria-hidden="true"></i>
+          </button>
+        </div>
       </div>
 
       <div class="detail-gallery">
         ${images.map((image, index) => `
-          <img src="${escapeHtml(image)}" alt="${escapeHtml(title)} ${index + 1}" loading="${index === 0 ? 'eager' : 'lazy'}">
+          <button class="detail-gallery-item" type="button" data-gallery-index="${index}">
+            <img src="${escapeHtml(image)}" alt="${escapeHtml(title)} ${index + 1}" loading="${index === 0 ? 'eager' : 'lazy'}">
+          </button>
         `).join('')}
       </div>
 
@@ -789,19 +1032,103 @@ function renderDetail() {
         </aside>
       </div>
     </section>
+    <div class="gallery-lightbox" id="galleryLightbox">
+      <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Close"></button>
+      <button class="lightbox-nav lightbox-prev" id="lightboxPrev" type="button" aria-label="Previous"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
+      <img id="lightboxImage" src="" alt="">
+      <button class="lightbox-nav lightbox-next" id="lightboxNext" type="button" aria-label="Next"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+      <span class="lightbox-counter" id="lightboxCounter"></span>
+    </div>
   `;
+
+  container.querySelectorAll('[data-gallery-index]').forEach(button => {
+    button.addEventListener('click', () => openLightbox(Number(button.dataset.galleryIndex) || 0));
+  });
+
+  bindLightbox();
+}
+
+function renderAbout() {
+  const container = document.querySelector('.about-page');
+  if (!container) return;
+
+  const content = ABOUT_CONTENT[currentLanguage] || ABOUT_CONTENT.en;
+  document.title = `${t('aboutNav')} | Antalya Realty Group`;
+
+  container.innerHTML = `
+    <section class="about-hero">
+      <div class="about-hero-inner">
+        <p class="eyebrow">Antalya Realty Group</p>
+        <h1>${escapeHtml(content.heroTitle)}</h1>
+        <p>${escapeHtml(content.heroText)}</p>
+      </div>
+    </section>
+
+    <section class="about-section">
+      <div class="about-intro">
+        <div>
+          <p class="eyebrow">${escapeHtml(content.introEyebrow)}</p>
+          <h2>${escapeHtml(content.introTitle)}</h2>
+        </div>
+        <p>${escapeHtml(content.introText)}</p>
+      </div>
+
+      <div class="about-stats">
+        ${content.stats.map(([value, label]) => `
+          <div><strong>${escapeHtml(value)}</strong><span>${escapeHtml(label)}</span></div>
+        `).join('')}
+      </div>
+    </section>
+
+    <section class="about-section about-band">
+      <div>
+        <p class="eyebrow">${escapeHtml(content.approachEyebrow)}</p>
+        <h2>${escapeHtml(content.approachTitle)}</h2>
+      </div>
+      <div class="about-benefits">
+        ${content.benefits.map(([icon, title, text]) => `
+          <article>
+            <i class="fa-solid ${escapeHtml(icon)}"></i>
+            <h3>${escapeHtml(title)}</h3>
+            <p>${escapeHtml(text)}</p>
+          </article>
+        `).join('')}
+      </div>
+    </section>
+
+    <section class="about-section about-cta">
+      <div>
+        <p class="eyebrow">${escapeHtml(content.ctaEyebrow)}</p>
+        <h2>${escapeHtml(content.ctaTitle)}</h2>
+        <p>${escapeHtml(content.ctaText)}</p>
+      </div>
+      <button class="appointment-btn" id="aboutAppointment" type="button">${escapeHtml(t('appointment'))}</button>
+    </section>
+  `;
+
+  document.getElementById('aboutAppointment')?.addEventListener('click', openAppointmentModal);
 }
 
 function renderCurrentPage() {
-  if (document.body.dataset.page === 'detail') {
+  if (document.body.dataset.page === 'about') {
+    renderAbout();
+  } else if (document.body.dataset.page === 'detail') {
     renderDetail();
   } else {
     renderCatalog();
   }
 }
 
+function openAppointmentModal() {
+  const appointmentOverlay = document.getElementById('appointmentOverlay');
+  if (!appointmentOverlay) return;
+  appointmentOverlay.classList.add('active');
+  document.body.classList.add('modal-open');
+}
+
 function bindAppointment() {
   const openAppointment = document.getElementById('openAppointment');
+  const aboutAppointment = document.getElementById('aboutAppointment');
   const appointmentOverlay = document.getElementById('appointmentOverlay');
   const appointmentClose = document.getElementById('appointmentClose');
   const appointmentDate = document.getElementById('appointmentDate');
@@ -810,12 +1137,10 @@ function bindAppointment() {
     appointmentDate.min = new Date().toISOString().slice(0, 10);
   }
 
-  if (!openAppointment || !appointmentOverlay || !appointmentClose) return;
+  if (!appointmentOverlay || !appointmentClose) return;
 
-  openAppointment.addEventListener('click', () => {
-    appointmentOverlay.classList.add('active');
-    document.body.classList.add('modal-open');
-  });
+  openAppointment?.addEventListener('click', openAppointmentModal);
+  aboutAppointment?.addEventListener('click', openAppointmentModal);
 
   const closeAppointment = () => {
     appointmentOverlay.classList.remove('active');
@@ -840,14 +1165,17 @@ async function init() {
   setupFavicon();
   applyTranslations();
   setupCatalogFilterToggle();
+  createSavedUi();
   bindPanels();
   bindAppointment();
 
   await Promise.all([loadProperties(), loadRates()]);
+  loadLocalSavedProperties();
 
   renderLanguageLinks();
   renderCurrencyLinks();
   updateCurrencyLabels();
+  updateSavedUi();
   bindFilters();
   renderCurrentPage();
 }

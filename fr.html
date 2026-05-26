@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body data-page="catalog" data-lang="fr">
   <div class="overlay" id="overlay"></div>
@@ -17,7 +18,7 @@
       <div class="top-container">
         <div class="top-left">
           <button class="dropdown-trigger" id="languageBtn" type="button">
-            <span data-i18n="languageName">Türkçe</span>
+            <span data-i18n="languageName">TГјrkГ§e</span>
             <span class="arrow"></span>
           </button>
           <button class="dropdown-trigger" id="currencyBtn" type="button">
@@ -41,7 +42,7 @@
           <a href="#catalog" data-i18n="buy">SATIN AL</a>
           <a href="#catalog" data-i18n="sell">SAT</a>
           <a href="#catalog" data-i18n="rent">KIRALA</a>
-          <a href="#contact" data-i18n="contacts">ILETISIM</a>
+          <a href="./about.html" data-i18n="aboutNav">О нас</a>
         </nav>
         <button class="appointment-btn" id="openAppointment" type="button" data-i18n="appointment">RANDEVU AL</button>
       </div>
@@ -84,6 +85,17 @@
       <div class="container">
         <aside class="filters">
           <h2 class="filters-title" data-i18n="filters">FILTRELER</h2>
+          <div class="filter-block">
+            <h3 data-i18n="districtSearch">Recherche par quartier</h3>
+            <input class="filter-search" type="search" id="locationSearch" data-i18n-placeholder="districtSearchPlaceholder" placeholder="Konyaalti, Hurma, Lara">
+          </div>
+          <div class="filter-block">
+            <h3 data-i18n="dealType">Type d'offre</h3>
+            <div class="segmented-filter">
+              <label><input type="radio" name="property-status" value="sale" checked><span data-i18n="buyFilter">Acheter</span></label>
+              <label><input type="radio" name="property-status" value="rent"><span data-i18n="rentFilter">Louer</span></label>
+            </div>
+          </div>
           <div class="filter-block">
             <h3 data-i18n="propertyType">Emlak tipi</h3>
             <label class="radio-item"><input type="radio" name="property-type" value="all" checked><span data-i18n="allTypes">Tumu</span></label>
