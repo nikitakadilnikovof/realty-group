@@ -25,6 +25,10 @@
         "city": "Antalya",
         "district": "Konyaalti",
         "subdistrict": "Hurma",
+        "coordinates": {
+          "lat": 36.8636,
+          "lng": 30.6037
+        },
         "display": {
           "tr": "Konyaalti / Hurma",
           "ru": "Коньяалты / Хурма",
@@ -102,6 +106,10 @@
         "city": "Antalya",
         "district": "Aksu",
         "subdistrict": "Altintas",
+        "coordinates": {
+          "lat": 36.9194,
+          "lng": 30.8138
+        },
         "display": {
           "tr": "Aksu / Altintas",
           "ru": "Аксу / Алтынташ",
@@ -178,6 +186,10 @@
         "city": "Antalya",
         "district": "Muratpasa",
         "subdistrict": "Guzeloba",
+        "coordinates": {
+          "lat": 36.8527,
+          "lng": 30.7966
+        },
         "display": {
           "tr": "Muratpasa / Guzeloba",
           "ru": "Муратпаша / Гюзелоба",

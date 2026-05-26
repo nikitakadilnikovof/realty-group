@@ -81,6 +81,22 @@ const EXTRA_TRANSLATIONS = {
     de: 'Mieten',
     ar: 'Rent'
   },
+  sellMenu: {
+    tr: 'Sat',
+    ru: 'Продать',
+    en: 'Sell',
+    fr: 'Vendre',
+    de: 'Verkaufen',
+    ar: 'Sell'
+  },
+  rentMenu: {
+    tr: 'Kirala',
+    ru: 'Аренда',
+    en: 'Rent',
+    fr: 'Louer',
+    de: 'Mieten',
+    ar: 'Rent'
+  },
   aboutNav: {
     tr: 'Hakkimizda',
     ru: 'О нас',
@@ -128,6 +144,14 @@ const EXTRA_TRANSLATIONS = {
     fr: 'Aucun bien enregistre.',
     de: 'Noch keine Immobilien gespeichert.',
     ar: 'Щ„Ш§ ШЄЩ€Ш¬ШЇ Ш№Щ‚Ш§Ш±Ш§ШЄ Щ…Ш­ЩЃЩ€ШёШ© ШЁШ№ШЇ.'
+  },
+  locationMap: {
+    tr: 'Konum',
+    ru: 'Геолокация',
+    en: 'Location',
+    fr: 'Geolocalisation',
+    de: 'Standort',
+    ar: 'Location'
   }
 };
 
@@ -273,6 +297,7 @@ let currentCurrency = localStorage.getItem('currency') || 'USD';
 let savedPropertyIds = new Set();
 let lightboxImages = [];
 let lightboxIndex = 0;
+let savedReturnToMobileMenu = false;
 const LOCAL_SAVED_KEY = 'arg-local-saved-properties';
 
 function t(key) {
@@ -414,6 +439,23 @@ function setupCatalogFilterToggle() {
     titleRow.appendChild(toggle);
   }
 
+  let closeButton = filters.querySelector('.filter-close');
+  if (!closeButton) {
+    closeButton = document.createElement('button');
+    closeButton.className = 'filter-close';
+    closeButton.type = 'button';
+    closeButton.setAttribute('aria-label', 'Close');
+    filters.prepend(closeButton);
+  }
+
+  let backdrop = document.getElementById('filterBackdrop');
+  if (!backdrop) {
+    backdrop = document.createElement('div');
+    backdrop.className = 'filter-backdrop';
+    backdrop.id = 'filterBackdrop';
+    document.body.appendChild(backdrop);
+  }
+
   filters.id = filters.id || 'catalogFilters';
   toggle.innerHTML = '<i class="fa-solid fa-sliders" aria-hidden="true"></i>';
   toggle.setAttribute('aria-label', t('filters'));
@@ -421,14 +463,21 @@ function setupCatalogFilterToggle() {
 
   const closeFilters = () => {
     filters.classList.remove('is-open');
+    backdrop.classList.remove('active');
+    document.body.classList.remove('filter-open');
     toggle.setAttribute('aria-expanded', 'false');
   };
 
   toggle.addEventListener('click', event => {
     event.stopPropagation();
     const isOpen = filters.classList.toggle('is-open');
+    backdrop.classList.toggle('active', isOpen);
+    document.body.classList.toggle('filter-open', isOpen);
     toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
   });
+
+  closeButton.addEventListener('click', closeFilters);
+  backdrop.addEventListener('click', closeFilters);
 
   document.addEventListener('click', event => {
     if (!filters.classList.contains('is-open')) return;
@@ -462,6 +511,151 @@ function bindPanels() {
   document.getElementById('closeBtn')?.addEventListener('click', closePanel);
 }
 
+function catalogAnchor() {
+  return `./${catalogPageForLanguage(currentLanguage)}#catalog`;
+}
+
+function mobileLanguageLinks() {
+  return Object.entries(SUPPORTED_LANGUAGES).map(([code, language]) => `
+    <a href="./${pageForLanguage(code)}" class="${code === currentLanguage ? 'active-item' : ''}">${escapeHtml(language.name)}</a>
+  `).join('');
+}
+
+function mobileCurrencyButtons() {
+  return SUPPORTED_CURRENCIES.map(currency => `
+    <button type="button" class="${currency === currentCurrency ? 'active-item' : ''}" data-mobile-currency="${currency}">${escapeHtml(currency)}</button>
+  `).join('');
+}
+
+function createMobileStatusFilter() {
+  const sort = document.getElementById('sortSelect');
+  if (!sort || document.getElementById('mobileStatusFilter')) return;
+
+  const wrapper = document.createElement('div');
+  wrapper.className = 'mobile-status-filter';
+  wrapper.id = 'mobileStatusFilter';
+  wrapper.innerHTML = `
+    <span class="mobile-status-title">${escapeHtml(t('dealType'))}</span>
+    <div class="segmented-filter">
+      <label><input type="radio" name="mobile-property-status" value="sale" checked><span>${escapeHtml(t('buyFilter'))}</span></label>
+      <label><input type="radio" name="mobile-property-status" value="rent"><span>${escapeHtml(t('rentFilter'))}</span></label>
+    </div>
+  `;
+  sort.insertAdjacentElement('afterend', wrapper);
+}
+
+function syncPropertyStatus(status) {
+  document.querySelectorAll('input[name="property-status"], input[name="mobile-property-status"]').forEach(input => {
+    input.checked = input.value === status;
+  });
+}
+
+function updateMobileMenuContent() {
+  const panel = document.getElementById('mobileMenuPanel');
+  if (!panel) return;
+
+  panel.innerHTML = `
+    <div class="mobile-menu-inner">
+      <nav class="mobile-menu-links">
+        <a href="${catalogAnchor()}" data-mobile-menu-link>${escapeHtml(t('buyFilter'))}</a>
+        <a href="${catalogAnchor()}" data-mobile-menu-link>${escapeHtml(t('sellMenu'))}</a>
+        <a href="${catalogAnchor()}" data-mobile-menu-link>${escapeHtml(t('rentMenu'))}</a>
+        <a href="./about.html?lang=${currentLanguage}" data-mobile-menu-link>${escapeHtml(t('aboutNav'))}</a>
+      </nav>
+      <div class="mobile-menu-actions">
+        <button class="saved-button mobile-saved-button" id="mobileOpenSaved" type="button">
+          <span>${escapeHtml(t('savedProjects'))}</span>
+          <strong data-saved-count>0</strong>
+        </button>
+        <button class="appointment-btn mobile-appointment-button" id="mobileOpenAppointment" type="button">${escapeHtml(t('appointment'))}</button>
+      </div>
+      <div class="mobile-menu-section">
+        <h3>${escapeHtml(t('siteLanguage'))}</h3>
+        <div class="mobile-menu-grid">${mobileLanguageLinks()}</div>
+      </div>
+      <div class="mobile-menu-section">
+        <h3>${escapeHtml(t('currency'))}</h3>
+        <div class="mobile-menu-grid">${mobileCurrencyButtons()}</div>
+      </div>
+      <a class="mobile-menu-phone" href="tel:+905556826955">
+        <span>${escapeHtml(t('callNow'))}</span>
+        <strong>+90 555 682 69 55</strong>
+      </a>
+    </div>
+  `;
+
+  panel.querySelectorAll('[data-mobile-menu-link]').forEach(link => {
+    link.addEventListener('click', closeMobileMenu);
+  });
+
+  panel.querySelector('#mobileOpenSaved')?.addEventListener('click', () => {
+    savedReturnToMobileMenu = true;
+    closeMobileMenu();
+    openSavedPanel();
+  });
+
+  panel.querySelector('#mobileOpenAppointment')?.addEventListener('click', () => {
+    closeMobileMenu();
+    openAppointmentModal();
+  });
+
+  panel.querySelectorAll('[data-mobile-currency]').forEach(button => {
+    button.addEventListener('click', () => {
+      currentCurrency = button.dataset.mobileCurrency;
+      localStorage.setItem('currency', currentCurrency);
+      updateCurrencyLabels();
+      updateMobileMenuContent();
+      renderCurrentPage();
+    });
+  });
+
+  updateSavedUi();
+}
+
+function openMobileMenu() {
+  document.getElementById('mobileMenuToggle')?.classList.add('is-active');
+  document.getElementById('mobileMenuToggle')?.setAttribute('aria-expanded', 'true');
+  document.getElementById('mobileMenuPanel')?.classList.add('active');
+  document.body.classList.add('mobile-menu-open');
+}
+
+function closeMobileMenu() {
+  document.getElementById('mobileMenuToggle')?.classList.remove('is-active');
+  document.getElementById('mobileMenuToggle')?.setAttribute('aria-expanded', 'false');
+  document.getElementById('mobileMenuPanel')?.classList.remove('active');
+  document.body.classList.remove('mobile-menu-open');
+}
+
+function createMobileMenu() {
+  const nav = document.querySelector('.nav-container');
+  if (!nav || document.getElementById('mobileMenuToggle')) return;
+
+  const toggle = document.createElement('button');
+  toggle.className = 'mobile-menu-toggle';
+  toggle.id = 'mobileMenuToggle';
+  toggle.type = 'button';
+  toggle.setAttribute('aria-label', 'Menu');
+  toggle.setAttribute('aria-expanded', 'false');
+  toggle.innerHTML = '<span></span><span></span><span></span>';
+  nav.appendChild(toggle);
+
+  const panel = document.createElement('div');
+  panel.className = 'mobile-menu-panel';
+  panel.id = 'mobileMenuPanel';
+  document.body.appendChild(panel);
+
+  updateMobileMenuContent();
+
+  toggle.addEventListener('click', () => {
+    if (toggle.classList.contains('is-active')) closeMobileMenu();
+    else openMobileMenu();
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 850) closeMobileMenu();
+  });
+}
+
 function renderLanguageLinks() {
   const container = document.getElementById('languageLinks');
   if (!container) return;
@@ -484,6 +678,7 @@ function renderCurrencyLinks() {
       currentCurrency = button.dataset.currency;
       localStorage.setItem('currency', currentCurrency);
       updateCurrencyLabels();
+      updateMobileMenuContent();
       closePanel();
       renderCurrentPage();
     });
@@ -534,7 +729,9 @@ function formatPrice(price) {
 }
 
 function getFilteredProperties() {
-  const status = document.querySelector('input[name="property-status"]:checked')?.value || 'sale';
+  const status = document.querySelector('input[name="property-status"]:checked')?.value
+    || document.querySelector('input[name="mobile-property-status"]:checked')?.value
+    || 'sale';
   const type = document.querySelector('input[name="property-type"]:checked')?.value || 'all';
   const locationQuery = normalizeSearchTerm(document.getElementById('locationSearch')?.value || '');
   const priceMin = Number(document.getElementById('priceMin')?.value) || 0;
@@ -602,14 +799,25 @@ function updateSavedUi() {
 function openSavedPanel() {
   const overlay = document.getElementById('savedOverlay');
   if (!overlay) return;
+  overlay.classList.toggle('from-mobile-menu', savedReturnToMobileMenu);
   overlay.classList.add('active');
   document.body.classList.add('modal-open');
   renderSavedPanel();
 }
 
 function closeSavedPanel() {
-  document.getElementById('savedOverlay')?.classList.remove('active');
+  const overlay = document.getElementById('savedOverlay');
+  overlay?.classList.remove('active', 'from-mobile-menu');
+  savedReturnToMobileMenu = false;
   document.body.classList.remove('modal-open');
+}
+
+function backToMobileMenuFromSaved() {
+  const overlay = document.getElementById('savedOverlay');
+  overlay?.classList.remove('active', 'from-mobile-menu');
+  savedReturnToMobileMenu = false;
+  document.body.classList.remove('modal-open');
+  openMobileMenu();
 }
 
 function toggleSavedProperty(propertyId) {
@@ -774,6 +982,7 @@ function createSavedUi() {
     document.body.insertAdjacentHTML('beforeend', `
       <div class="saved-overlay" id="savedOverlay">
         <aside class="saved-panel">
+          <button class="saved-back" id="savedBack" type="button" aria-label="Back"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></button>
           <button class="appointment-close" id="savedClose" type="button" aria-label="Close"></button>
           <div class="saved-heading">
             <h2>${escapeHtml(t('savedProjects'))}</h2>
@@ -787,6 +996,7 @@ function createSavedUi() {
 
   document.getElementById('openSaved')?.addEventListener('click', openSavedPanel);
   document.getElementById('savedClose')?.addEventListener('click', closeSavedPanel);
+  document.getElementById('savedBack')?.addEventListener('click', backToMobileMenuFromSaved);
   document.getElementById('savedOverlay')?.addEventListener('click', event => {
     if (event.target === event.currentTarget) closeSavedPanel();
   });
@@ -857,8 +1067,15 @@ function bindFilters() {
     element.addEventListener('change', renderCatalog);
   });
 
+  document.querySelectorAll('input[name="property-status"], input[name="mobile-property-status"]').forEach(element => {
+    element.addEventListener('change', () => {
+      syncPropertyStatus(element.value);
+      renderCatalog();
+    });
+  });
+
   document.getElementById('resetFilters')?.addEventListener('click', () => {
-    document.querySelector('input[name="property-status"][value="sale"]').checked = true;
+    syncPropertyStatus('sale');
     document.querySelector('input[name="property-type"][value="all"]').checked = true;
     ['locationSearch', 'priceMin', 'priceMax', 'areaMin', 'areaMax'].forEach(id => {
       const input = document.getElementById(id);
@@ -968,6 +1185,43 @@ function featureRows(property) {
     `).join('');
 }
 
+function googleMapEmbedUrl(property) {
+  const coordinates = property.location?.coordinates;
+  const lat = Number(coordinates?.lat);
+  const lng = Number(coordinates?.lng);
+
+  if (Number.isFinite(lat) && Number.isFinite(lng)) {
+    return `https://www.google.com/maps?q=${lat},${lng}&z=15&output=embed`;
+  }
+
+  const location = [
+    property.location?.subdistrict,
+    property.location?.district,
+    property.location?.city,
+    property.location?.country
+  ].filter(Boolean).join(', ');
+
+  return `https://www.google.com/maps?q=${encodeURIComponent(location)}&z=14&output=embed`;
+}
+
+function renderLocationMap(property, location) {
+  return `
+    <section class="detail-map">
+      <div class="detail-map-heading">
+        <h2>${escapeHtml(t('locationMap'))}</h2>
+        <span>${escapeHtml(location)}</span>
+      </div>
+      <iframe
+        src="${escapeHtml(googleMapEmbedUrl(property))}"
+        title="${escapeHtml(`${t('locationMap')} - ${location}`)}"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        allowfullscreen>
+      </iframe>
+    </section>
+  `;
+}
+
 function renderDetail() {
   const container = document.getElementById('propertyDetail');
   if (!container) return;
@@ -1029,6 +1283,7 @@ function renderDetail() {
         <aside class="detail-features">
           <h2>${escapeHtml(t('features'))}</h2>
           ${featureRows(property)}
+          ${renderLocationMap(property, location)}
         </aside>
       </div>
     </section>
@@ -1165,7 +1420,9 @@ async function init() {
   setupFavicon();
   applyTranslations();
   setupCatalogFilterToggle();
+  createMobileStatusFilter();
   createSavedUi();
+  createMobileMenu();
   bindPanels();
   bindAppointment();
 
@@ -1176,6 +1433,7 @@ async function init() {
   renderCurrencyLinks();
   updateCurrencyLabels();
   updateSavedUi();
+  updateMobileMenuContent();
   bindFilters();
   renderCurrentPage();
 }
