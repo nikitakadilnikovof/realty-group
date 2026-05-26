@@ -1,0 +1,239 @@
+{
+  "properties": [
+    {
+      "id": "tr-antalya-konyaalti-hurma-001",
+      "status": "sale",
+      "type": "apartment",
+      "title": {
+        "tr": "Konyaalti Hurma'da 2+1 daire",
+        "ru": "Квартира 2+1 в Хурме, Коньяалты",
+        "en": "2+1 apartment in Hurma, Konyaalti",
+        "fr": "Appartement 2+1 a Hurma, Konyaalti",
+        "de": "2+1 Wohnung in Hurma, Konyaalti",
+        "ar": "شقة 2+1 في هورما، كونيالتي"
+      },
+      "description": {
+        "tr": "Konyaalti'nin Hurma bolgesinde, marketlere, okullara ve toplu tasimaya yakin, balkonlu ve aydinlik bir daire.",
+        "ru": "Светлая квартира с балконом в районе Хурма, рядом с магазинами, школами и общественным транспортом.",
+        "en": "A bright apartment with a balcony in Hurma, close to shops, schools and public transport.",
+        "fr": "Appartement lumineux avec balcon a Hurma, proche des commerces, des ecoles et des transports.",
+        "de": "Helle Wohnung mit Balkon in Hurma, nahe Geschaeften, Schulen und oeffentlichen Verkehrsmitteln.",
+        "ar": "شقة مشرقة مع شرفة في هورما، قريبة من المتاجر والمدارس ووسائل النقل العام."
+      },
+      "location": {
+        "country": "Turkey",
+        "city": "Antalya",
+        "district": "Konyaalti",
+        "subdistrict": "Hurma",
+        "display": {
+          "tr": "Konyaalti / Hurma",
+          "ru": "Коньяалты / Хурма",
+          "en": "Konyaalti / Hurma",
+          "fr": "Konyaalti / Hurma",
+          "de": "Konyaalti / Hurma",
+          "ar": "كونيالتي / هورما"
+        }
+      },
+      "price": {
+        "value": 158000,
+        "currency": "USD"
+      },
+      "area": {
+        "value": 120,
+        "unit": "m2"
+      },
+      "features": {
+        "rooms": "2+1",
+        "floor": 2,
+        "bedrooms": 2,
+        "bathrooms": 1,
+        "furnished": false,
+        "parking": true
+      },
+      "details": {
+        "tr": ["120 m2", "2. kat", "Otopark"],
+        "ru": ["120 м²", "2 этаж", "Парковка"],
+        "en": ["120 m2", "2nd floor", "Parking"],
+        "fr": ["120 m2", "2e etage", "Parking"],
+        "de": ["120 m2", "2. Etage", "Parkplatz"],
+        "ar": ["120 م²", "الطابق 2", "موقف سيارات"]
+      },
+      "media": {
+        "preview": [
+          "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=1200&auto=format&fit=crop",
+          "https://images.unsplash.com/photo-1560185127-6ed189bf02f4?q=80&w=1200&auto=format&fit=crop",
+          "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1200&auto=format&fit=crop"
+        ],
+        "gallery": [
+          "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=1600&auto=format&fit=crop",
+          "https://images.unsplash.com/photo-1560185127-6ed189bf02f4?q=80&w=1600&auto=format&fit=crop",
+          "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1600&auto=format&fit=crop",
+          "https://images.unsplash.com/photo-1560184897-ae75f418493e?q=80&w=1600&auto=format&fit=crop",
+          "https://images.unsplash.com/photo-1484154218962-a197022b5858?q=80&w=1600&auto=format&fit=crop"
+        ]
+      },
+      "isFeatured": true,
+      "createdAt": "2026-05-25",
+      "updatedAt": "2026-05-25"
+    },
+    {
+      "id": "tr-antalya-aksu-altintas-001",
+      "status": "sale",
+      "type": "land",
+      "title": {
+        "tr": "Altintas'ta yatirimlik arsa",
+        "ru": "Земельный участок в Алтынташе",
+        "en": "Investment land in Altintas",
+        "fr": "Terrain d'investissement a Altintas",
+        "de": "Investitionsgrundstueck in Altintas",
+        "ar": "أرض استثمارية في ألتينتاش"
+      },
+      "description": {
+        "tr": "Aksu Altintas bolgesinde, gelisen imar hattina yakin, villa veya butik proje icin uygun arsa.",
+        "ru": "Участок в развивающемся районе Алтынташ, подходит для виллы или небольшого инвестиционного проекта.",
+        "en": "A land plot in the growing Altintas area, suitable for a villa or a boutique investment project.",
+        "fr": "Terrain dans le quartier en developpement d'Altintas, adapte a une villa ou un petit projet.",
+        "de": "Grundstueck im wachsenden Gebiet Altintas, geeignet fuer eine Villa oder ein kleines Projekt.",
+        "ar": "قطعة أرض في منطقة ألتينتاش النامية، مناسبة لفيلا أو مشروع استثماري صغير."
+      },
+      "location": {
+        "country": "Turkey",
+        "city": "Antalya",
+        "district": "Aksu",
+        "subdistrict": "Altintas",
+        "display": {
+          "tr": "Aksu / Altintas",
+          "ru": "Аксу / Алтынташ",
+          "en": "Aksu / Altintas",
+          "fr": "Aksu / Altintas",
+          "de": "Aksu / Altintas",
+          "ar": "أكسو / ألتينتاش"
+        }
+      },
+      "price": {
+        "value": 230000,
+        "currency": "USD"
+      },
+      "area": {
+        "value": 540,
+        "unit": "m2"
+      },
+      "features": {
+        "rooms": null,
+        "floor": null,
+        "bedrooms": null,
+        "bathrooms": null,
+        "furnished": false,
+        "parking": false
+      },
+      "details": {
+        "tr": ["540 m2", "Imar yolu", "Yatirim"],
+        "ru": ["540 м²", "Дорога рядом", "Инвестиция"],
+        "en": ["540 m2", "Road access", "Investment"],
+        "fr": ["540 m2", "Acces route", "Investissement"],
+        "de": ["540 m2", "Strassenzugang", "Investition"],
+        "ar": ["540 م²", "طريق قريب", "استثمار"]
+      },
+      "media": {
+        "preview": [
+          "https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1200&auto=format&fit=crop",
+          "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop",
+          "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=1200&auto=format&fit=crop"
+        ],
+        "gallery": [
+          "https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1600&auto=format&fit=crop",
+          "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop",
+          "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=1600&auto=format&fit=crop",
+          "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=1600&auto=format&fit=crop",
+          "https://images.unsplash.com/photo-1439853949127-fa647821eba0?q=80&w=1600&auto=format&fit=crop"
+        ]
+      },
+      "isFeatured": false,
+      "createdAt": "2026-05-25",
+      "updatedAt": "2026-05-25"
+    },
+    {
+      "id": "tr-antalya-muratpasa-guzeloba-001",
+      "status": "rent",
+      "type": "apartment",
+      "title": {
+        "tr": "Guzeloba'da esyali 1+1 kiralik",
+        "ru": "Меблированная квартира 1+1 в Гюзелоба",
+        "en": "Furnished 1+1 rental in Guzeloba",
+        "fr": "Location meublee 1+1 a Guzeloba",
+        "de": "Moeblierte 1+1 Mietwohnung in Guzeloba",
+        "ar": "شقة مفروشة 1+1 للايجار في غوزيلوبا"
+      },
+      "description": {
+        "tr": "Lara plajina ve sosyal alanlara yakin, esyali, bakimli ve hemen tasinmaya hazir kiralik daire.",
+        "ru": "Меблированная квартира рядом с пляжем Лара и городской инфраструктурой, готова к заселению.",
+        "en": "A furnished apartment near Lara beach and city amenities, ready to move in.",
+        "fr": "Appartement meuble proche de la plage de Lara et des commodites, pret a emmenager.",
+        "de": "Moeblierte Wohnung nahe Lara-Strand und Infrastruktur, sofort bezugsfertig.",
+        "ar": "شقة مفروشة بالقرب من شاطئ لارا والخدمات، جاهزة للسكن."
+      },
+      "location": {
+        "country": "Turkey",
+        "city": "Antalya",
+        "district": "Muratpasa",
+        "subdistrict": "Guzeloba",
+        "display": {
+          "tr": "Muratpasa / Guzeloba",
+          "ru": "Муратпаша / Гюзелоба",
+          "en": "Muratpasa / Guzeloba",
+          "fr": "Muratpasa / Guzeloba",
+          "de": "Muratpasa / Guzeloba",
+          "ar": "مراد باشا / غوزيلوبا"
+        }
+      },
+      "price": {
+        "value": 950,
+        "currency": "USD",
+        "period": "month"
+      },
+      "area": {
+        "value": 65,
+        "unit": "m2"
+      },
+      "features": {
+        "rooms": "1+1",
+        "floor": 4,
+        "bedrooms": 1,
+        "bathrooms": 1,
+        "furnished": true,
+        "parking": false
+      },
+      "details": {
+        "tr": ["65 m2", "Esyali", "Aylik kira"],
+        "ru": ["65 м²", "Меблирована", "Помесячно"],
+        "en": ["65 m2", "Furnished", "Monthly rent"],
+        "fr": ["65 m2", "Meuble", "Loyer mensuel"],
+        "de": ["65 m2", "Moebliert", "Monatsmiete"],
+        "ar": ["65 م²", "مفروشة", "ايجار شهري"]
+      },
+      "media": {
+        "preview": [
+          "https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=1200&auto=format&fit=crop",
+          "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=1200&auto=format&fit=crop",
+          "https://images.unsplash.com/photo-1560448205-17d3a46c84de?q=80&w=1200&auto=format&fit=crop"
+        ],
+        "gallery": [
+          "https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=1600&auto=format&fit=crop",
+          "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=1600&auto=format&fit=crop",
+          "https://images.unsplash.com/photo-1560448205-17d3a46c84de?q=80&w=1600&auto=format&fit=crop",
+          "https://images.unsplash.com/photo-1560185008-b033106af5c3?q=80&w=1600&auto=format&fit=crop",
+          "https://images.unsplash.com/photo-1560185007-c5ca9d2c014d?q=80&w=1600&auto=format&fit=crop"
+        ]
+      },
+      "isFeatured": false,
+      "createdAt": "2026-05-25",
+      "updatedAt": "2026-05-25"
+    }
+  ],
+  "dictionaries": {
+    "languages": ["tr", "ru", "en", "fr", "de", "ar"],
+    "currencies": ["USD", "TRY", "EUR", "RUB", "GBP", "CHF", "CAD", "SEK"],
+    "types": ["land", "apartment", "villa", "commercial"],
+    "statuses": ["sale", "rent"]
+  }
+}
