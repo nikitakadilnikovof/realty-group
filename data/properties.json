@@ -2,6 +2,14 @@
   "properties": [
     {
       "id": "tr-antalya-konyaalti-hurma-001",
+      "objectNumber": "1001",
+      "_dealType": "sale",
+      "_propertyType": "apartment",
+      "_district": "Konyaalti",
+      "_rooms": "2+1",
+      "_price": 158000,
+      "_area": 120,
+      "_parking": true,
       "status": "sale",
       "type": "apartment",
       "title": {
@@ -55,12 +63,36 @@
         "parking": true
       },
       "details": {
-        "tr": ["120 m2", "2. kat", "Otopark"],
-        "ru": ["120 м²", "2 этаж", "Парковка"],
-        "en": ["120 m2", "2nd floor", "Parking"],
-        "fr": ["120 m2", "2e etage", "Parking"],
-        "de": ["120 m2", "2. Etage", "Parkplatz"],
-        "ar": ["120 م²", "الطابق 2", "موقف سيارات"]
+        "tr": [
+          "120 m2",
+          "2. kat",
+          "Otopark"
+        ],
+        "ru": [
+          "120 м²",
+          "2 этаж",
+          "Парковка"
+        ],
+        "en": [
+          "120 m2",
+          "2nd floor",
+          "Parking"
+        ],
+        "fr": [
+          "120 m2",
+          "2e etage",
+          "Parking"
+        ],
+        "de": [
+          "120 m2",
+          "2. Etage",
+          "Parkplatz"
+        ],
+        "ar": [
+          "120 م²",
+          "الطابق 2",
+          "موقف سيارات"
+        ]
       },
       "media": {
         "preview": [
@@ -80,9 +112,14 @@
       "createdAt": "2026-05-25",
       "updatedAt": "2026-05-25"
     },
-    
     {
       "id": "tr-antalya-aksu-altintas-001",
+      "objectNumber": "1002",
+      "_dealType": "sale",
+      "_propertyType": "land",
+      "_district": "Aksu",
+      "_price": 230000,
+      "_area": 540,
       "status": "sale",
       "type": "land",
       "title": {
@@ -136,12 +173,36 @@
         "parking": false
       },
       "details": {
-        "tr": ["540 m2", "Imar yolu", "Yatirim"],
-        "ru": ["540 м²", "Дорога рядом", "Инвестиция"],
-        "en": ["540 m2", "Road access", "Investment"],
-        "fr": ["540 m2", "Acces route", "Investissement"],
-        "de": ["540 m2", "Strassenzugang", "Investition"],
-        "ar": ["540 م²", "طريق قريب", "استثمار"]
+        "tr": [
+          "540 m2",
+          "Imar yolu",
+          "Yatirim"
+        ],
+        "ru": [
+          "540 м²",
+          "Дорога рядом",
+          "Инвестиция"
+        ],
+        "en": [
+          "540 m2",
+          "Road access",
+          "Investment"
+        ],
+        "fr": [
+          "540 m2",
+          "Acces route",
+          "Investissement"
+        ],
+        "de": [
+          "540 m2",
+          "Strassenzugang",
+          "Investition"
+        ],
+        "ar": [
+          "540 م²",
+          "طريق قريب",
+          "استثمار"
+        ]
       },
       "media": {
         "preview": [
@@ -163,6 +224,14 @@
     },
     {
       "id": "tr-antalya-muratpasa-guzeloba-001",
+      "objectNumber": "1003",
+      "_dealType": "rent",
+      "_propertyType": "apartment",
+      "_district": "Muratpasa",
+      "_rooms": "1+1",
+      "_price": 950,
+      "_area": 65,
+      "_furnished": true,
       "status": "rent",
       "type": "apartment",
       "title": {
@@ -216,14 +285,37 @@
         "furnished": true,
         "parking": false
       },
-      
       "details": {
-        "tr": ["65 m2", "Esyali", "Aylik kira"],
-        "ru": ["65 м²", "Меблирована", "Помесячно"],
-        "en": ["65 m2", "Furnished", "Monthly rent"],
-        "fr": ["65 m2", "Meuble", "Loyer mensuel"],
-        "de": ["65 m2", "Moebliert", "Monatsmiete"],
-        "ar": ["65 م²", "مفروشة", "ايجار شهري"]
+        "tr": [
+          "65 m2",
+          "Esyali",
+          "Aylik kira"
+        ],
+        "ru": [
+          "65 м²",
+          "Меблирована",
+          "Помесячно"
+        ],
+        "en": [
+          "65 m2",
+          "Furnished",
+          "Monthly rent"
+        ],
+        "fr": [
+          "65 m2",
+          "Meuble",
+          "Loyer mensuel"
+        ],
+        "de": [
+          "65 m2",
+          "Moebliert",
+          "Monatsmiete"
+        ],
+        "ar": [
+          "65 م²",
+          "مفروشة",
+          "ايجار شهري"
+        ]
       },
       "media": {
         "preview": [
@@ -242,12 +334,228 @@
       "isFeatured": false,
       "createdAt": "2026-05-25",
       "updatedAt": "2026-05-25"
+    },
+    {
+      "id": "tr-antalya-konyaalti-hurma-001",
+      "objectNumber": "1001",
+      "_dealType": "sale",
+      "_propertyType": "Ev",
+      "_district": "Konyaalti",
+      "_rooms": "2+1",
+      "_price": 158000,
+      "_area": 120,
+      "_parking": true,
+      "status": "sale",
+      "type": "Ev",
+      "title": {
+        "tr": "Konyaalti Hurma'da 2+1 daire",
+        "ru": "Квартира 2+1 в Хурме, Коньяалты",
+        "en": "2+1 apartment in Hurma, Konyaalti",
+        "fr": "Appartement 2+1 a Hurma, Konyaalti",
+        "de": "2+1 Wohnung in Hurma, Konyaalti",
+        "ar": "شقة 2+1 في هورما، كونيالتي"
+      },
+      "description": {
+        "tr": "Konyaalti'nin Hurma bolgesinde, marketlere, okullara ve toplu tasimaya yakin, balkonlu ve aydinlik bir daire.",
+        "ru": "Светлая квартира с балконом в районе Хурма, рядом с магазинами, школами и общественным транспортом.",
+        "en": "A bright apartment with a balcony in Hurma, close to shops, schools and public transport.",
+        "fr": "Appartement lumineux avec balcon a Hurma, proche des commerces, des ecoles et des transports.",
+        "de": "Helle Wohnung mit Balkon in Hurma, nahe Geschaeften, Schulen und oeffentlichen Verkehrsmitteln.",
+        "ar": "شقة مشرقة مع شرفة في هورما، قريبة من المتاجر والمدارس ووسائل النقل العام."
+      },
+      "location": {
+        "country": "Turkey",
+        "city": "Antalya",
+        "district": "Konyaalti",
+        "subdistrict": "Hurma",
+        "coordinates": {
+          "lat": 36.8636,
+          "lng": 30.6037
+        },
+        "display": {
+          "tr": "Konyaalti / Hurma",
+          "ru": "Коньяалты / Хурма",
+          "en": "Konyaalti / Hurma",
+          "fr": "Konyaalti / Hurma",
+          "de": "Konyaalti / Hurma",
+          "ar": "كونيالتي / هورما"
+        }
+      },
+      "price": {
+        "value": 158000,
+        "currency": "USD"
+      },
+      "area": {
+        "value": 120,
+        "unit": "m2"
+      },
+      "features": {
+        "rooms": "2+1",
+        "floor": 2,
+        "bedrooms": 2,
+        "bathrooms": 1,
+        "furnished": false,
+        "parking": true
+      },
+      "details": {
+        "tr": [
+          "120 m2",
+          "2. kat",
+          "Otopark"
+        ],
+        "ru": [
+          "120 м²",
+          "2 этаж",
+          "Парковка"
+        ],
+        "en": [
+          "120 m2",
+          "2nd floor",
+          "Parking"
+        ],
+        "fr": [
+          "120 m2",
+          "2e etage",
+          "Parking"
+        ],
+        "de": [
+          "120 m2",
+          "2. Etage",
+          "Parkplatz"
+        ],
+        "ar": [
+          "120 م²",
+          "الطابق 2",
+          "موقف سيارات"
+        ]
+      },
+      "media": {
+        "preview": [
+          "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=1200&auto=format&fit=crop",
+          "https://images.unsplash.com/photo-1560185127-6ed189bf02f4?q=80&w=1200&auto=format&fit=crop",
+          "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1200&auto=format&fit=crop"
+        ],
+        "gallery": [
+          "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=1600&auto=format&fit=crop",
+          "https://images.unsplash.com/photo-1560185127-6ed189bf02f4?q=80&w=1600&auto=format&fit=crop",
+          "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1600&auto=format&fit=crop",
+          "https://images.unsplash.com/photo-1560184897-ae75f418493e?q=80&w=1600&auto=format&fit=crop",
+          "https://images.unsplash.com/photo-1484154218962-a197022b5858?q=80&w=1600&auto=format&fit=crop"
+        ]
+      },
+      "isFeatured": true,
+      "createdAt": "2026-05-25",
+      "updatedAt": "2026-05-25"
+    },
+    {
+      "id": "tr-kemer-kemer-apartment-1004",
+      "objectNumber": "1004",
+      "_dealType": "sale",
+      "_propertyType": "apartment",
+      "_district": "Kemer",
+      "_rooms": "5+2",
+      "_price": 500000,
+      "_area": 130,
+      "status": "sale",
+      "type": "apartment",
+      "title": {
+        "tr": "Kemer'de 5+2 satilik daire",
+        "ru": "Квартира 5+2 в Кемере",
+        "en": "5+2 apartment for sale in Kemer",
+        "fr": "Appartement 5+2 a vendre a Kemer",
+        "de": "5+2 Wohnung zum Verkauf in Kemer",
+        "ar": "شقة 5+2 للبيع في كيمر"
+      },
+      "description": {
+        "tr": "Kemer'de 130 m2 alana sahip, 5+2 planli satilik daire.",
+        "ru": "Просторная квартира 5+2 площадью 130 м² на продажу в Кемере.",
+        "en": "A spacious 5+2 apartment with 130 m2 of living area for sale in Kemer.",
+        "fr": "Appartement spacieux 5+2 de 130 m2 a vendre a Kemer.",
+        "de": "Grosszuegige 5+2 Wohnung mit 130 m2 Wohnflaeche zum Verkauf in Kemer.",
+        "ar": "شقة واسعة 5+2 بمساحة 130 م2 للبيع في كيمر."
+      },
+      "location": {
+        "country": "Turkey",
+        "city": "Kemer",
+        "district": "Kemer",
+        "subdistrict": "",
+        "coordinates": {
+          "lat": null,
+          "lng": null
+        },
+        "display": {
+          "tr": "Kemer",
+          "ru": "Кемер",
+          "en": "Kemer",
+          "fr": "Kemer",
+          "de": "Kemer",
+          "ar": "كيمر"
+        }
+      },
+      "price": {
+        "value": 500000,
+        "currency": "USD"
+      },
+      "area": {
+        "value": 130,
+        "unit": "m2"
+      },
+      "features": {
+        "rooms": "5+2",
+        "floor": null,
+        "bedrooms": 5,
+        "bathrooms": null,
+        "furnished": null,
+        "parking": null
+      },
+      "details": {
+        "tr": [
+          "130 m2",
+          "5+2",
+          "Satilik"
+        ],
+        "ru": [
+          "130 м²",
+          "5+2",
+          "Продажа"
+        ],
+        "en": [
+          "130 m2",
+          "5+2",
+          "For sale"
+        ],
+        "fr": [
+          "130 m2",
+          "5+2",
+          "A vendre"
+        ],
+        "de": [
+          "130 m2",
+          "5+2",
+          "Zum Verkauf"
+        ],
+        "ar": [
+          "130 م2",
+          "5+2",
+          "للبيع"
+        ]
+      },
+      "media": {
+        "preview": [
+          "https://placehold.co/1200x800?text=Property+1004+Photo+1",
+          "https://placehold.co/1200x800?text=Property+1004+Photo+2",
+          "https://placehold.co/1200x800?text=Property+1004+Photo+3"
+        ],
+        "gallery": [
+          "https://placehold.co/1600x1000?text=Property+1004+Photo+1",
+          "https://placehold.co/1600x1000?text=Property+1004+Photo+2",
+          "https://placehold.co/1600x1000?text=Property+1004+Photo+3",
+          "https://placehold.co/1600x1000?text=Property+1004+Photo+4"
+        ]
+      },
+      "isFeatured": false,
+      "createdAt": "2026-05-28",
+      "updatedAt": "2026-05-28"
     }
-  ],
-  "dictionaries": {
-    "languages": ["tr", "ru", "en", "fr", "de", "ar"],
-    "currencies": ["USD", "TRY", "EUR", "RUB", "GBP", "CHF", "CAD", "SEK"],
-    "types": ["land", "apartment", "villa", "commercial"],
-    "statuses": ["sale", "rent"]
-  }
+  ]
 }

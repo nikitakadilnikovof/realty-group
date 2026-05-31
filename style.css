@@ -823,11 +823,47 @@ button {
   padding: 20px;
 }
 
-.location {
+.card-meta-row,
+.detail-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.card-meta-row {
   margin-bottom: 9px;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.detail-meta-row {
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.location {
+  margin: 0;
   color: var(--muted);
   font-size: 13px;
   font-weight: 700;
+}
+
+.object-number {
+  flex-shrink: 0;
+  padding: 5px 9px;
+  border-radius: 6px;
+  background: #fff5f6;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.detail-object-number {
+  padding: 7px 10px;
 }
 
 .property-info h3 {
@@ -863,6 +899,7 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 12px;
 }
 
@@ -875,11 +912,14 @@ button {
 }
 
 .card-actions {
+  max-width: 100%;
   flex-shrink: 0;
+  flex-wrap: wrap;
   justify-content: flex-end;
 }
 
-.save-property-button {
+.save-property-button,
+.share-property-button {
   width: 42px;
   height: 42px;
   display: inline-flex;
@@ -893,7 +933,8 @@ button {
   transition: border-color 0.2s, color 0.2s, background 0.2s;
 }
 
-.save-property-button:hover {
+.save-property-button:hover,
+.share-property-button:hover {
   background: #fff5f6;
 }
 
@@ -1689,7 +1730,16 @@ button {
   }
 
   .filter-close {
+    position: sticky;
+    top: -34px;
+    right: -24px;
+    z-index: 2;
+    float: right;
     display: block;
+    margin: -52px 0 18px 12px;
+    border-radius: 999px;
+    background: #fff;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
   }
 
   .filter-backdrop {

@@ -129,6 +129,22 @@ const EXTRA_TRANSLATIONS = {
     de: 'Gespeichert',
     ar: 'Щ…Ш­ЩЃЩ€Шё'
   },
+  shareProperty: {
+    tr: 'Ilan paylas',
+    ru: 'Поделиться объектом',
+    en: 'Share property',
+    fr: 'Partager le bien',
+    de: 'Immobilie teilen',
+    ar: 'Share property'
+  },
+  linkCopied: {
+    tr: 'Baglanti kopyalandi',
+    ru: 'Ссылка скопирована',
+    en: 'Link copied',
+    fr: 'Lien copie',
+    de: 'Link kopiert',
+    ar: 'Link copied'
+  },
   removeSaved: {
     tr: 'Kaldir',
     ru: 'Удалить',
@@ -144,6 +160,14 @@ const EXTRA_TRANSLATIONS = {
     fr: 'Aucun bien enregistre.',
     de: 'Noch keine Immobilien gespeichert.',
     ar: 'Щ„Ш§ ШЄЩ€Ш¬ШЇ Ш№Щ‚Ш§Ш±Ш§ШЄ Щ…Ш­ЩЃЩ€ШёШ© ШЁШ№ШЇ.'
+  },
+  objectNumber: {
+    tr: 'Ilan numarasi ',
+    ru: 'Номер объекта ',
+    en: 'Property number ',
+    fr: 'Numero du bien ',
+    de: 'Objektnummer ',
+    ar: 'Property number '
   },
   locationMap: {
     tr: 'Konum',
@@ -291,6 +315,10 @@ const ABOUT_CONTENT = {
 };
 
 let properties = [];
+let filterDefinitions = [];
+let filterLabels = {};
+let filterValueLabels = {};
+let filterOrder = [];
 let rates = { ...FALLBACK_RATES };
 let currentLanguage = document.body.dataset.lang || document.documentElement.lang || 'tr';
 let currentCurrency = localStorage.getItem('currency') || 'USD';
@@ -318,6 +346,18 @@ function escapeHtml(value) {
     .replaceAll("'", '&#039;');
 }
 
+function formatObjectNumber(property) {
+  const explicitNumber = property?.number || property?.objectNumber || property?.referenceNumber;
+  const explicitDigits = String(explicitNumber || '').replace(/\D/g, '');
+  if (explicitDigits) return explicitDigits;
+
+  const propertyIndex = properties.findIndex(item => item.id === property?.id);
+  if (propertyIndex >= 0) return String(1001 + propertyIndex);
+
+  const fallbackDigits = String(property?.id || '').replace(/\D/g, '');
+  return fallbackDigits || '1000';
+}
+
 function normalizeSearchTerm(value) {
   return String(value ?? '')
     .toLocaleLowerCase()
@@ -328,6 +368,144 @@ function normalizeSearchTerm(value) {
 function localizedSearchValues(value) {
   if (!value || typeof value !== 'object') return [value];
   return Object.values(value);
+}
+
+function isFilterKey(key) {
+  return key.startsWith('_') && key.length > 1;
+}
+
+function humanizeFilterKey(key) {
+  return key
+    .replace(/^_+/, '')
+    .replace(/([a-z])([A-Z])/g, '$1 $2')
+    .replace(/[-_]+/g, ' ')
+    .replace(/\b\w/g, letter => letter.toLocaleUpperCase());
+}
+
+function getFilterLabel(key) {
+  return getLocalized(filterLabels[key]) || humanizeFilterKey(key);
+}
+
+function getFilterValueLabel(value) {
+  const normalizedValue = filterValueToken(value);
+  if (filterValueLabels[normalizedValue]) return getLocalized(filterValueLabels[normalizedValue]);
+  if (typeof value === 'boolean') return value ? t('yes') : t('no');
+  return humanizeFilterKey(normalizedValue);
+}
+
+function getFilterValues(property, key) {
+  const value = property[key];
+  const values = Array.isArray(value) ? value : [value];
+  return values.filter(item => item !== null && item !== undefined && item !== '');
+}
+
+function filterValueToken(value) {
+  if (typeof value === 'string') return value.trim().toLocaleLowerCase();
+  return String(value);
+}
+
+function filterInputId(key, suffix = '') {
+  return `filter-${key.replace(/[^a-zA-Z0-9_-]/g, '-')}${suffix}`;
+}
+
+function collectFilterDefinitions() {
+  const filters = new Map();
+
+  properties.forEach(property => {
+    Object.keys(property).filter(isFilterKey).forEach(key => {
+      if (!filters.has(key)) {
+        filters.set(key, {
+          key,
+          values: new Map()
+        });
+      }
+
+      const filter = filters.get(key);
+      getFilterValues(property, key).forEach(value => {
+        filter.values.set(filterValueToken(value), value);
+      });
+    });
+  });
+
+  const orderedKeys = [
+    ...filterOrder.filter(key => filters.has(key)),
+    ...[...filters.keys()].filter(key => !filterOrder.includes(key)).sort((a, b) => getFilterLabel(a).localeCompare(getFilterLabel(b)))
+  ];
+
+  filterDefinitions = orderedKeys.map(key => {
+    const filter = filters.get(key);
+    const values = [...filter.values.values()];
+    const isRange = values.length > 0 && values.every(value => typeof value === 'number' && Number.isFinite(value));
+
+    return {
+      key,
+      label: getFilterLabel(key),
+      type: isRange ? 'range' : 'options',
+      values: values.sort((a, b) => {
+        if (typeof a === 'number' && typeof b === 'number') return a - b;
+        return getFilterValueLabel(a).localeCompare(getFilterValueLabel(b));
+      }),
+      min: isRange ? Math.min(...values) : null,
+      max: isRange ? Math.max(...values) : null
+    };
+  });
+}
+
+function rangeDisplayValue(key, value) {
+  if (key === '_price') return Math.round(convertFromUsd(value));
+  return value;
+}
+
+function propertyRangeValue(property, key) {
+  const value = Number(property[key]);
+  if (!Number.isFinite(value)) return null;
+  return key === '_price' ? convertFromUsd(value) : value;
+}
+
+function renderFilterOptions(filter) {
+  return filter.values.map(value => {
+    const token = filterValueToken(value);
+    const label = value === true && filter.values.length === 1 ? filter.label : getFilterValueLabel(value);
+
+    return `
+      <label class="checkbox-item">
+        <input type="checkbox" data-filter-key="${escapeHtml(filter.key)}" value="${escapeHtml(token)}">
+        <span>${escapeHtml(label)}</span>
+      </label>
+    `;
+  }).join('');
+}
+
+function renderRangeFilter(filter) {
+  return `
+    <div class="range-inputs">
+      <input type="number" id="${escapeHtml(filterInputId(filter.key, '-min'))}" data-filter-key="${escapeHtml(filter.key)}" data-filter-range="min" placeholder="${escapeHtml(t('from'))}" min="${escapeHtml(rangeDisplayValue(filter.key, filter.min))}" max="${escapeHtml(rangeDisplayValue(filter.key, filter.max))}">
+      <input type="number" id="${escapeHtml(filterInputId(filter.key, '-max'))}" data-filter-key="${escapeHtml(filter.key)}" data-filter-range="max" placeholder="${escapeHtml(t('to'))}" min="${escapeHtml(rangeDisplayValue(filter.key, filter.min))}" max="${escapeHtml(rangeDisplayValue(filter.key, filter.max))}">
+    </div>
+  `;
+}
+
+function renderDynamicFilters() {
+  const filters = document.querySelector('.filters');
+  if (!filters) return;
+
+  const closeButton = filters.querySelector('.filter-close');
+  filters.innerHTML = `
+    <h2 class="filters-title">${escapeHtml(t('filters'))}</h2>
+    <div class="filter-block">
+      <h3>${escapeHtml(t('districtSearch'))}</h3>
+      <input class="filter-search" type="search" id="locationSearch" placeholder="${escapeHtml(t('districtSearchPlaceholder'))}">
+    </div>
+    ${filterDefinitions.map(filter => `
+      <div class="filter-block dynamic-filter-block" data-filter-block="${escapeHtml(filter.key)}">
+        <h3>${escapeHtml(filter.label)}</h3>
+        ${filter.type === 'range' ? renderRangeFilter(filter) : renderFilterOptions(filter)}
+      </div>
+    `).join('')}
+    <button class="filter-reset" id="resetFilters" type="button">${escapeHtml(t('resetFilters'))}</button>
+  `;
+
+  if (closeButton) filters.prepend(closeButton);
 }
 
 function searchTokens(value) {
@@ -729,28 +907,33 @@ function formatPrice(price) {
 }
 
 function getFilteredProperties() {
-  const status = document.querySelector('input[name="property-status"]:checked')?.value
-    || document.querySelector('input[name="mobile-property-status"]:checked')?.value
-    || 'sale';
-  const type = document.querySelector('input[name="property-type"]:checked')?.value || 'all';
   const locationQuery = normalizeSearchTerm(document.getElementById('locationSearch')?.value || '');
-  const priceMin = Number(document.getElementById('priceMin')?.value) || 0;
-  const priceMax = Number(document.getElementById('priceMax')?.value) || Infinity;
-  const areaMin = Number(document.getElementById('areaMin')?.value) || 0;
-  const areaMax = Number(document.getElementById('areaMax')?.value) || Infinity;
   const sort = document.getElementById('sortSelect')?.value || 'newest';
 
   return properties
-    .filter(property => property.status === status)
-    .filter(property => type === 'all' || property.type === type)
     .filter(property => propertyMatchesSearch(property, locationQuery))
     .filter(property => {
-      const price = convertFromUsd(property.price?.value || 0);
-      return price >= priceMin && price <= priceMax;
-    })
-    .filter(property => {
-      const area = property.area?.value || 0;
-      return area >= areaMin && area <= areaMax;
+      return filterDefinitions.every(filter => {
+        if (filter.type === 'range') {
+          const min = Number(document.querySelector(`[data-filter-key="${filter.key}"][data-filter-range="min"]`)?.value);
+          const max = Number(document.querySelector(`[data-filter-key="${filter.key}"][data-filter-range="max"]`)?.value);
+          const hasMin = Number.isFinite(min) && min > 0;
+          const hasMax = Number.isFinite(max) && max > 0;
+          if (!hasMin && !hasMax) return true;
+          if (!Object.prototype.hasOwnProperty.call(property, filter.key)) return false;
+
+          const value = propertyRangeValue(property, filter.key);
+          if (value === null) return false;
+          return (!hasMin || value >= min) && (!hasMax || value <= max);
+        }
+
+        const selectedValues = [...document.querySelectorAll(`[data-filter-key="${filter.key}"]:checked`)].map(input => input.value);
+        if (!selectedValues.length) return true;
+        if (!Object.prototype.hasOwnProperty.call(property, filter.key)) return false;
+
+        const propertyValues = getFilterValues(property, filter.key).map(filterValueToken);
+        return selectedValues.some(value => propertyValues.includes(value));
+      });
     })
     .sort((a, b) => {
       if (sort === 'priceAsc') return (a.price?.value || 0) - (b.price?.value || 0);
@@ -829,6 +1012,42 @@ function toggleSavedProperty(propertyId) {
 
   persistLocalSavedProperties();
   updateSavedUi();
+}
+
+function propertyDetailUrl(propertyId) {
+  const detailUrl = `property.html?id=${encodeURIComponent(propertyId || '')}&lang=${currentLanguage}`;
+  return new URL(detailUrl, window.location.href).href;
+}
+
+async function shareProperty(propertyId) {
+  const property = properties.find(item => item.id === propertyId);
+  if (!property) return;
+
+  const shareData = {
+    title: getLocalized(property.title),
+    text: `${t('objectNumber')}${formatObjectNumber(property)} - ${getLocalized(property.title)}`,
+    url: propertyDetailUrl(property.id)
+  };
+
+  if (navigator.share) {
+    try {
+      await navigator.share(shareData);
+      return;
+    } catch (error) {
+      if (error?.name === 'AbortError') return;
+    }
+  }
+
+  try {
+    await navigator.clipboard?.writeText(shareData.url);
+  } catch (error) {
+    const input = document.createElement('input');
+    input.value = shareData.url;
+    document.body.appendChild(input);
+    input.select();
+    document.execCommand('copy');
+    input.remove();
+  }
 }
 
 function showLightboxImage() {
@@ -1003,9 +1222,16 @@ function createSavedUi() {
 
   document.addEventListener('click', event => {
     const saveButton = event.target.closest('[data-save-property]');
-    if (!saveButton) return;
+    if (saveButton) {
+      event.preventDefault();
+      toggleSavedProperty(saveButton.dataset.saveProperty);
+      return;
+    }
+
+    const shareButton = event.target.closest('[data-share-property]');
+    if (!shareButton) return;
     event.preventDefault();
-    toggleSavedProperty(saveButton.dataset.saveProperty);
+    shareProperty(shareButton.dataset.shareProperty);
   });
 }
 
@@ -1016,6 +1242,7 @@ function renderPropertyCard(property) {
   const details = getLocalized(property.details) || [];
   const preview = property.media?.preview?.slice(0, 3) || property.media?.gallery?.slice(0, 3) || [];
   const detailUrl = `property.html?id=${encodeURIComponent(property.id)}&lang=${currentLanguage}`;
+  const objectNumber = formatObjectNumber(property);
 
   return `
     <article class="property-card" data-property-id="${escapeHtml(property.id)}">
@@ -1028,7 +1255,10 @@ function renderPropertyCard(property) {
         </a>
       </div>
       <div class="property-info">
-        <p class="location">${escapeHtml(location)}</p>
+        <div class="card-meta-row">
+          <p class="location">${escapeHtml(location)}</p>
+          <span class="object-number">${escapeHtml(t('objectNumber'))}${escapeHtml(objectNumber)}</span>
+        </div>
         <h3><a href="./${detailUrl}">${escapeHtml(title)}</a></h3>
         <p class="card-description">${escapeHtml(description)}</p>
         <div class="details">
@@ -1038,6 +1268,9 @@ function renderPropertyCard(property) {
           <div class="price">${escapeHtml(formatPrice(property.price))}</div>
           <div class="card-actions">
             <a class="details-link" href="./${detailUrl}">${escapeHtml(t('details'))}</a>
+            <button class="share-property-button" type="button" data-share-property="${escapeHtml(property.id)}" aria-label="${escapeHtml(t('shareProperty'))}" title="${escapeHtml(t('shareProperty'))}">
+              <i class="fa-solid fa-share" aria-hidden="true"></i>
+            </button>
             <button class="save-property-button ${isPropertySaved(property.id) ? 'is-saved' : ''}" type="button" data-save-property="${escapeHtml(property.id)}" aria-label="${escapeHtml(isPropertySaved(property.id) ? t('savedProperty') : t('saveProperty'))}" title="${escapeHtml(isPropertySaved(property.id) ? t('savedProperty') : t('saveProperty'))}">
               <i class="${isPropertySaved(property.id) ? 'fa-solid' : 'fa-regular'} fa-bookmark" aria-hidden="true"></i>
             </button>
@@ -1067,19 +1300,13 @@ function bindFilters() {
     element.addEventListener('change', renderCatalog);
   });
 
-  document.querySelectorAll('input[name="property-status"], input[name="mobile-property-status"]').forEach(element => {
-    element.addEventListener('change', () => {
-      syncPropertyStatus(element.value);
-      renderCatalog();
-    });
-  });
-
   document.getElementById('resetFilters')?.addEventListener('click', () => {
-    syncPropertyStatus('sale');
-    document.querySelector('input[name="property-type"][value="all"]').checked = true;
-    ['locationSearch', 'priceMin', 'priceMax', 'areaMin', 'areaMax'].forEach(id => {
-      const input = document.getElementById(id);
-      if (input) input.value = '';
+    document.querySelectorAll('.filters input').forEach(input => {
+      if (input.type === 'checkbox' || input.type === 'radio') {
+        input.checked = false;
+      } else {
+        input.value = '';
+      }
     });
     renderCatalog();
   });
@@ -1244,6 +1471,7 @@ function renderDetail() {
   const location = getLocalized(property.location?.display);
   const description = getLocalized(property.description);
   const images = property.media?.gallery || property.media?.preview || [];
+  const objectNumber = formatObjectNumber(property);
   lightboxImages = images.map((image, index) => ({
     src: image,
     alt: `${title} ${index + 1}`
@@ -1256,11 +1484,17 @@ function renderDetail() {
       <a href="./${catalogPageForLanguage(currentLanguage)}" class="back-link"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i><span>${escapeHtml(t('backToCatalog'))}</span></a>
       <div class="detail-heading">
         <div>
-          <p class="eyebrow">${escapeHtml(location)}</p>
+          <div class="detail-meta-row">
+            <p class="eyebrow">${escapeHtml(location)}</p>
+            <span class="object-number detail-object-number">${escapeHtml(t('objectNumber'))}${escapeHtml(objectNumber)}</span>
+          </div>
           <h1>${escapeHtml(title)}</h1>
         </div>
         <div class="detail-side-actions">
           <div class="detail-price">${escapeHtml(formatPrice(property.price))}</div>
+          <button class="share-property-button" type="button" data-share-property="${escapeHtml(property.id)}" aria-label="${escapeHtml(t('shareProperty'))}" title="${escapeHtml(t('shareProperty'))}">
+            <i class="fa-solid fa-share" aria-hidden="true"></i>
+          </button>
           <button class="save-property-button ${isPropertySaved(property.id) ? 'is-saved' : ''}" type="button" data-save-property="${escapeHtml(property.id)}" aria-label="${escapeHtml(isPropertySaved(property.id) ? t('savedProperty') : t('saveProperty'))}" title="${escapeHtml(isPropertySaved(property.id) ? t('savedProperty') : t('saveProperty'))}">
             <i class="${isPropertySaved(property.id) ? 'fa-solid' : 'fa-regular'} fa-bookmark" aria-hidden="true"></i>
           </button>
@@ -1415,18 +1649,28 @@ async function loadProperties() {
   properties = data.properties || [];
 }
 
+async function loadFilterSettings() {
+  const response = await fetch('./data/filter-settings.json');
+  if (!response.ok) throw new Error(`Filter settings request failed: ${response.status}`);
+  const data = await response.json();
+  filterLabels = data.filterLabels || {};
+  filterValueLabels = data.filterValueLabels || {};
+  filterOrder = data.filterOrder || [];
+}
+
 async function init() {
   syncLanguageFromQuery();
   setupFavicon();
   applyTranslations();
-  setupCatalogFilterToggle();
-  createMobileStatusFilter();
   createSavedUi();
   createMobileMenu();
   bindPanels();
   bindAppointment();
 
-  await Promise.all([loadProperties(), loadRates()]);
+  await Promise.all([loadProperties(), loadFilterSettings(), loadRates()]);
+  collectFilterDefinitions();
+  renderDynamicFilters();
+  setupCatalogFilterToggle();
   loadLocalSavedProperties();
 
   renderLanguageLinks();

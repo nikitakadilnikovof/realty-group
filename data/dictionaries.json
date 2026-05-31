@@ -1,0 +1,32 @@
+{
+  "languages": [
+    "tr",
+    "ru",
+    "en",
+    "fr",
+    "de",
+    "ar"
+  ],
+  "currencies": [
+    "USD",
+    "TRY",
+    "EUR",
+    "RUB",
+    "GBP",
+    "CHF",
+    "CAD",
+    "SEK"
+  ],
+  "types": [
+    "land",
+    "apartment",
+    "villa",
+    "commercial",
+    "ev",
+    "house"
+  ],
+  "statuses": [
+    "sale",
+    "rent"
+  ]
+}
