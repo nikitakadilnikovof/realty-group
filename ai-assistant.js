@@ -110,6 +110,10 @@ function aiAssistantEscapeHtml(value) {
     .replaceAll("'", '&#039;');
 }
 
+function renderAssistantMessageHtml(text) {
+  return aiAssistantEscapeHtml(text).replace(/\n{2,}/g, '<br><br>').replace(/\n/g, '<br>');
+}
+
 function cleanAssistantAnswer(value) {
   const text = String(value || '').trim();
   if (!text) return '';
@@ -126,6 +130,138 @@ function cleanAssistantAnswer(value) {
   ));
 
   return uniqueParagraphs.join('\n\n').trim();
+}
+
+function formatAssistantAnswer(value) {
+  let text = cleanAssistantAnswer(value);
+  if (!text) return '';
+
+  text = text
+    .replace(/\r\n/g, '\n')
+    .replace(/([.!?])\s+(?=(?:[А-ЯA-ZЁ]|\d+\.|\- ))/g, '$1\n\n')
+    .replace(/\n{3,}/g, '\n\n');
+
+  return text.trim();
+}
+
+let aiAssistantPropertiesPromise = null;
+
+function aiAssistantGetLocalized(value) {
+  const language = aiAssistantLanguage();
+  if (!value || typeof value !== 'object') return value || '';
+  return value[language] || value.en || value.tr || Object.values(value)[0] || '';
+}
+
+function aiAssistantPropertyUrl(propertyId) {
+  const params = new URLSearchParams();
+  params.set('id', propertyId);
+  params.set('lang', aiAssistantLanguage());
+  return `./property.html?${params.toString()}`;
+}
+
+function aiAssistantFormatPrice(property) {
+  const value = Number(property?.price?.value || property?._price);
+  const currency = property?.price?.currency || 'USD';
+  if (!Number.isFinite(value) || value <= 0) return '';
+
+  try {
+    return new Intl.NumberFormat(aiAssistantLanguage(), {
+      style: 'currency',
+      currency,
+      maximumFractionDigits: 0
+    }).format(value);
+  } catch {
+    return `${value.toLocaleString()} ${currency}`;
+  }
+}
+
+function aiAssistantPreviewImage(property) {
+  const media = property?.media || {};
+  const preview = Array.isArray(media.preview) ? media.preview : [];
+  if (preview[0]) return preview[0];
+
+  const gallery = Array.isArray(media.gallery) ? media.gallery : [];
+  if (gallery[0]) return gallery[0];
+
+  const folder = String(media.folder || media.imageFolder || property?.objectNumber || '').replace(/[^\d]/g, '');
+  if (folder) return `./image/${folder}/1.jpg`;
+
+  return './assets/logo-realty-16-9.png';
+}
+
+async function loadAssistantProperties() {
+  if (!aiAssistantPropertiesPromise) {
+    aiAssistantPropertiesPromise = fetch('./data/properties.json')
+      .then(response => (response.ok ? response.json() : { properties: [] }))
+      .then(data => (Array.isArray(data.properties) ? data.properties : []))
+      .catch(error => {
+        console.warn('[AI assistant] properties load failed', error);
+        return [];
+      });
+  }
+
+  return aiAssistantPropertiesPromise;
+}
+
+function normalizeAssistantMatchText(value) {
+  return String(value || '').toLocaleLowerCase().replace(/\s+/g, ' ').trim();
+}
+
+function isPropertyMentionedInAnswer(property, answer) {
+  const answerText = normalizeAssistantMatchText(answer);
+  if (!answerText) return false;
+
+  const title = normalizeAssistantMatchText(property.title);
+  const objectNumber = normalizeAssistantMatchText(property.objectNumber);
+  const id = normalizeAssistantMatchText(property.id);
+
+  return Boolean(
+    (objectNumber && answerText.includes(objectNumber)) ||
+    (id && answerText.includes(id)) ||
+    (title && title.length > 8 && answerText.includes(title))
+  );
+}
+
+async function enrichSuggestedProperties(items, answer) {
+  const suggestions = Array.isArray(items) ? items : [];
+  if (!suggestions.length) return [];
+
+  const properties = await loadAssistantProperties();
+  const seen = new Set();
+
+  return suggestions
+    .map(item => {
+      const property = properties.find(candidate => (
+        candidate.id === item?.id ||
+        candidate.objectNumber === item?.objectNumber ||
+        candidate.number === item?.objectNumber
+      ));
+
+      const source = property || item;
+      const id = source?.id || item?.id;
+      if (!id) return null;
+
+      return {
+        id,
+        title: item?.title || aiAssistantGetLocalized(source.title) || id,
+        objectNumber: source.objectNumber || source.number || item?.objectNumber || '',
+        location: item?.location?.display || aiAssistantGetLocalized(source.location?.display) || [
+          source.location?.district || source._district,
+          source.location?.subdistrict
+        ].filter(Boolean).join(' / '),
+        price: aiAssistantFormatPrice(source),
+        image: item?.image || item?.previewImage || aiAssistantPreviewImage(source),
+        url: item?.url || aiAssistantPropertyUrl(id)
+      };
+    })
+    .filter(Boolean)
+    .filter(property => {
+      const key = property.id || property.url || property.objectNumber;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return isPropertyMentionedInAnswer(property, answer);
+    })
+    .slice(0, 3);
 }
 
 async function requestAssistantAnswer(message, history) {
@@ -163,7 +299,12 @@ async function requestAssistantAnswer(message, history) {
     throw new Error(data.details || data.error || `Assistant request failed: ${response.status}`);
   }
 
-  return cleanAssistantAnswer(data.answer) || aiAssistantText('aiAssistantFallback');
+  const answer = formatAssistantAnswer(data.answer) || aiAssistantText('aiAssistantFallback');
+
+  return {
+    answer,
+    properties: await enrichSuggestedProperties(data.matchedProperties, answer)
+  };
 }
 
 function createAssistantUi() {
@@ -232,10 +373,75 @@ function createAssistantUi() {
   const appendMessage = (text, type) => {
     const message = document.createElement('div');
     message.className = `ai-message ai-message-${type}`;
-    message.textContent = text;
+    message.innerHTML = renderAssistantMessageHtml(text);
     messages.appendChild(message);
     messages.scrollTop = messages.scrollHeight;
     return message;
+  };
+
+  const scrollToMessageStart = message => {
+    messages.scrollTop = Math.max(0, message.offsetTop - messages.offsetTop - 12);
+  };
+
+  const renderMessageInto = (element, text) => {
+    element.innerHTML = renderAssistantMessageHtml(text);
+  };
+
+  const appendPropertyPreviews = (properties, container = messages) => {
+    if (!properties.length) return;
+
+    const list = document.createElement('div');
+    list.className = 'ai-property-previews';
+    list.innerHTML = properties.map(property => `
+      <a class="ai-property-preview" href="${aiAssistantEscapeHtml(property.url)}">
+        <img src="${aiAssistantEscapeHtml(property.image)}" alt="${aiAssistantEscapeHtml(property.title)}" loading="lazy">
+        <span>
+          <strong>${aiAssistantEscapeHtml(property.title)}</strong>
+          <small>${aiAssistantEscapeHtml([
+            property.objectNumber ? `№ ${property.objectNumber}` : '',
+            property.location,
+            property.price
+          ].filter(Boolean).join(' · '))}</small>
+        </span>
+      </a>
+    `).join('');
+
+    container.appendChild(list);
+  };
+
+  const renderAssistantResponse = (answer, properties, firstMessage) => {
+    const paragraphs = answer.split(/\n{2,}/).map(paragraph => paragraph.trim()).filter(Boolean);
+    const renderedPropertyIds = new Set();
+
+    if (!paragraphs.length) {
+      renderMessageInto(firstMessage, answer);
+      return;
+    }
+
+    firstMessage.innerHTML = '';
+
+    paragraphs.forEach((paragraph, index) => {
+      if (index > 0) {
+        firstMessage.appendChild(document.createElement('br'));
+        firstMessage.appendChild(document.createElement('br'));
+      }
+
+      const paragraphElement = document.createElement('span');
+      paragraphElement.innerHTML = renderAssistantMessageHtml(paragraph);
+      firstMessage.appendChild(paragraphElement);
+
+      const paragraphProperties = properties.filter(property => {
+        const key = property.id || property.url || property.objectNumber;
+        if (renderedPropertyIds.has(key)) return false;
+        if (!isPropertyMentionedInAnswer(property, paragraph)) return false;
+        renderedPropertyIds.add(key);
+        return true;
+      });
+
+      appendPropertyPreviews(paragraphProperties, firstMessage);
+    });
+
+    scrollToMessageStart(firstMessage);
   };
 
   const setLoading = loading => {
@@ -265,9 +471,9 @@ function createAssistantUi() {
     thinkingMessage.classList.add('ai-message-loading');
 
     try {
-      const answer = await requestAssistantAnswer(value, conversationHistory.slice(-10));
-      thinkingMessage.textContent = answer;
-      conversationHistory.push({ role: 'assistant', content: answer });
+      const result = await requestAssistantAnswer(value, conversationHistory.slice(-10));
+      renderAssistantResponse(result.answer, result.properties, thinkingMessage);
+      conversationHistory.push({ role: 'assistant', content: result.answer });
     } catch (error) {
       console.error(error);
       const errorMessage = aiAssistantText('aiAssistantError');

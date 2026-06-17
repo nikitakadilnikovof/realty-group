@@ -1115,7 +1115,8 @@ button {
   border-radius: 8px;
   padding: 10px 12px;
   font-size: 13px;
-  line-height: 1.45;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
   box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
 }
 
@@ -1133,6 +1134,65 @@ button {
   align-self: flex-end;
   background: var(--accent);
   color: #fff;
+}
+
+.ai-property-previews {
+  width: 100%;
+  display: grid;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.ai-property-preview {
+  min-height: 76px;
+  display: grid;
+  grid-template-columns: 78px minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #f7f8fa;
+  color: var(--ink);
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.ai-property-preview:hover {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.ai-property-preview img {
+  width: 78px;
+  height: 76px;
+  object-fit: cover;
+  background: #eef0f3;
+}
+
+.ai-property-preview span {
+  min-width: 0;
+  display: grid;
+  gap: 5px;
+  padding-right: 10px;
+}
+
+.ai-property-preview strong {
+  overflow: hidden;
+  font-size: 12px;
+  line-height: 1.35;
+  font-weight: 900;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ai-property-preview small {
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.35;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .ai-assistant-quick {
