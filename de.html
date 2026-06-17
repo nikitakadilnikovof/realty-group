@@ -1,0 +1,163 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Antalya Realty Group</title>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body data-page="catalog" data-lang="de">
+  <div class="overlay" id="overlay"></div>
+
+  <header class="header">
+    <div class="top-bar">
+      <div class="top-container">
+        <div class="top-left">
+          <button class="dropdown-trigger" id="languageBtn" type="button">
+            <span data-i18n="languageName">TГјrkГ§e</span>
+            <span class="arrow"></span>
+          </button>
+          <button class="dropdown-trigger" id="currencyBtn" type="button">
+            <span data-currency-label>USD</span>
+            <span class="arrow"></span>
+          </button>
+        </div>
+        <div class="top-right">
+          <span class="call-text" data-i18n="callNow">HEMEN ARAYIN</span>
+          <a href="tel:+905556826955">+90 555 682 69 55</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="navbar">
+      <div class="nav-container">
+        <a href="./index.html" class="logo-placeholder" aria-label="Antalya Realty Group">
+          <img src="./assets/logo-realty-transparent.png" alt="Antalya Realty Group">
+        </a>
+        <nav class="nav-menu">
+          <a href="#catalog" data-i18n="buy">SATIN AL</a>
+          <a href="#catalog" data-i18n="sell">SAT</a>
+          <a href="#catalog" data-i18n="rent">KIRALA</a>
+          <a href="./about.html" data-i18n="aboutNav">О нас</a>
+        </nav>
+        <button class="appointment-btn" id="openAppointment" type="button" data-i18n="appointment">RANDEVU AL</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mega-panel" id="megaPanel">
+    <button class="close-btn" id="closeBtn" type="button" aria-label="Close"></button>
+    <div class="panel-inner">
+      <div class="panel-column">
+        <h3 class="panel-title" data-i18n="siteLanguage">SITE DILI</h3>
+        <div class="panel-links language-links" id="languageLinks"></div>
+      </div>
+      <div class="panel-column">
+        <h3 class="panel-title" data-i18n="currency">PARA BIRIMI</h3>
+        <div class="panel-links currency-links" id="currencyLinks"></div>
+      </div>
+      <div class="panel-column">
+        <h3 class="panel-title" data-i18n="measurement">OLCU BIRIMI</h3>
+        <div class="panel-links">
+          <a href="#" class="active-item">METRIC</a>
+          <a href="#">IMPERIAL</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <section class="catalog-hero">
+      <div class="catalog-hero-inner">
+        <div>
+          <p class="eyebrow">Antalya Realty Group</p>
+          <h1 data-i18n="heroTitle">Antalya'da satilik ve kiralik gayrimenkuller</h1>
+          <p data-i18n="heroText">Bolge, butce ve yasam tarzina gore secilmis guncel portfoy.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="real-estate-section" id="catalog">
+      <div class="container">
+        <aside class="filters">
+          <h2 class="filters-title" data-i18n="filters">FILTRELER</h2>
+          <div class="filter-block">
+            <h3 data-i18n="districtSearch">Bezirk suchen</h3>
+            <input class="filter-search" type="search" id="locationSearch" data-i18n-placeholder="districtSearchPlaceholder" placeholder="Konyaalti, Hurma, Lara">
+          </div>
+          <div class="filter-block status-filter-block">
+            <h3 data-i18n="dealType">Angebotstyp</h3>
+            <div class="segmented-filter">
+              <label><input type="radio" name="property-status" value="sale" checked><span data-i18n="buyFilter">Kaufen</span></label>
+              <label><input type="radio" name="property-status" value="rent"><span data-i18n="rentFilter">Mieten</span></label>
+            </div>
+          </div>
+          <div class="filter-block">
+            <h3 data-i18n="propertyType">Emlak tipi</h3>
+            <label class="radio-item"><input type="radio" name="property-type" value="all" checked><span data-i18n="allTypes">Tumu</span></label>
+            <label class="radio-item"><input type="radio" name="property-type" value="land"><span data-i18n="land">Arsa</span></label>
+            <label class="radio-item"><input type="radio" name="property-type" value="apartment"><span data-i18n="apartment">Daire</span></label>
+          </div>
+          <div class="filter-block">
+            <h3 data-i18n="price">Fiyat</h3>
+            <div class="range-inputs">
+              <input type="number" id="priceMin" data-i18n-placeholder="from" placeholder="Min">
+              <input type="number" id="priceMax" data-i18n-placeholder="to" placeholder="Max">
+            </div>
+          </div>
+          <div class="filter-block">
+            <h3 data-i18n="area">Alan (m2)</h3>
+            <div class="range-inputs">
+              <input type="number" id="areaMin" data-i18n-placeholder="from" placeholder="Min">
+              <input type="number" id="areaMax" data-i18n-placeholder="to" placeholder="Max">
+            </div>
+          </div>
+          <button class="filter-reset" id="resetFilters" type="button" data-i18n="resetFilters">Filtreleri sifirla</button>
+        </aside>
+
+        <div class="properties-content">
+          <div class="content-toolbar">
+            <div>
+              <p class="eyebrow" data-i18n="catalogEyebrow">Katalog</p>
+              <h2 data-i18n="catalogTitle">Antalya gayrimenkulleri</h2>
+            </div>
+            <select id="sortSelect" aria-label="Sort properties">
+              <option value="newest" data-i18n="sortNewest">Once yeni</option>
+              <option value="priceAsc" data-i18n="sortPriceAsc">Ucuzdan pahaliya</option>
+              <option value="priceDesc" data-i18n="sortPriceDesc">Pahalidan ucuza</option>
+            </select>
+          </div>
+          <div class="property-grid" id="propertyGrid"></div>
+          <p class="empty-state" id="emptyState" hidden data-i18n="emptyState">Uygun ilan bulunamadi.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="appointment-overlay" id="appointmentOverlay">
+    <div class="appointment-modal">
+      <button class="appointment-close" id="appointmentClose" type="button" aria-label="Close"></button>
+      <h2 class="appointment-title" data-i18n="appointmentTitle">Randevu olustur</h2>
+      <form class="appointment-form">
+        <div class="appointment-left">
+          <input type="date" id="appointmentDate">
+          <input type="text" data-i18n-placeholder="firstName" placeholder="Ad">
+          <input type="text" data-i18n-placeholder="lastName" placeholder="Soyad">
+          <input type="tel" data-i18n-placeholder="phone" placeholder="Telefon">
+        </div>
+        <div class="appointment-right">
+          <textarea data-i18n-placeholder="message" placeholder="Mesaj"></textarea>
+          <button type="submit" data-i18n="send">GONDER</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="./script.js"></script>
+  <script src="./ai-assistant.js"></script>
+</body>
+</html>

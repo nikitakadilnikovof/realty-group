@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Рћ РЅР°СЃ | Antalya Realty Group</title>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body data-page="about" data-lang="ru">
+  <div class="overlay" id="overlay"></div>
+
+  <header class="header">
+    <div class="top-bar">
+      <div class="top-container">
+        <div class="top-left">
+          <button class="dropdown-trigger" id="languageBtn" type="button">
+            <span data-i18n="languageName">Р СѓСЃСЃРєРёР№</span>
+            <span class="arrow"></span>
+          </button>
+          <button class="dropdown-trigger" id="currencyBtn" type="button">
+            <span data-currency-label>USD</span>
+            <span class="arrow"></span>
+          </button>
+        </div>
+        <div class="top-right">
+          <span class="call-text" data-i18n="callNow">РџРћР—Р’РћРќРРўР• РќРђРњ</span>
+          <a href="tel:+905556826955">+90 555 682 69 55</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="navbar">
+      <div class="nav-container">
+        <a href="./ru.html" class="logo-placeholder" aria-label="Antalya Realty Group">
+          <img src="./assets/logo-realty-transparent.png" alt="Antalya Realty Group">
+        </a>
+        <nav class="nav-menu">
+          <a href="./ru.html#catalog" data-i18n="buy">РљРЈРџРРўР¬</a>
+          <a href="./ru.html#catalog" data-i18n="sell">РџР РћР”РђРўР¬</a>
+          <a href="./ru.html#catalog" data-i18n="rent">РђР Р•РќР”Рђ</a>
+          <a href="./about.html" data-i18n="aboutNav">Рћ РЅР°СЃ</a>
+        </nav>
+        <button class="appointment-btn" id="openAppointment" type="button" data-i18n="appointment">Р—Р°РїРёСЃР°С‚СЊСЃСЏ</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mega-panel" id="megaPanel">
+    <button class="close-btn" id="closeBtn" type="button" aria-label="Close"></button>
+    <div class="panel-inner">
+      <div class="panel-column">
+        <h3 class="panel-title" data-i18n="siteLanguage">РЇР—Р«Рљ РЎРђР™РўРђ</h3>
+        <div class="panel-links language-links" id="languageLinks"></div>
+      </div>
+      <div class="panel-column">
+        <h3 class="panel-title" data-i18n="currency">Р’РђР›Р®РўРђ</h3>
+        <div class="panel-links currency-links" id="currencyLinks"></div>
+      </div>
+      <div class="panel-column">
+        <h3 class="panel-title" data-i18n="measurement">Р•Р”РРќРР¦Р«</h3>
+        <div class="panel-links">
+          <a href="#" class="active-item">METRIC</a>
+          <a href="#">IMPERIAL</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="about-page"></main>
+
+  <div class="appointment-overlay" id="appointmentOverlay">
+    <div class="appointment-modal">
+      <button class="appointment-close" id="appointmentClose" type="button" aria-label="Close"></button>
+      <h2 class="appointment-title" data-i18n="appointmentTitle">РќР°Р·РЅР°С‡РёС‚СЊ РІСЃС‚СЂРµС‡Сѓ</h2>
+      <form class="appointment-form">
+        <div class="appointment-left">
+          <input type="date" id="appointmentDate">
+          <input type="text" data-i18n-placeholder="firstName" placeholder="РРјСЏ">
+          <input type="text" data-i18n-placeholder="lastName" placeholder="Р¤Р°РјРёР»РёСЏ">
+          <input type="tel" data-i18n-placeholder="phone" placeholder="РўРµР»РµС„РѕРЅ">
+        </div>
+        <div class="appointment-right">
+          <textarea data-i18n-placeholder="message" placeholder="РЎРѕРѕР±С‰РµРЅРёРµ"></textarea>
+          <button type="submit" data-i18n="send">РћРўРџР РђР’РРўР¬</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="./script.js"></script>
+  <script src="./ai-assistant.js"></script>
+</body>
+</html>

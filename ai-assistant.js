@@ -1,0 +1,303 @@
+const AI_ASSISTANT_ENDPOINT = 'https://realty-ai-assistant.nikitakadilnikovof.workers.dev/';
+
+const AI_ASSISTANT_TRANSLATIONS = {
+  aiAssistant: {
+    tr: 'AI asistan',
+    ru: 'AI ассистент',
+    en: 'AI assistant',
+    fr: 'Assistant IA',
+    de: 'AI Assistent',
+    ar: 'AI assistant'
+  },
+  aiAssistantOnline: {
+    tr: 'Cevaplamaya hazir',
+    ru: 'Готов помочь с подбором',
+    en: 'Ready to help',
+    fr: 'Pret a aider',
+    de: 'Bereit zu helfen',
+    ar: 'Ready to help'
+  },
+  aiAssistantGreeting: {
+    tr: 'Merhaba! Butce, bolge ve amacinizi yazin, size uygun secenekleri onereyim.',
+    ru: 'Здравствуйте! Напишите бюджет, район и цель покупки или аренды, я помогу сузить подбор.',
+    en: 'Hello! Share your budget, district and goal, and I will help narrow the selection.',
+    fr: 'Bonjour ! Indiquez votre budget, quartier et objectif, je vous aide a affiner la selection.',
+    de: 'Hallo! Nennen Sie Budget, Bezirk und Ziel, ich helfe bei der Auswahl.',
+    ar: 'Hello! Share your budget, district and goal, and I will help narrow the selection.'
+  },
+  aiAssistantPlaceholder: {
+    tr: 'Sorunuzu yazin...',
+    ru: 'Напишите вопрос...',
+    en: 'Type your question...',
+    fr: 'Ecrivez votre question...',
+    de: 'Schreiben Sie Ihre Frage...',
+    ar: 'Type your question...'
+  },
+  aiAssistantQuickBudget: {
+    tr: 'Butceme gore secenekler',
+    ru: 'Подобрать по бюджету',
+    en: 'Match my budget',
+    fr: 'Selon mon budget',
+    de: 'Nach Budget suchen',
+    ar: 'Match my budget'
+  },
+  aiAssistantQuickDistrict: {
+    tr: 'Bolge secimi',
+    ru: 'Помочь с районом',
+    en: 'Choose a district',
+    fr: 'Choisir un quartier',
+    de: 'Bezirk wahlen',
+    ar: 'Choose a district'
+  },
+  aiAssistantQuickViewing: {
+    tr: 'Goruntuleme planla',
+    ru: 'Запланировать просмотр',
+    en: 'Plan a viewing',
+    fr: 'Planifier une visite',
+    de: 'Besichtigung planen',
+    ar: 'Plan a viewing'
+  },
+  aiAssistantFallback: {
+    tr: 'Talebinizi aldik. Danismanimiz secenekleri kontrol edip sizinle iletisime gececek.',
+    ru: 'Запрос принят. Консультант проверит подходящие варианты и свяжется с вами.',
+    en: 'Request received. A consultant will check suitable options and contact you.',
+    fr: 'Demande recue. Un conseiller verifiera les options et vous contactera.',
+    de: 'Anfrage erhalten. Ein Berater prueft passende Optionen und meldet sich.',
+    ar: 'Request received. A consultant will check suitable options and contact you.'
+  },
+  aiAssistantThinking: {
+    tr: 'Yanit hazirlaniyor...',
+    ru: 'Готовлю ответ...',
+    en: 'Preparing an answer...',
+    fr: 'Preparation de la reponse...',
+    de: 'Antwort wird vorbereitet...',
+    ar: 'Preparing an answer...'
+  },
+  aiAssistantError: {
+    tr: 'Su anda cevap alinamadi. Lutfen biraz sonra tekrar deneyin.',
+    ru: 'Сейчас не удалось получить ответ. Попробуйте еще раз чуть позже.',
+    en: 'Could not get an answer right now. Please try again in a moment.',
+    fr: 'Impossible obtenir une reponse pour le moment. Veuillez reessayer.',
+    de: 'Im Moment konnte keine Antwort geladen werden. Bitte versuchen Sie es erneut.',
+    ar: 'Could not get an answer right now. Please try again in a moment.'
+  },
+  aiAssistantSend: {
+    tr: 'Gonder',
+    ru: 'Отправить',
+    en: 'Send',
+    fr: 'Envoyer',
+    de: 'Senden',
+    ar: 'Send'
+  }
+};
+
+function aiAssistantLanguage() {
+  return document.body.dataset.lang || document.documentElement.lang || 'tr';
+}
+
+function aiAssistantText(key) {
+  const language = aiAssistantLanguage();
+  const value = AI_ASSISTANT_TRANSLATIONS[key];
+  return value?.[language] || value?.tr || key;
+}
+
+function aiAssistantEscapeHtml(value) {
+  return String(value ?? '')
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#039;');
+}
+
+function cleanAssistantAnswer(value) {
+  const text = String(value || '').trim();
+  if (!text) return '';
+
+  const halfLength = Math.floor(text.length / 2);
+  const firstHalf = text.slice(0, halfLength).trim();
+  const secondHalf = text.slice(halfLength).trim();
+
+  if (firstHalf && firstHalf === secondHalf) return firstHalf;
+
+  const paragraphs = text.split(/\n{2,}/);
+  const uniqueParagraphs = paragraphs.filter((paragraph, index) => (
+    index === 0 || paragraph.trim() !== paragraphs[index - 1].trim()
+  ));
+
+  return uniqueParagraphs.join('\n\n').trim();
+}
+
+async function requestAssistantAnswer(message, history) {
+  const payload = {
+    message,
+    history,
+    language: aiAssistantLanguage(),
+    page: document.body.dataset.page || '',
+    url: window.location.href,
+    propertyId: new URLSearchParams(window.location.search).get('id') || ''
+  };
+
+  console.info('[AI assistant] request payload', {
+    endpoint: AI_ASSISTANT_ENDPOINT,
+    payload
+  });
+
+  const response = await fetch(AI_ASSISTANT_ENDPOINT, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  });
+
+  const data = await response.json().catch(() => ({}));
+
+  console.info('[AI assistant] server response', {
+    ok: response.ok,
+    status: response.status,
+    data
+  });
+
+  if (!response.ok) {
+    throw new Error(data.details || data.error || `Assistant request failed: ${response.status}`);
+  }
+
+  return cleanAssistantAnswer(data.answer) || aiAssistantText('aiAssistantFallback');
+}
+
+function createAssistantUi() {
+  if (document.getElementById('aiAssistantWidget')) return;
+
+  const widget = document.createElement('section');
+  widget.className = 'ai-assistant-widget';
+  widget.id = 'aiAssistantWidget';
+  widget.innerHTML = `
+    <div class="ai-assistant-window" id="aiAssistantWindow" role="dialog" aria-labelledby="aiAssistantTitle" aria-hidden="true">
+      <div class="ai-assistant-header">
+        <div class="ai-assistant-avatar" aria-hidden="true">
+          <i class="fa-solid fa-robot"></i>
+        </div>
+        <div>
+          <h2 id="aiAssistantTitle">${aiAssistantEscapeHtml(aiAssistantText('aiAssistant'))}</h2>
+          <p>${aiAssistantEscapeHtml(aiAssistantText('aiAssistantOnline'))}</p>
+        </div>
+        <button class="ai-assistant-close" id="aiAssistantClose" type="button" aria-label="Close">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="ai-assistant-messages" id="aiAssistantMessages" aria-live="polite">
+        <div class="ai-message ai-message-bot">${aiAssistantEscapeHtml(aiAssistantText('aiAssistantGreeting'))}</div>
+      </div>
+      <div class="ai-assistant-quick">
+        <button type="button">${aiAssistantEscapeHtml(aiAssistantText('aiAssistantQuickBudget'))}</button>
+        <button type="button">${aiAssistantEscapeHtml(aiAssistantText('aiAssistantQuickDistrict'))}</button>
+        <button type="button">${aiAssistantEscapeHtml(aiAssistantText('aiAssistantQuickViewing'))}</button>
+      </div>
+      <form class="ai-assistant-form" id="aiAssistantForm">
+        <input id="aiAssistantInput" type="text" autocomplete="off" placeholder="${aiAssistantEscapeHtml(aiAssistantText('aiAssistantPlaceholder'))}" aria-label="${aiAssistantEscapeHtml(aiAssistantText('aiAssistantPlaceholder'))}">
+        <button type="submit" aria-label="${aiAssistantEscapeHtml(aiAssistantText('aiAssistantSend'))}">
+          <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+        </button>
+      </form>
+    </div>
+    <button class="ai-assistant-toggle" id="aiAssistantToggle" type="button" aria-controls="aiAssistantWindow" aria-expanded="false">
+      <i class="fa-solid fa-message" aria-hidden="true"></i>
+      <span>${aiAssistantEscapeHtml(aiAssistantText('aiAssistant'))}</span>
+    </button>
+  `;
+
+  document.body.appendChild(widget);
+
+  const toggle = document.getElementById('aiAssistantToggle');
+  const windowElement = document.getElementById('aiAssistantWindow');
+  const closeButton = document.getElementById('aiAssistantClose');
+  const form = document.getElementById('aiAssistantForm');
+  const input = document.getElementById('aiAssistantInput');
+  const messages = document.getElementById('aiAssistantMessages');
+  const submitButton = form.querySelector('button[type="submit"]');
+  const quickButtons = widget.querySelectorAll('.ai-assistant-quick button');
+  const conversationHistory = [];
+  let isLoading = false;
+  let lastSubmittedMessage = '';
+  let lastSubmittedAt = 0;
+
+  const setOpen = isOpen => {
+    widget.classList.toggle('is-open', isOpen);
+    toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    windowElement.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+    if (isOpen) setTimeout(() => input.focus(), 120);
+  };
+
+  const appendMessage = (text, type) => {
+    const message = document.createElement('div');
+    message.className = `ai-message ai-message-${type}`;
+    message.textContent = text;
+    messages.appendChild(message);
+    messages.scrollTop = messages.scrollHeight;
+    return message;
+  };
+
+  const setLoading = loading => {
+    isLoading = loading;
+    input.disabled = loading;
+    submitButton.disabled = loading;
+    quickButtons.forEach(button => {
+      button.disabled = loading;
+    });
+  };
+
+  const sendMessage = async text => {
+    const value = text.trim();
+    if (!value || isLoading) return;
+
+    const now = Date.now();
+    if (value === lastSubmittedMessage && now - lastSubmittedAt < 1200) return;
+    lastSubmittedMessage = value;
+    lastSubmittedAt = now;
+
+    appendMessage(value, 'user');
+    input.value = '';
+    setLoading(true);
+    conversationHistory.push({ role: 'user', content: value });
+
+    const thinkingMessage = appendMessage(aiAssistantText('aiAssistantThinking'), 'bot');
+    thinkingMessage.classList.add('ai-message-loading');
+
+    try {
+      const answer = await requestAssistantAnswer(value, conversationHistory.slice(-10));
+      thinkingMessage.textContent = answer;
+      conversationHistory.push({ role: 'assistant', content: answer });
+    } catch (error) {
+      console.error(error);
+      const errorMessage = aiAssistantText('aiAssistantError');
+      thinkingMessage.textContent = errorMessage;
+      conversationHistory.push({ role: 'assistant', content: errorMessage });
+    } finally {
+      thinkingMessage.classList.remove('ai-message-loading');
+      setLoading(false);
+      input.focus();
+    }
+  };
+
+  toggle.addEventListener('click', () => setOpen(!widget.classList.contains('is-open')));
+  closeButton.addEventListener('click', () => setOpen(false));
+
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    sendMessage(input.value);
+  });
+
+  quickButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      setOpen(true);
+      sendMessage(button.textContent || '');
+    });
+  });
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && widget.classList.contains('is-open')) setOpen(false);
+  });
+}
+
+createAssistantUi();
