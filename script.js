@@ -759,6 +759,17 @@ function bindPanels() {
   document.getElementById('currencyBtn')?.addEventListener('click', openPanel);
   document.getElementById('overlay')?.addEventListener('click', closePanel);
   document.getElementById('closeBtn')?.addEventListener('click', closePanel);
+
+  document.addEventListener('click', event => {
+    const languageLink = event.target.closest('[data-language]');
+    if (!languageLink) return;
+
+    try {
+      localStorage.setItem('preferredLanguage', languageLink.dataset.language);
+    } catch (error) {
+      // Navigation must continue even when browser storage is unavailable.
+    }
+  });
 }
 
 function catalogAnchor() {
@@ -767,7 +778,7 @@ function catalogAnchor() {
 
 function mobileLanguageLinks() {
   return Object.entries(SUPPORTED_LANGUAGES).map(([code, language]) => `
-    <a href="./${pageForLanguage(code)}" class="${code === currentLanguage ? 'active-item' : ''}">${escapeHtml(language.name)}</a>
+    <a href="./${pageForLanguage(code)}" data-language="${code}" class="${code === currentLanguage ? 'active-item' : ''}">${escapeHtml(language.name)}</a>
   `).join('');
 }
 
@@ -911,7 +922,7 @@ function renderLanguageLinks() {
   if (!container) return;
 
   container.innerHTML = Object.entries(SUPPORTED_LANGUAGES).map(([code, language]) => `
-    <a href="./${pageForLanguage(code)}" class="${code === currentLanguage ? 'active-item' : ''}">${language.name}</a>
+    <a href="./${pageForLanguage(code)}" data-language="${code}" class="${code === currentLanguage ? 'active-item' : ''}">${language.name}</a>
   `).join('');
 }
 

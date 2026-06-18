@@ -3,6 +3,51 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (() => {
+      const languagePages = {
+        tr: 'index.html',
+        ru: 'ru.html',
+        en: 'en.html',
+        fr: 'fr.html',
+        de: 'de.html',
+        ar: 'ar.html'
+      };
+      const requestedLanguage = new URLSearchParams(window.location.search).get('lang');
+
+      if (languagePages[requestedLanguage]) {
+        try {
+          localStorage.setItem('preferredLanguage', requestedLanguage);
+        } catch (error) {
+          // Language detection still works when browser storage is unavailable.
+        }
+        return;
+      }
+
+      let preferredLanguage = '';
+      try {
+        preferredLanguage = localStorage.getItem('preferredLanguage') || '';
+      } catch (error) {
+        // Fall back to the device language when browser storage is unavailable.
+      }
+
+      const deviceLanguages = navigator.languages?.length
+        ? navigator.languages
+        : [navigator.language];
+      console.log('[Language detection] Device language:', navigator.language || deviceLanguages[0]);
+      console.log('[Language detection] Device languages:', deviceLanguages);
+      const detectedLanguage = deviceLanguages
+        .map(language => String(language || '').toLowerCase().split('-')[0])
+        .find(language => languagePages[language]);
+      const targetLanguage = languagePages[preferredLanguage]
+        ? preferredLanguage
+        : detectedLanguage;
+
+      if (targetLanguage && targetLanguage !== 'tr') {
+        window.location.replace(`./${languagePages[targetLanguage]}${window.location.hash}`);
+      }
+    })();
+  </script>
   <title>Antalya'da Satılık ve Kiralık Gayrimenkuller | Antalya Realty Group</title>
   <meta name="description" content="Antalya'da satılık ve kiralık daire, villa ve arsa seçeneklerini keşfedin. Bölge, bütçe ve yaşam tarzınıza uygun güncel gayrimenkul portföyü.">
   <link rel="canonical" href="https://nikitakadilnikovof.github.io/realty-group/">
