@@ -9,6 +9,8 @@
 
 const SUPPORTED_CURRENCIES = ['USD', 'TRY', 'EUR', 'RUB', 'GBP', 'CHF', 'CAD', 'SEK'];
 const CURRENCY_API_URL = 'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/usd.json';
+const SITE_ORIGIN = 'https://nikitakadilnikovof.github.io/realty-group/';
+const OG_LOCALES = { tr: 'tr_TR', ru: 'ru_RU', en: 'en_US', fr: 'fr_FR', de: 'de_DE', ar: 'ar_AR' };
 const FALLBACK_RATES = {
   USD: 1,
   TRY: 32.25,
@@ -618,6 +620,39 @@ function applyTranslations() {
   document.querySelectorAll('[data-i18n="aboutNav"]').forEach(link => {
     link.setAttribute('href', `./about.html?lang=${currentLanguage}`);
   });
+}
+
+function setMetaContent(selector, content, attribute = 'content') {
+  const element = document.head.querySelector(selector);
+  if (element && content) element.setAttribute(attribute, content);
+}
+
+function absoluteSiteUrl(path = '') {
+  try {
+    return new URL(path, SITE_ORIGIN).href;
+  } catch {
+    return SITE_ORIGIN;
+  }
+}
+
+function updatePageMeta({ title, description, url, image, imageAlt, type = 'website' }) {
+  const normalizedDescription = String(description || '').replace(/\s+/g, ' ').trim().slice(0, 220);
+  const absoluteUrl = absoluteSiteUrl(url);
+  const absoluteImage = absoluteSiteUrl(image || 'assets/logo-realty-16-9.png');
+
+  if (title) document.title = title;
+  setMetaContent('meta[name="description"]', normalizedDescription);
+  setMetaContent('link[rel="canonical"]', absoluteUrl, 'href');
+  setMetaContent('meta[property="og:type"]', type);
+  setMetaContent('meta[property="og:locale"]', OG_LOCALES[currentLanguage] || OG_LOCALES.en);
+  setMetaContent('meta[property="og:title"]', title);
+  setMetaContent('meta[property="og:description"]', normalizedDescription);
+  setMetaContent('meta[property="og:url"]', absoluteUrl);
+  setMetaContent('meta[property="og:image"]', absoluteImage);
+  setMetaContent('meta[property="og:image:alt"]', imageAlt || title);
+  setMetaContent('meta[name="twitter:title"]', title);
+  setMetaContent('meta[name="twitter:description"]', normalizedDescription);
+  setMetaContent('meta[name="twitter:image"]', absoluteImage);
 }
 
 function setupFavicon() {
@@ -1566,6 +1601,16 @@ function renderDetail() {
   }));
 
   document.title = `${title} | Antalya Realty Group`;
+  const detailPath = `property.html?id=${encodeURIComponent(property.id)}&lang=${encodeURIComponent(currentLanguage)}`;
+  const metaDescription = [description, location, formatPrice(property.price)].filter(Boolean).join(' — ');
+  updatePageMeta({
+    title: `${title} | Antalya Realty Group`,
+    description: metaDescription,
+    url: detailPath,
+    image: images[0],
+    imageAlt: title,
+    type: 'article'
+  });
 
   container.innerHTML = `
     <section class="detail-shell">
@@ -1622,6 +1667,13 @@ function renderAbout() {
 
   const content = ABOUT_CONTENT[currentLanguage] || ABOUT_CONTENT.en;
   document.title = `${t('aboutNav')} | Antalya Realty Group`;
+  updatePageMeta({
+    title: `${t('aboutNav')} | Antalya Realty Group`,
+    description: content.heroText,
+    url: `about.html?lang=${encodeURIComponent(currentLanguage)}`,
+    image: 'assets/logo-realty-16-9.png',
+    imageAlt: 'Antalya Realty Group'
+  });
 
   container.innerHTML = `
     <section class="about-hero">

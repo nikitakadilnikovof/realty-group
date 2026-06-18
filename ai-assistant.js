@@ -1,4 +1,7 @@
 const AI_ASSISTANT_ENDPOINT = 'https://realty-ai-assistant.nikitakadilnikovof.workers.dev/';
+const AI_ASSISTANT_STORAGE_KEY = 'arg-ai-assistant-sessions-v1';
+const AI_ASSISTANT_MAX_SESSIONS = 20;
+const AI_ASSISTANT_MAX_MESSAGES = 40;
 
 const AI_ASSISTANT_TRANSLATIONS = {
   aiAssistant: {
@@ -81,6 +84,38 @@ const AI_ASSISTANT_TRANSLATIONS = {
     de: 'Im Moment konnte keine Antwort geladen werden. Bitte versuchen Sie es erneut.',
     ar: 'Could not get an answer right now. Please try again in a moment.'
   },
+  aiAssistantHistory: {
+    tr: 'Gecmis sohbetler',
+    ru: 'История переписок',
+    en: 'Chat history',
+    fr: 'Historique',
+    de: 'Chatverlauf',
+    ar: 'Chat history'
+  },
+  aiAssistantNewChat: {
+    tr: 'Yeni sohbet',
+    ru: 'Новый диалог',
+    en: 'New chat',
+    fr: 'Nouvelle discussion',
+    de: 'Neuer Chat',
+    ar: 'New chat'
+  },
+  aiAssistantNoHistory: {
+    tr: 'Kayitli sohbet yok.',
+    ru: 'Сохранённых диалогов пока нет.',
+    en: 'No saved chats yet.',
+    fr: 'Aucune discussion enregistree.',
+    de: 'Noch keine gespeicherten Chats.',
+    ar: 'No saved chats yet.'
+  },
+  aiAssistantDeleteChat: {
+    tr: 'Sohbeti sil',
+    ru: 'Удалить диалог',
+    en: 'Delete chat',
+    fr: 'Supprimer',
+    de: 'Chat loeschen',
+    ar: 'Delete chat'
+  },
   aiAssistantSend: {
     tr: 'Gonder',
     ru: 'Отправить',
@@ -93,6 +128,43 @@ const AI_ASSISTANT_TRANSLATIONS = {
 
 function aiAssistantLanguage() {
   return document.body.dataset.lang || document.documentElement.lang || 'tr';
+}
+
+function createAssistantSession() {
+  const now = new Date().toISOString();
+  return {
+    id: `chat-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+    title: '',
+    createdAt: now,
+    updatedAt: now,
+    messages: []
+  };
+}
+
+function loadAssistantSessionState() {
+  try {
+    const state = JSON.parse(localStorage.getItem(AI_ASSISTANT_STORAGE_KEY));
+    if (!state || !Array.isArray(state.sessions)) throw new Error('Invalid session state');
+
+    state.sessions = state.sessions
+      .filter(session => session?.id && Array.isArray(session.messages))
+      .slice(0, AI_ASSISTANT_MAX_SESSIONS);
+
+    return state;
+  } catch {
+    return { activeSessionId: '', sessions: [] };
+  }
+}
+
+function saveAssistantSessionState(state) {
+  try {
+    state.sessions = state.sessions
+      .sort((a, b) => String(b.updatedAt).localeCompare(String(a.updatedAt)))
+      .slice(0, AI_ASSISTANT_MAX_SESSIONS);
+    localStorage.setItem(AI_ASSISTANT_STORAGE_KEY, JSON.stringify(state));
+  } catch (error) {
+    console.warn('[AI assistant] session save failed', error);
+  }
 }
 
 function aiAssistantText(key) {
@@ -323,9 +395,27 @@ function createAssistantUi() {
           <h2 id="aiAssistantTitle">${aiAssistantEscapeHtml(aiAssistantText('aiAssistant'))}</h2>
           <p>${aiAssistantEscapeHtml(aiAssistantText('aiAssistantOnline'))}</p>
         </div>
-        <button class="ai-assistant-close" id="aiAssistantClose" type="button" aria-label="Close">
-          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
-        </button>
+        <div class="ai-assistant-header-actions">
+          <button id="aiAssistantHistory" type="button" aria-label="${aiAssistantEscapeHtml(aiAssistantText('aiAssistantHistory'))}" title="${aiAssistantEscapeHtml(aiAssistantText('aiAssistantHistory'))}">
+            <i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i>
+          </button>
+          <button id="aiAssistantNewChat" type="button" aria-label="${aiAssistantEscapeHtml(aiAssistantText('aiAssistantNewChat'))}" title="${aiAssistantEscapeHtml(aiAssistantText('aiAssistantNewChat'))}">
+            <i class="fa-solid fa-plus" aria-hidden="true"></i>
+          </button>
+          <button class="ai-assistant-close" id="aiAssistantClose" type="button" aria-label="Close">
+            <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+      <div class="ai-assistant-sessions" id="aiAssistantSessions" hidden>
+        <div class="ai-assistant-sessions-heading">
+          <h3>${aiAssistantEscapeHtml(aiAssistantText('aiAssistantHistory'))}</h3>
+          <button id="aiAssistantSessionsNew" type="button">
+            <i class="fa-solid fa-plus" aria-hidden="true"></i>
+            <span>${aiAssistantEscapeHtml(aiAssistantText('aiAssistantNewChat'))}</span>
+          </button>
+        </div>
+        <div class="ai-assistant-session-list" id="aiAssistantSessionList"></div>
       </div>
       <div class="ai-assistant-messages" id="aiAssistantMessages" aria-live="polite">
         <div class="ai-message ai-message-bot">${aiAssistantEscapeHtml(aiAssistantText('aiAssistantGreeting'))}</div>
@@ -358,7 +448,13 @@ function createAssistantUi() {
   const messages = document.getElementById('aiAssistantMessages');
   const submitButton = form.querySelector('button[type="submit"]');
   const quickButtons = widget.querySelectorAll('.ai-assistant-quick button');
-  const conversationHistory = [];
+  const historyButton = document.getElementById('aiAssistantHistory');
+  const newChatButton = document.getElementById('aiAssistantNewChat');
+  const sessionsPanel = document.getElementById('aiAssistantSessions');
+  const sessionsList = document.getElementById('aiAssistantSessionList');
+  const sessionsNewButton = document.getElementById('aiAssistantSessionsNew');
+  const sessionState = loadAssistantSessionState();
+  let conversationHistory = [];
   let isLoading = false;
   let lastSubmittedMessage = '';
   let lastSubmittedAt = 0;
@@ -471,6 +567,141 @@ function createAssistantUi() {
     scrollToMessageStart(firstMessage);
   };
 
+  const getSessionTitle = session => {
+    if (session.title) return session.title;
+    const firstUserMessage = session.messages.find(message => message.role === 'user');
+    return firstUserMessage?.content?.slice(0, 48) || aiAssistantText('aiAssistantNewChat');
+  };
+
+  const getActiveSession = () => {
+    let session = sessionState.sessions.find(item => item.id === sessionState.activeSessionId);
+    if (session) return session;
+
+    session = createAssistantSession();
+    sessionState.sessions.unshift(session);
+    sessionState.activeSessionId = session.id;
+    saveAssistantSessionState(sessionState);
+    return session;
+  };
+
+  const persistSessionMessage = (role, content, properties = []) => {
+    const session = getActiveSession();
+    session.messages.push({
+      role,
+      content: String(content || '').slice(0, 6000),
+      properties: Array.isArray(properties) ? properties.slice(0, 3) : []
+    });
+    session.messages = session.messages.slice(-AI_ASSISTANT_MAX_MESSAGES);
+    session.updatedAt = new Date().toISOString();
+
+    if (!session.title && role === 'user') {
+      session.title = content.length > 48 ? `${content.slice(0, 48)}...` : content;
+    }
+
+    saveAssistantSessionState(sessionState);
+  };
+
+  const renderStoredConversation = session => {
+    messages.innerHTML = '';
+    conversationHistory = session.messages.map(message => ({
+      role: message.role,
+      content: message.content
+    }));
+
+    if (!session.messages.length) {
+      appendMessage(aiAssistantText('aiAssistantGreeting'), 'bot');
+      return;
+    }
+
+    session.messages.forEach(message => {
+      if (message.role === 'assistant') {
+        const bubble = appendMessage('', 'bot');
+        renderAssistantResponse(message.content, Array.isArray(message.properties) ? message.properties : [], bubble);
+      } else {
+        appendMessage(message.content, 'user');
+      }
+    });
+
+    messages.scrollTop = messages.scrollHeight;
+  };
+
+  const renderSessionList = () => {
+    const savedSessions = sessionState.sessions.filter(session => session.messages.length);
+
+    if (!savedSessions.length) {
+      sessionsList.innerHTML = `<p class="ai-assistant-no-sessions">${aiAssistantEscapeHtml(aiAssistantText('aiAssistantNoHistory'))}</p>`;
+      return;
+    }
+
+    sessionsList.innerHTML = savedSessions.map(session => {
+      const date = new Date(session.updatedAt);
+      const dateText = Number.isNaN(date.getTime()) ? '' : date.toLocaleString(aiAssistantLanguage(), {
+        day: '2-digit',
+        month: 'short',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+
+      return `
+        <div class="ai-assistant-session-item ${session.id === sessionState.activeSessionId ? 'is-active' : ''}">
+          <button class="ai-assistant-session-open" type="button" data-session-open="${aiAssistantEscapeHtml(session.id)}">
+            <strong>${aiAssistantEscapeHtml(getSessionTitle(session))}</strong>
+            <small>${aiAssistantEscapeHtml(dateText)}</small>
+          </button>
+          <button class="ai-assistant-session-delete" type="button" data-session-delete="${aiAssistantEscapeHtml(session.id)}" aria-label="${aiAssistantEscapeHtml(aiAssistantText('aiAssistantDeleteChat'))}" title="${aiAssistantEscapeHtml(aiAssistantText('aiAssistantDeleteChat'))}">
+            <i class="fa-solid fa-trash" aria-hidden="true"></i>
+          </button>
+        </div>
+      `;
+    }).join('');
+  };
+
+  const showSessions = show => {
+    sessionsPanel.hidden = !show;
+    historyButton.classList.toggle('is-active', show);
+    if (show) renderSessionList();
+  };
+
+  const openSession = sessionId => {
+    const session = sessionState.sessions.find(item => item.id === sessionId);
+    if (!session) return;
+
+    sessionState.activeSessionId = session.id;
+    saveAssistantSessionState(sessionState);
+    renderStoredConversation(session);
+    showSessions(false);
+  };
+
+  const startNewSession = () => {
+    const current = getActiveSession();
+    let session = current;
+
+    if (current.messages.length) {
+      session = createAssistantSession();
+      sessionState.sessions.unshift(session);
+      sessionState.activeSessionId = session.id;
+      saveAssistantSessionState(sessionState);
+    }
+
+    renderStoredConversation(session);
+    showSessions(false);
+    input.focus();
+  };
+
+  const deleteSession = sessionId => {
+    sessionState.sessions = sessionState.sessions.filter(session => session.id !== sessionId);
+
+    if (sessionState.activeSessionId === sessionId) {
+      const nextSession = sessionState.sessions[0] || createAssistantSession();
+      if (!sessionState.sessions.length) sessionState.sessions.push(nextSession);
+      sessionState.activeSessionId = nextSession.id;
+      renderStoredConversation(nextSession);
+    }
+
+    saveAssistantSessionState(sessionState);
+    renderSessionList();
+  };
+
   const setLoading = loading => {
     isLoading = loading;
     input.disabled = loading;
@@ -489,23 +720,27 @@ function createAssistantUi() {
     lastSubmittedMessage = value;
     lastSubmittedAt = now;
 
+    const requestHistory = conversationHistory.slice(-10);
     appendMessage(value, 'user');
     input.value = '';
     setLoading(true);
     conversationHistory.push({ role: 'user', content: value });
+    persistSessionMessage('user', value);
 
     const thinkingMessage = appendMessage(aiAssistantText('aiAssistantThinking'), 'bot');
     thinkingMessage.classList.add('ai-message-loading');
 
     try {
-      const result = await requestAssistantAnswer(value, conversationHistory.slice(-10));
+      const result = await requestAssistantAnswer(value, requestHistory);
       renderAssistantResponse(result.answer, result.properties, thinkingMessage);
       conversationHistory.push({ role: 'assistant', content: result.answer });
+      persistSessionMessage('assistant', result.answer, result.properties);
     } catch (error) {
       console.error(error);
       const errorMessage = aiAssistantText('aiAssistantError');
       thinkingMessage.textContent = errorMessage;
       conversationHistory.push({ role: 'assistant', content: errorMessage });
+      persistSessionMessage('assistant', errorMessage);
     } finally {
       thinkingMessage.classList.remove('ai-message-loading');
       setLoading(false);
@@ -515,6 +750,20 @@ function createAssistantUi() {
 
   toggle.addEventListener('click', () => setOpen(!widget.classList.contains('is-open')));
   closeButton.addEventListener('click', () => setOpen(false));
+  historyButton.addEventListener('click', () => showSessions(sessionsPanel.hidden));
+  newChatButton.addEventListener('click', startNewSession);
+  sessionsNewButton.addEventListener('click', startNewSession);
+
+  sessionsList.addEventListener('click', event => {
+    const deleteButton = event.target.closest('[data-session-delete]');
+    if (deleteButton) {
+      deleteSession(deleteButton.dataset.sessionDelete);
+      return;
+    }
+
+    const openButton = event.target.closest('[data-session-open]');
+    if (openButton) openSession(openButton.dataset.sessionOpen);
+  });
 
   form.addEventListener('submit', event => {
     event.preventDefault();
@@ -529,8 +778,16 @@ function createAssistantUi() {
   });
 
   document.addEventListener('keydown', event => {
-    if (event.key === 'Escape' && widget.classList.contains('is-open')) setOpen(false);
+    if (event.key !== 'Escape' || !widget.classList.contains('is-open')) return;
+
+    if (!sessionsPanel.hidden) {
+      showSessions(false);
+    } else {
+      setOpen(false);
+    }
   });
+
+  renderStoredConversation(getActiveSession());
 }
 
 createAssistantUi();
