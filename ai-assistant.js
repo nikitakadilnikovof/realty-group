@@ -363,12 +363,39 @@ function createAssistantUi() {
   let lastSubmittedMessage = '';
   let lastSubmittedAt = 0;
 
+  const syncAssistantViewport = () => {
+    if (!widget.classList.contains('is-open') || window.innerWidth > 850) {
+      widget.style.removeProperty('--ai-assistant-viewport-height');
+      widget.style.removeProperty('--ai-assistant-viewport-top');
+      return;
+    }
+
+    const viewport = window.visualViewport;
+    const height = viewport?.height || window.innerHeight;
+    const offsetTop = viewport?.offsetTop || 0;
+
+    widget.style.setProperty('--ai-assistant-viewport-height', `${Math.round(height)}px`);
+    widget.style.setProperty('--ai-assistant-viewport-top', `${Math.round(offsetTop)}px`);
+  };
+
   const setOpen = isOpen => {
     widget.classList.toggle('is-open', isOpen);
+    document.body.classList.toggle('ai-assistant-open', isOpen);
     toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     windowElement.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
-    if (isOpen) setTimeout(() => input.focus(), 120);
+    syncAssistantViewport();
+
+    if (isOpen) {
+      setTimeout(() => {
+        input.focus();
+        syncAssistantViewport();
+      }, 120);
+    }
   };
+
+  window.visualViewport?.addEventListener('resize', syncAssistantViewport);
+  window.visualViewport?.addEventListener('scroll', syncAssistantViewport);
+  window.addEventListener('resize', syncAssistantViewport);
 
   const appendMessage = (text, type) => {
     const message = document.createElement('div');
