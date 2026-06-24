@@ -1318,6 +1318,101 @@ button {
   white-space: nowrap;
 }
 
+.ai-assistant-followups {
+  max-width: 86%;
+  align-self: flex-start;
+  display: grid;
+  gap: 8px;
+}
+
+.ai-assistant-followups button {
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+  padding: 0 12px;
+  font-size: 12px;
+  font-weight: 800;
+  text-align: left;
+  transition: border-color 0.2s, color 0.2s, transform 0.2s;
+}
+
+.ai-assistant-followups button:first-child {
+  border-color: rgba(214, 0, 28, 0.35);
+  color: var(--accent);
+}
+
+.ai-assistant-followups button:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.ai-assistant-followups i {
+  width: 14px;
+  flex: 0 0 14px;
+  text-align: center;
+}
+
+.ai-assistant-callback {
+  width: min(100%, 320px);
+  align-self: flex-start;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  padding: 10px;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
+}
+
+.ai-assistant-callback-form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 8px;
+}
+
+.ai-assistant-callback-form input {
+  min-width: 0;
+  height: 38px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--ink);
+  padding: 0 10px;
+  font-size: 13px;
+  outline: none;
+}
+
+.ai-assistant-callback-form input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(214, 0, 28, 0.1);
+}
+
+.ai-assistant-callback-form button {
+  min-height: 38px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--ink);
+  padding: 0 10px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.ai-assistant-callback-form button[type="submit"] {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.ai-assistant-callback-form button:hover {
+  border-color: var(--accent);
+}
+
 .ai-assistant-quick {
   display: flex;
   gap: 8px;
@@ -1347,7 +1442,10 @@ button {
 
 .ai-assistant-quick button:disabled,
 .ai-assistant-form input:disabled,
-.ai-assistant-form button:disabled {
+.ai-assistant-form button:disabled,
+.ai-assistant-followups button:disabled,
+.ai-assistant-callback-form input:disabled,
+.ai-assistant-callback-form button:disabled {
   cursor: wait;
   opacity: 0.65;
 }
@@ -2329,7 +2427,20 @@ button {
     -webkit-overflow-scrolling: touch;
   }
 
+  .ai-assistant-followups,
+  .ai-assistant-callback {
+    max-width: 100%;
+  }
+
+  .ai-assistant-callback-form {
+    grid-template-columns: 1fr;
+  }
+
   .ai-assistant-widget .ai-assistant-form input {
+    font-size: 16px;
+  }
+
+  .ai-assistant-widget .ai-assistant-callback-form input {
     font-size: 16px;
   }
 

@@ -123,6 +123,126 @@ const AI_ASSISTANT_TRANSLATIONS = {
     fr: 'Envoyer',
     de: 'Senden',
     ar: 'Send'
+  },
+  aiAssistantCallRequest: {
+    tr: 'Arama iste',
+    ru: 'Заказать звонок',
+    en: 'Request a call',
+    fr: 'Demander un appel',
+    de: 'Ruckruf anfordern',
+    ar: 'Request a call'
+  },
+  aiAssistantSimilar: {
+    tr: 'Benzer secenekler',
+    ru: 'Показать похожие варианты',
+    en: 'Show similar options',
+    fr: 'Options similaires',
+    de: 'Ahnliche Optionen',
+    ar: 'Show similar options'
+  },
+  aiAssistantDocuments: {
+    tr: 'Belgeleri anlat',
+    ru: 'Что по документам?',
+    en: 'What about documents?',
+    fr: 'Et les documents ?',
+    de: 'Was ist mit Dokumenten?',
+    ar: 'What about documents?'
+  },
+  aiAssistantCompare: {
+    tr: 'Secenekleri karsilastir',
+    ru: 'Сравнить эти варианты',
+    en: 'Compare these options',
+    fr: 'Comparer ces options',
+    de: 'Diese Optionen vergleichen',
+    ar: 'Compare these options'
+  },
+  aiAssistantSea: {
+    tr: 'Denize yakin olsun',
+    ru: 'Ближе к морю',
+    en: 'Closer to the sea',
+    fr: 'Plus pres de la mer',
+    de: 'Nah am Meer',
+    ar: 'Closer to the sea'
+  },
+  aiAssistantQuiet: {
+    tr: 'Sessiz bolge olsun',
+    ru: 'Тихий район',
+    en: 'A quiet district',
+    fr: 'Quartier calme',
+    de: 'Ruhiger Bezirk',
+    ar: 'A quiet district'
+  },
+  aiAssistantApartment: {
+    tr: 'Daire bakiyorum',
+    ru: 'Интересует квартира',
+    en: 'I need an apartment',
+    fr: 'Je cherche un appartement',
+    de: 'Ich suche eine Wohnung',
+    ar: 'I need an apartment'
+  },
+  aiAssistantVilla: {
+    tr: 'Villa veya ev',
+    ru: 'Интересует дом или вилла',
+    en: 'I need a house or villa',
+    fr: 'Je cherche une maison ou villa',
+    de: 'Ich suche Haus oder Villa',
+    ar: 'I need a house or villa'
+  },
+  aiAssistantBudget: {
+    tr: 'Butceye gore sec',
+    ru: 'Подобрать по бюджету',
+    en: 'Match by budget',
+    fr: 'Selon mon budget',
+    de: 'Nach Budget suchen',
+    ar: 'Match by budget'
+  },
+  aiAssistantRent: {
+    tr: 'Kiralama icin',
+    ru: 'Варианты для аренды',
+    en: 'Rental options',
+    fr: 'Options de location',
+    de: 'Optionen zur Miete',
+    ar: 'Rental options'
+  },
+  aiAssistantPhonePlaceholder: {
+    tr: 'Telefon / WhatsApp',
+    ru: 'Телефон / WhatsApp',
+    en: 'Phone / WhatsApp',
+    fr: 'Telephone / WhatsApp',
+    de: 'Telefon / WhatsApp',
+    ar: 'Phone / WhatsApp'
+  },
+  aiAssistantCallbackSubmit: {
+    tr: 'Gonder',
+    ru: 'Отправить',
+    en: 'Send',
+    fr: 'Envoyer',
+    de: 'Senden',
+    ar: 'Send'
+  },
+  aiAssistantCallbackCancel: {
+    tr: 'Iptal',
+    ru: 'Отмена',
+    en: 'Cancel',
+    fr: 'Annuler',
+    de: 'Abbrechen',
+    ar: 'Cancel'
+  },
+  aiAssistantCallbackSuccess: {
+    tr: 'Tesekkurler! Numaranizi aldik, yoneticimiz sizinle iletisime gececek.',
+    ru: 'Спасибо! Номер получили, менеджер свяжется с вами.',
+    en: 'Thank you! We received your number, a manager will contact you.',
+    fr: 'Merci ! Nous avons recu votre numero, un manager vous contactera.',
+    de: 'Danke! Wir haben Ihre Nummer erhalten, ein Manager meldet sich.',
+    ar: 'Thank you! We received your number, a manager will contact you.'
+  },
+  aiAssistantCallbackError: {
+    tr: 'Basvuru gonderilemedi. Lutfen biraz sonra tekrar deneyin.',
+    ru: 'Не удалось отправить заявку. Попробуйте чуть позже.',
+    en: 'Could not send the request. Please try again later.',
+    fr: 'Impossible envoyer la demande. Veuillez reessayer plus tard.',
+    de: 'Anfrage konnte nicht gesendet werden. Bitte versuchen Sie es spater erneut.',
+    ar: 'Could not send the request. Please try again later.'
   }
 };
 
@@ -137,6 +257,7 @@ function createAssistantSession() {
     title: '',
     createdAt: now,
     updatedAt: now,
+    preferences: createAssistantPreferences(),
     messages: []
   };
 }
@@ -148,6 +269,10 @@ function loadAssistantSessionState() {
 
     state.sessions = state.sessions
       .filter(session => session?.id && Array.isArray(session.messages))
+      .map(session => ({
+        ...session,
+        preferences: cloneAssistantPreferences(session.preferences)
+      }))
       .slice(0, AI_ASSISTANT_MAX_SESSIONS);
 
     return state;
@@ -214,6 +339,50 @@ function formatAssistantAnswer(value) {
     .replace(/\n{3,}/g, '\n\n');
 
   return text.trim();
+}
+
+function createAssistantPreferences() {
+  return {
+    dealType: '',
+    propertyType: '',
+    districtPreference: '',
+    nearSea: false,
+    city: '',
+    budget: ''
+  };
+}
+
+function cloneAssistantPreferences(preferences) {
+  return {
+    ...createAssistantPreferences(),
+    ...(preferences && typeof preferences === 'object' ? preferences : {})
+  };
+}
+
+function inferAssistantPreferences(text, currentPreferences = {}) {
+  const next = cloneAssistantPreferences(currentPreferences);
+  const value = normalizeAssistantMatchText(text);
+
+  if (!value) return next;
+
+  if (/аренд|снять|сдач|rent|kirala/.test(value)) next.dealType = 'rent';
+  if (/покуп|купить|продаж|buy|purchase|satilik/.test(value)) next.dealType = 'buy';
+  if (/квартир|апартамент|apartment|daire/.test(value)) next.propertyType = 'apartment';
+  if (/дом|вилл|коттедж|house|villa|ev/.test(value)) next.propertyType = 'villa';
+  if (/море|пляж|берег|sea|beach|deniz/.test(value)) next.nearSea = true;
+  if (/тих|спокой|уедин|quiet|calm|sessiz/.test(value)) next.districtPreference = 'quiet';
+  if (/центр|center|centre|merkez/.test(value)) next.districtPreference = 'center';
+
+  const budgetMatch = value.match(/(?:до|бюджет|budget|up to)?\s*(\d[\d\s.,]{3,})\s*(?:\$|usd|eur|€|доллар|евро)?/i);
+  if (budgetMatch) next.budget = budgetMatch[1].replace(/\s+/g, '');
+
+  return next;
+}
+
+function inferAssistantPreferencesFromMessages(messages) {
+  return (Array.isArray(messages) ? messages : [])
+    .filter(message => message.role === 'user')
+    .reduce((preferences, message) => inferAssistantPreferences(message.content, preferences), createAssistantPreferences());
 }
 
 let aiAssistantPropertiesPromise = null;
@@ -336,10 +505,11 @@ async function enrichSuggestedProperties(items, answer) {
     .slice(0, 3);
 }
 
-async function requestAssistantAnswer(message, history) {
+async function requestAssistantAnswer(message, history, preferences) {
   const payload = {
     message,
     history,
+    preferences,
     language: aiAssistantLanguage(),
     page: document.body.dataset.page || '',
     url: window.location.href,
@@ -377,6 +547,46 @@ async function requestAssistantAnswer(message, history) {
     answer,
     properties: await enrichSuggestedProperties(data.matchedProperties, answer)
   };
+}
+
+async function requestAssistantCallback(phone, history, preferences) {
+  const payload = {
+    action: 'callback_request',
+    phone,
+    history,
+    preferences,
+    language: aiAssistantLanguage(),
+    page: document.body.dataset.page || '',
+    url: window.location.href,
+    propertyId: new URLSearchParams(window.location.search).get('id') || ''
+  };
+
+  console.info('[AI assistant] callback payload', {
+    endpoint: AI_ASSISTANT_ENDPOINT,
+    payload
+  });
+
+  const response = await fetch(AI_ASSISTANT_ENDPOINT, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  });
+
+  const data = await response.json().catch(() => ({}));
+
+  console.info('[AI assistant] callback response', {
+    ok: response.ok,
+    status: response.status,
+    data
+  });
+
+  if (!response.ok) {
+    throw new Error(data.details || data.error || `Callback request failed: ${response.status}`);
+  }
+
+  return data;
 }
 
 function createAssistantUi() {
@@ -455,6 +665,7 @@ function createAssistantUi() {
   const sessionsNewButton = document.getElementById('aiAssistantSessionsNew');
   const sessionState = loadAssistantSessionState();
   let conversationHistory = [];
+  let assistantPreferences = createAssistantPreferences();
   let isLoading = false;
   let lastSubmittedMessage = '';
   let lastSubmittedAt = 0;
@@ -510,6 +721,12 @@ function createAssistantUi() {
     element.innerHTML = renderAssistantMessageHtml(text);
   };
 
+  const clearAssistantFollowups = () => {
+    messages.querySelectorAll('.ai-assistant-followups, .ai-assistant-callback').forEach(element => {
+      element.remove();
+    });
+  };
+
   const appendPropertyPreviews = (properties, container = messages) => {
     if (!properties.length) return;
 
@@ -532,12 +749,115 @@ function createAssistantUi() {
     container.appendChild(list);
   };
 
-  const renderAssistantResponse = (answer, properties, firstMessage) => {
+  const buildAssistantFollowups = (answer, properties) => {
+    const text = normalizeAssistantMatchText(answer);
+    const hasProperties = Array.isArray(properties) && properties.length > 0;
+    const currentPropertyId = new URLSearchParams(window.location.search).get('id') || '';
+
+    if (hasProperties && properties.length > 1) {
+      return [
+        aiAssistantText('aiAssistantCompare'),
+        aiAssistantText('aiAssistantDocuments')
+      ];
+    }
+
+    if (hasProperties || currentPropertyId) {
+      return [
+        aiAssistantText('aiAssistantSimilar'),
+        aiAssistantText('aiAssistantDocuments')
+      ];
+    }
+
+    if (assistantPreferences.nearSea && !assistantPreferences.dealType) {
+      return [
+        aiAssistantText('aiAssistantRent'),
+        aiAssistantText('aiAssistantBudget')
+      ];
+    }
+
+    if (assistantPreferences.dealType && !assistantPreferences.propertyType) {
+      return [
+        aiAssistantText('aiAssistantApartment'),
+        aiAssistantText('aiAssistantVilla')
+      ];
+    }
+
+    if (/район|море|инфраструктур|школ|транспорт|тих|центр|district|sea|school|transport|quiet|center/i.test(text)) {
+      return [
+        aiAssistantText('aiAssistantSea'),
+        aiAssistantText('aiAssistantQuiet')
+      ];
+    }
+
+    if (/квартир|дом|вилл|тип|недвижим|apartment|house|villa|property type/i.test(text)) {
+      return [
+        aiAssistantText('aiAssistantApartment'),
+        aiAssistantText('aiAssistantVilla')
+      ];
+    }
+
+    if (/аренд|rent/i.test(text)) {
+      return [
+        aiAssistantText('aiAssistantRent'),
+        aiAssistantText('aiAssistantBudget')
+      ];
+    }
+
+    return [
+      aiAssistantText('aiAssistantBudget'),
+      aiAssistantText('aiAssistantQuickDistrict')
+    ];
+  };
+
+  const appendFollowupActions = (answer, properties) => {
+    clearAssistantFollowups();
+    const followupActions = buildAssistantFollowups(answer, properties);
+
+    const followups = document.createElement('div');
+    followups.className = 'ai-assistant-followups';
+    followups.innerHTML = `
+      <button type="button" data-ai-followup="callback">
+        <i class="fa-solid fa-phone" aria-hidden="true"></i>
+        <span>${aiAssistantEscapeHtml(aiAssistantText('aiAssistantCallRequest'))}</span>
+      </button>
+      <button type="button" data-ai-followup="${aiAssistantEscapeHtml(followupActions[0])}">
+        <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
+        <span>${aiAssistantEscapeHtml(followupActions[0])}</span>
+      </button>
+      <button type="button" data-ai-followup="${aiAssistantEscapeHtml(followupActions[1])}">
+        <i class="fa-solid fa-file-signature" aria-hidden="true"></i>
+        <span>${aiAssistantEscapeHtml(followupActions[1])}</span>
+      </button>
+    `;
+
+    messages.appendChild(followups);
+  };
+
+  const showCallbackForm = () => {
+    messages.querySelectorAll('.ai-assistant-callback').forEach(element => element.remove());
+
+    const callback = document.createElement('div');
+    callback.className = 'ai-assistant-callback';
+    callback.innerHTML = `
+      <form class="ai-assistant-callback-form">
+        <input type="tel" name="phone" autocomplete="tel" required placeholder="${aiAssistantEscapeHtml(aiAssistantText('aiAssistantPhonePlaceholder'))}" aria-label="${aiAssistantEscapeHtml(aiAssistantText('aiAssistantPhonePlaceholder'))}">
+        <button type="submit">${aiAssistantEscapeHtml(aiAssistantText('aiAssistantCallbackSubmit'))}</button>
+        <button type="button" data-ai-callback-cancel>${aiAssistantEscapeHtml(aiAssistantText('aiAssistantCallbackCancel'))}</button>
+      </form>
+    `;
+
+    messages.appendChild(callback);
+    messages.scrollTop = messages.scrollHeight;
+    callback.querySelector('input')?.focus();
+  };
+
+  const renderAssistantResponse = (answer, properties, firstMessage, options = {}) => {
     const paragraphs = answer.split(/\n{2,}/).map(paragraph => paragraph.trim()).filter(Boolean);
     const renderedPropertyIds = new Set();
 
     if (!paragraphs.length) {
       renderMessageInto(firstMessage, answer);
+      if (options.showFollowups) appendFollowupActions(answer, properties);
       return;
     }
 
@@ -565,6 +885,7 @@ function createAssistantUi() {
     });
 
     scrollToMessageStart(firstMessage);
+    if (options.showFollowups) appendFollowupActions(answer, properties);
   };
 
   const getSessionTitle = session => {
@@ -586,6 +907,7 @@ function createAssistantUi() {
 
   const persistSessionMessage = (role, content, properties = []) => {
     const session = getActiveSession();
+    session.preferences = cloneAssistantPreferences(assistantPreferences);
     session.messages.push({
       role,
       content: String(content || '').slice(0, 6000),
@@ -607,8 +929,12 @@ function createAssistantUi() {
       role: message.role,
       content: message.content
     }));
+    assistantPreferences = session.preferences
+      ? cloneAssistantPreferences(session.preferences)
+      : inferAssistantPreferencesFromMessages(session.messages);
 
     if (!session.messages.length) {
+      assistantPreferences = createAssistantPreferences();
       appendMessage(aiAssistantText('aiAssistantGreeting'), 'bot');
       return;
     }
@@ -709,6 +1035,9 @@ function createAssistantUi() {
     quickButtons.forEach(button => {
       button.disabled = loading;
     });
+    messages.querySelectorAll('.ai-assistant-followups button, .ai-assistant-callback button, .ai-assistant-callback input').forEach(element => {
+      element.disabled = loading;
+    });
   };
 
   const sendMessage = async text => {
@@ -721,6 +1050,8 @@ function createAssistantUi() {
     lastSubmittedAt = now;
 
     const requestHistory = conversationHistory.slice(-10);
+    assistantPreferences = inferAssistantPreferences(value, assistantPreferences);
+    clearAssistantFollowups();
     appendMessage(value, 'user');
     input.value = '';
     setLoading(true);
@@ -731,8 +1062,8 @@ function createAssistantUi() {
     thinkingMessage.classList.add('ai-message-loading');
 
     try {
-      const result = await requestAssistantAnswer(value, requestHistory);
-      renderAssistantResponse(result.answer, result.properties, thinkingMessage);
+      const result = await requestAssistantAnswer(value, requestHistory, assistantPreferences);
+      renderAssistantResponse(result.answer, result.properties, thinkingMessage, { showFollowups: true });
       conversationHistory.push({ role: 'assistant', content: result.answer });
       persistSessionMessage('assistant', result.answer, result.properties);
     } catch (error) {
@@ -743,6 +1074,44 @@ function createAssistantUi() {
       persistSessionMessage('assistant', errorMessage);
     } finally {
       thinkingMessage.classList.remove('ai-message-loading');
+      setLoading(false);
+      input.focus();
+    }
+  };
+
+  const submitCallbackRequest = async phone => {
+    const normalizedPhone = phone.trim();
+    if (!normalizedPhone || isLoading) return;
+
+    clearAssistantFollowups();
+    appendMessage(`${aiAssistantText('aiAssistantCallRequest')}: ${normalizedPhone}`, 'user');
+    input.value = '';
+    setLoading(true);
+
+    const requestHistory = conversationHistory
+      .concat({ role: 'user', content: `${aiAssistantText('aiAssistantCallRequest')}: ${normalizedPhone}` })
+      .slice(-20);
+
+    conversationHistory.push({ role: 'user', content: `${aiAssistantText('aiAssistantCallRequest')}: ${normalizedPhone}` });
+    persistSessionMessage('user', `${aiAssistantText('aiAssistantCallRequest')}: ${normalizedPhone}`);
+
+    const statusMessage = appendMessage(aiAssistantText('aiAssistantThinking'), 'bot');
+    statusMessage.classList.add('ai-message-loading');
+
+    try {
+      await requestAssistantCallback(normalizedPhone, requestHistory, assistantPreferences);
+      const successMessage = aiAssistantText('aiAssistantCallbackSuccess');
+      renderMessageInto(statusMessage, successMessage);
+      conversationHistory.push({ role: 'assistant', content: successMessage });
+      persistSessionMessage('assistant', successMessage);
+    } catch (error) {
+      console.error(error);
+      const errorMessage = aiAssistantText('aiAssistantCallbackError');
+      renderMessageInto(statusMessage, errorMessage);
+      conversationHistory.push({ role: 'assistant', content: errorMessage });
+      persistSessionMessage('assistant', errorMessage);
+    } finally {
+      statusMessage.classList.remove('ai-message-loading');
       setLoading(false);
       input.focus();
     }
@@ -763,6 +1132,32 @@ function createAssistantUi() {
 
     const openButton = event.target.closest('[data-session-open]');
     if (openButton) openSession(openButton.dataset.sessionOpen);
+  });
+
+  messages.addEventListener('click', event => {
+    const followupButton = event.target.closest('[data-ai-followup]');
+    if (followupButton) {
+      const followup = followupButton.dataset.aiFollowup || '';
+      if (followup === 'callback') {
+        showCallbackForm();
+      } else {
+        sendMessage(followup);
+      }
+      return;
+    }
+
+    if (event.target.closest('[data-ai-callback-cancel]')) {
+      event.target.closest('.ai-assistant-callback')?.remove();
+    }
+  });
+
+  messages.addEventListener('submit', event => {
+    const callbackForm = event.target.closest('.ai-assistant-callback-form');
+    if (!callbackForm) return;
+
+    event.preventDefault();
+    const formData = new FormData(callbackForm);
+    submitCallbackRequest(String(formData.get('phone') || ''));
   });
 
   form.addEventListener('submit', event => {
