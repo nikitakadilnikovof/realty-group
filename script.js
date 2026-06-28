@@ -9,6 +9,7 @@
 
 const SUPPORTED_CURRENCIES = ['USD', 'TRY', 'EUR', 'RUB', 'GBP', 'CHF', 'CAD', 'SEK'];
 const CURRENCY_API_URL = 'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/usd.json';
+const APPOINTMENT_ENDPOINT = 'https://realty-ai-assistant.nikitakadilnikovof.workers.dev/';
 const SITE_ORIGIN = 'https://nikitakadilnikovof.github.io/realty-group/';
 const OG_LOCALES = { tr: 'tr_TR', ru: 'ru_RU', en: 'en_US', fr: 'fr_FR', de: 'de_DE', ar: 'ar_AR' };
 const FALLBACK_RATES = {
@@ -24,22 +25,22 @@ const FALLBACK_RATES = {
 
 const I18N = {
   tr: {
-    languageName: 'Turkce', callNow: 'HEMEN ARAYIN', buy: 'SATIN AL', sell: 'SAT', rent: 'KIRALA', contacts: 'ILETISIM', appointment: 'RANDEVU AL', siteLanguage: 'SITE DILI', currency: 'PARA BIRIMI', measurement: 'OLCU BIRIMI', heroTitle: "Antalya'da satilik ve kiralik gayrimenkuller", heroText: 'Bolge, butce ve yasam tarzina gore secilmis guncel portfoy.', filters: 'FILTRELER', propertyType: 'Emlak tipi', allTypes: 'Tumu', land: 'Arsa', apartment: 'Daire', price: 'Fiyat', area: 'Alan (m2)', from: 'Min', to: 'Max', resetFilters: 'Filtreleri sifirla', catalogEyebrow: 'Katalog', catalogTitle: 'Antalya gayrimenkulleri', sortNewest: 'Once yeni', sortPriceAsc: 'Ucuzdan pahaliya', sortPriceDesc: 'Pahalidan ucuza', emptyState: 'Uygun ilan bulunamadi.', details: 'Detaylari gor', appointmentTitle: 'Randevu olustur', firstName: 'Ad', lastName: 'Soyad', phone: 'Telefon', message: 'Mesaj', send: 'GONDER', description: 'Aciklama', features: 'Ozellikler', gallery: 'Galeri', backToCatalog: 'Kataloga don', notFound: 'Ilan bulunamadi', rooms: 'Oda', floor: 'Kat', bedrooms: 'Yatak odasi', bathrooms: 'Banyo', furnished: 'Esyali', parking: 'Otopark', yes: 'Evet', no: 'Hayir', month: '/ay'
+    languageName: 'Turkce', callNow: 'HEMEN ARAYIN', buy: 'SATIN AL', sell: 'SAT', rent: 'KIRALA', contacts: 'ILETISIM', appointment: 'RANDEVU AL', siteLanguage: 'SITE DILI', currency: 'PARA BIRIMI', measurement: 'OLCU BIRIMI', heroTitle: "Antalya'da satilik ve kiralik gayrimenkuller", heroText: 'Bolge, butce ve yasam tarzina gore secilmis guncel portfoy.', filters: 'FILTRELER', propertyType: 'Emlak tipi', allTypes: 'Tumu', land: 'Arsa', apartment: 'Daire', price: 'Fiyat', area: 'Alan (m2)', landShare: 'Arsa payi', from: 'Min', to: 'Max', resetFilters: 'Filtreleri sifirla', catalogEyebrow: 'Katalog', catalogTitle: 'Antalya gayrimenkulleri', sortNewest: 'Once yeni', sortPriceAsc: 'Ucuzdan pahaliya', sortPriceDesc: 'Pahalidan ucuza', emptyState: 'Uygun ilan bulunamadi.', details: 'Detaylari gor', appointmentTitle: 'Randevu olustur', firstName: 'Ad', lastName: 'Soyad', phone: 'Telefon', message: 'Mesaj', send: 'GONDER', description: 'Aciklama', features: 'Ozellikler', gallery: 'Galeri', backToCatalog: 'Kataloga don', notFound: 'Ilan bulunamadi', rooms: 'Oda', floor: 'Kat', bedrooms: 'Yatak odasi', bathrooms: 'Banyo', furnished: 'Esyali', parking: 'Otopark', yes: 'Evet', no: 'Hayir', month: '/ay'
   },
   ru: {
-    languageName: 'Русский', callNow: 'ПОЗВОНИТЕ НАМ', buy: 'КУПИТЬ', sell: 'ПРОДАТЬ', rent: 'АРЕНДА', contacts: 'КОНТАКТЫ', appointment: 'Записаться', siteLanguage: 'ЯЗЫК САЙТА', currency: 'ВАЛЮТА', measurement: 'ЕДИНИЦЫ', heroTitle: 'Недвижимость в Анталии для покупки и аренды', heroText: 'Актуальная база объектов, подобранных по району, бюджету и стилю жизни.', filters: 'ФИЛЬТРЫ', propertyType: 'Тип недвижимости', allTypes: 'Все', land: 'Земля', apartment: 'Квартира', price: 'Стоимость', area: 'Площадь (м²)', from: 'От', to: 'До', resetFilters: 'Сбросить фильтры', catalogEyebrow: 'Каталог', catalogTitle: 'Недвижимость в Анталии', sortNewest: 'Сначала новые', sortPriceAsc: 'Дешевле', sortPriceDesc: 'Дороже', emptyState: 'Подходящих объектов не найдено.', details: 'Подробнее', appointmentTitle: 'Назначить встречу', firstName: 'Имя', lastName: 'Фамилия', phone: 'Телефон', message: 'Сообщение', send: 'ОТПРАВИТЬ', description: 'Описание', features: 'Характеристики', gallery: 'Галерея', backToCatalog: 'Вернуться в каталог', notFound: 'Объект не найден', rooms: 'Комнаты', floor: 'Этаж', bedrooms: 'Спальни', bathrooms: 'Ванные', furnished: 'Мебель', parking: 'Парковка', yes: 'Да', no: 'Нет', month: '/мес'
+    languageName: 'Русский', callNow: 'ПОЗВОНИТЕ НАМ', buy: 'КУПИТЬ', sell: 'ПРОДАТЬ', rent: 'АРЕНДА', contacts: 'КОНТАКТЫ', appointment: 'Записаться', siteLanguage: 'ЯЗЫК САЙТА', currency: 'ВАЛЮТА', measurement: 'ЕДИНИЦЫ', heroTitle: 'Недвижимость в Анталии для покупки и аренды', heroText: 'Актуальная база объектов, подобранных по району, бюджету и стилю жизни.', filters: 'ФИЛЬТРЫ', propertyType: 'Тип недвижимости', allTypes: 'Все', land: 'Земля', apartment: 'Квартира', price: 'Стоимость', area: 'Площадь (м²)', landShare: 'Доля земли', from: 'От', to: 'До', resetFilters: 'Сбросить фильтры', catalogEyebrow: 'Каталог', catalogTitle: 'Недвижимость в Анталии', sortNewest: 'Сначала новые', sortPriceAsc: 'Дешевле', sortPriceDesc: 'Дороже', emptyState: 'Подходящих объектов не найдено.', details: 'Подробнее', appointmentTitle: 'Назначить встречу', firstName: 'Имя', lastName: 'Фамилия', phone: 'Телефон', message: 'Сообщение', send: 'ОТПРАВИТЬ', description: 'Описание', features: 'Характеристики', gallery: 'Галерея', backToCatalog: 'Вернуться в каталог', notFound: 'Объект не найден', rooms: 'Комнаты', floor: 'Этаж', bedrooms: 'Спальни', bathrooms: 'Ванные', furnished: 'Мебель', parking: 'Парковка', yes: 'Да', no: 'Нет', month: '/мес'
   },
   en: {
-    languageName: 'English', callNow: 'CALL US NOW', buy: 'BUY', sell: 'SELL', rent: 'RENT', contacts: 'CONTACTS', appointment: 'BOOK APPOINTMENT', siteLanguage: 'SITE LANGUAGE', currency: 'CURRENCY', measurement: 'MEASUREMENT', heroTitle: 'Properties for sale and rent in Antalya', heroText: 'A current portfolio selected by district, budget and lifestyle.', filters: 'FILTERS', propertyType: 'Property type', allTypes: 'All', land: 'Land', apartment: 'Apartment', price: 'Price', area: 'Area (m2)', from: 'From', to: 'To', resetFilters: 'Reset filters', catalogEyebrow: 'Catalog', catalogTitle: 'Antalya properties', sortNewest: 'Newest first', sortPriceAsc: 'Price low to high', sortPriceDesc: 'Price high to low', emptyState: 'No matching properties found.', details: 'View details', appointmentTitle: 'Book an appointment', firstName: 'First name', lastName: 'Last name', phone: 'Phone', message: 'Message', send: 'SEND', description: 'Description', features: 'Features', gallery: 'Gallery', backToCatalog: 'Back to catalog', notFound: 'Property not found', rooms: 'Rooms', floor: 'Floor', bedrooms: 'Bedrooms', bathrooms: 'Bathrooms', furnished: 'Furnished', parking: 'Parking', yes: 'Yes', no: 'No', month: '/month'
+    languageName: 'English', callNow: 'CALL US NOW', buy: 'BUY', sell: 'SELL', rent: 'RENT', contacts: 'CONTACTS', appointment: 'BOOK APPOINTMENT', siteLanguage: 'SITE LANGUAGE', currency: 'CURRENCY', measurement: 'MEASUREMENT', heroTitle: 'Properties for sale and rent in Antalya', heroText: 'A current portfolio selected by district, budget and lifestyle.', filters: 'FILTERS', propertyType: 'Property type', allTypes: 'All', land: 'Land', apartment: 'Apartment', price: 'Price', area: 'Area (m2)', landShare: 'Land share', from: 'From', to: 'To', resetFilters: 'Reset filters', catalogEyebrow: 'Catalog', catalogTitle: 'Antalya properties', sortNewest: 'Newest first', sortPriceAsc: 'Price low to high', sortPriceDesc: 'Price high to low', emptyState: 'No matching properties found.', details: 'View details', appointmentTitle: 'Book an appointment', firstName: 'First name', lastName: 'Last name', phone: 'Phone', message: 'Message', send: 'SEND', description: 'Description', features: 'Features', gallery: 'Gallery', backToCatalog: 'Back to catalog', notFound: 'Property not found', rooms: 'Rooms', floor: 'Floor', bedrooms: 'Bedrooms', bathrooms: 'Bathrooms', furnished: 'Furnished', parking: 'Parking', yes: 'Yes', no: 'No', month: '/month'
   },
   fr: {
-    languageName: 'Francais', callNow: 'APPELEZ-NOUS', buy: 'ACHETER', sell: 'VENDRE', rent: 'LOUER', contacts: 'CONTACTS', appointment: 'RENDEZ-VOUS', siteLanguage: 'LANGUE DU SITE', currency: 'DEVISE', measurement: 'MESURE', heroTitle: 'Biens a vendre et a louer a Antalya', heroText: 'Un portefeuille actuel selectionne par quartier, budget et style de vie.', filters: 'FILTRES', propertyType: 'Type de bien', allTypes: 'Tous', land: 'Terrain', apartment: 'Appartement', price: 'Prix', area: 'Surface (m2)', from: 'Min', to: 'Max', resetFilters: 'Reinitialiser', catalogEyebrow: 'Catalogue', catalogTitle: 'Immobilier a Antalya', sortNewest: 'Plus recents', sortPriceAsc: 'Prix croissant', sortPriceDesc: 'Prix decroissant', emptyState: 'Aucun bien correspondant.', details: 'Voir details', appointmentTitle: 'Prendre rendez-vous', firstName: 'Prenom', lastName: 'Nom', phone: 'Telephone', message: 'Message', send: 'ENVOYER', description: 'Description', features: 'Caracteristiques', gallery: 'Galerie', backToCatalog: 'Retour au catalogue', notFound: 'Bien introuvable', rooms: 'Pieces', floor: 'Etage', bedrooms: 'Chambres', bathrooms: 'Salles de bain', furnished: 'Meuble', parking: 'Parking', yes: 'Oui', no: 'Non', month: '/mois'
+    languageName: 'Francais', callNow: 'APPELEZ-NOUS', buy: 'ACHETER', sell: 'VENDRE', rent: 'LOUER', contacts: 'CONTACTS', appointment: 'RENDEZ-VOUS', siteLanguage: 'LANGUE DU SITE', currency: 'DEVISE', measurement: 'MESURE', heroTitle: 'Biens a vendre et a louer a Antalya', heroText: 'Un portefeuille actuel selectionne par quartier, budget et style de vie.', filters: 'FILTRES', propertyType: 'Type de bien', allTypes: 'Tous', land: 'Terrain', apartment: 'Appartement', price: 'Prix', area: 'Surface (m2)', landShare: 'Quote-part terrain', from: 'Min', to: 'Max', resetFilters: 'Reinitialiser', catalogEyebrow: 'Catalogue', catalogTitle: 'Immobilier a Antalya', sortNewest: 'Plus recents', sortPriceAsc: 'Prix croissant', sortPriceDesc: 'Prix decroissant', emptyState: 'Aucun bien correspondant.', details: 'Voir details', appointmentTitle: 'Prendre rendez-vous', firstName: 'Prenom', lastName: 'Nom', phone: 'Telephone', message: 'Message', send: 'ENVOYER', description: 'Description', features: 'Caracteristiques', gallery: 'Galerie', backToCatalog: 'Retour au catalogue', notFound: 'Bien introuvable', rooms: 'Pieces', floor: 'Etage', bedrooms: 'Chambres', bathrooms: 'Salles de bain', furnished: 'Meuble', parking: 'Parking', yes: 'Oui', no: 'Non', month: '/mois'
   },
   de: {
-    languageName: 'Deutsch', callNow: 'RUFEN SIE UNS AN', buy: 'KAUFEN', sell: 'VERKAUFEN', rent: 'MIETEN', contacts: 'KONTAKT', appointment: 'TERMIN', siteLanguage: 'SPRACHE', currency: 'WAEHRUNG', measurement: 'MASSEINHEIT', heroTitle: 'Immobilien zum Kauf und zur Miete in Antalya', heroText: 'Aktuelles Portfolio nach Bezirk, Budget und Lebensstil.', filters: 'FILTER', propertyType: 'Immobilientyp', allTypes: 'Alle', land: 'Grundstueck', apartment: 'Wohnung', price: 'Preis', area: 'Flaeche (m2)', from: 'Min', to: 'Max', resetFilters: 'Filter zuruecksetzen', catalogEyebrow: 'Katalog', catalogTitle: 'Immobilien in Antalya', sortNewest: 'Neueste zuerst', sortPriceAsc: 'Preis aufsteigend', sortPriceDesc: 'Preis absteigend', emptyState: 'Keine passenden Immobilien gefunden.', details: 'Details ansehen', appointmentTitle: 'Termin vereinbaren', firstName: 'Vorname', lastName: 'Nachname', phone: 'Telefon', message: 'Nachricht', send: 'SENDEN', description: 'Beschreibung', features: 'Merkmale', gallery: 'Galerie', backToCatalog: 'Zurueck zum Katalog', notFound: 'Immobilie nicht gefunden', rooms: 'Zimmer', floor: 'Etage', bedrooms: 'Schlafzimmer', bathrooms: 'Baeder', furnished: 'Moebliert', parking: 'Parkplatz', yes: 'Ja', no: 'Nein', month: '/Monat'
+    languageName: 'Deutsch', callNow: 'RUFEN SIE UNS AN', buy: 'KAUFEN', sell: 'VERKAUFEN', rent: 'MIETEN', contacts: 'KONTAKT', appointment: 'TERMIN', siteLanguage: 'SPRACHE', currency: 'WAEHRUNG', measurement: 'MASSEINHEIT', heroTitle: 'Immobilien zum Kauf und zur Miete in Antalya', heroText: 'Aktuelles Portfolio nach Bezirk, Budget und Lebensstil.', filters: 'FILTER', propertyType: 'Immobilientyp', allTypes: 'Alle', land: 'Grundstueck', apartment: 'Wohnung', price: 'Preis', area: 'Flaeche (m2)', landShare: 'Grundanteil', from: 'Min', to: 'Max', resetFilters: 'Filter zuruecksetzen', catalogEyebrow: 'Katalog', catalogTitle: 'Immobilien in Antalya', sortNewest: 'Neueste zuerst', sortPriceAsc: 'Preis aufsteigend', sortPriceDesc: 'Preis absteigend', emptyState: 'Keine passenden Immobilien gefunden.', details: 'Details ansehen', appointmentTitle: 'Termin vereinbaren', firstName: 'Vorname', lastName: 'Nachname', phone: 'Telefon', message: 'Nachricht', send: 'SENDEN', description: 'Beschreibung', features: 'Merkmale', gallery: 'Galerie', backToCatalog: 'Zurueck zum Katalog', notFound: 'Immobilie nicht gefunden', rooms: 'Zimmer', floor: 'Etage', bedrooms: 'Schlafzimmer', bathrooms: 'Baeder', furnished: 'Moebliert', parking: 'Parkplatz', yes: 'Ja', no: 'Nein', month: '/Monat'
   },
   ar: {
-    languageName: 'Arabic', callNow: 'CALL US NOW', buy: 'BUY', sell: 'SELL', rent: 'RENT', contacts: 'CONTACTS', appointment: 'APPOINTMENT', siteLanguage: 'SITE LANGUAGE', currency: 'CURRENCY', measurement: 'MEASUREMENT', heroTitle: 'Antalya properties', heroText: 'A current portfolio selected by district, budget and lifestyle.', filters: 'FILTERS', propertyType: 'Property type', allTypes: 'All', land: 'Land', apartment: 'Apartment', price: 'Price', area: 'Area (m2)', from: 'From', to: 'To', resetFilters: 'Reset filters', catalogEyebrow: 'Catalog', catalogTitle: 'Antalya properties', sortNewest: 'Newest first', sortPriceAsc: 'Price low to high', sortPriceDesc: 'Price high to low', emptyState: 'No matching properties found.', details: 'View details', appointmentTitle: 'Book an appointment', firstName: 'First name', lastName: 'Last name', phone: 'Phone', message: 'Message', send: 'SEND', description: 'Description', features: 'Features', gallery: 'Gallery', backToCatalog: 'Back to catalog', notFound: 'Property not found', rooms: 'Rooms', floor: 'Floor', bedrooms: 'Bedrooms', bathrooms: 'Bathrooms', furnished: 'Furnished', parking: 'Parking', yes: 'Yes', no: 'No', month: '/month'
+    languageName: 'Arabic', callNow: 'CALL US NOW', buy: 'BUY', sell: 'SELL', rent: 'RENT', contacts: 'CONTACTS', appointment: 'APPOINTMENT', siteLanguage: 'SITE LANGUAGE', currency: 'CURRENCY', measurement: 'MEASUREMENT', heroTitle: 'Antalya properties', heroText: 'A current portfolio selected by district, budget and lifestyle.', filters: 'FILTERS', propertyType: 'Property type', allTypes: 'All', land: 'Land', apartment: 'Apartment', price: 'Price', area: 'Area (m2)', landShare: 'حصة الأرض', from: 'From', to: 'To', resetFilters: 'Reset filters', catalogEyebrow: 'Catalog', catalogTitle: 'Antalya properties', sortNewest: 'Newest first', sortPriceAsc: 'Price low to high', sortPriceDesc: 'Price high to low', emptyState: 'No matching properties found.', details: 'View details', appointmentTitle: 'Book an appointment', firstName: 'First name', lastName: 'Last name', phone: 'Phone', message: 'Message', send: 'SEND', description: 'Description', features: 'Features', gallery: 'Gallery', backToCatalog: 'Back to catalog', notFound: 'Property not found', rooms: 'Rooms', floor: 'Floor', bedrooms: 'Bedrooms', bathrooms: 'Bathrooms', furnished: 'Furnished', parking: 'Parking', yes: 'Yes', no: 'No', month: '/month'
   }
 };
 const EXTRA_TRANSLATIONS = {
@@ -178,6 +179,14 @@ const EXTRA_TRANSLATIONS = {
     fr: 'Geolocalisation',
     de: 'Standort',
     ar: 'Location'
+  },
+  appointmentMessageOptional: {
+    tr: 'Gorusme icin notunuz (istege bagli)',
+    ru: 'Комментарий к встрече (по желанию)',
+    en: 'A note for the meeting (optional)',
+    fr: 'Note pour le rendez-vous (facultatif)',
+    de: 'Notiz zum Termin (optional)',
+    ar: 'A note for the meeting (optional)'
   }
 };
 
@@ -337,7 +346,18 @@ const DETAIL_GALLERY_DESKTOP_LIMIT = 8;
 const DETAIL_GALLERY_COMPACT_LIMIT = 5;
 const DETAIL_GALLERY_MOBILE_LIMIT = 3;
 const PROPERTY_IMAGE_ROOT = './image';
+const ABOUT_SOCIAL_LINKS = [
+  { name: 'Instagram', icon: 'fa-instagram', url: '#', className: 'instagram' },
+  { name: 'Telegram', icon: 'fa-telegram', url: '#', className: 'telegram' },
+  { name: 'WhatsApp', icon: 'fa-whatsapp', url: '#', className: 'whatsapp' }
+];
 const PROPERTY_IMAGE_EXTENSION = 'jpg';
+const CATALOG_FILTERS_STORAGE_KEY = 'arg-catalog-filters';
+const FILTER_VALUE_ALIASES = {
+  _propertyType: {
+    ev: 'house'
+  }
+};
 
 function t(key) {
   return I18N[currentLanguage]?.[key] || EXTRA_TRANSLATIONS[key]?.[currentLanguage] || EXTRA_TRANSLATIONS[key]?.tr || I18N.tr[key] || key;
@@ -421,13 +441,23 @@ function humanizeFilterKey(key) {
     .replace(/\b\w/g, letter => letter.toLocaleUpperCase());
 }
 
+function filterLookupKeys(value) {
+  const raw = String(value ?? '').trim();
+  const lower = raw.toLocaleLowerCase();
+  const compact = lower.replace(/[-_\s]+/g, '');
+  return [...new Set([raw, lower, compact])];
+}
+
 function getFilterLabel(key) {
-  return getLocalized(filterLabels[key]) || humanizeFilterKey(key);
+  const labelKey = filterLookupKeys(key).find(item => filterLabels[item]);
+  return getLocalized(filterLabels[labelKey]) || humanizeFilterKey(key);
 }
 
 function getFilterValueLabel(value) {
+  if (value && typeof value === 'object') return getLocalized(value);
   const normalizedValue = filterValueToken(value);
-  if (filterValueLabels[normalizedValue]) return getLocalized(filterValueLabels[normalizedValue]);
+  const labelKey = filterLookupKeys(normalizedValue).find(item => filterValueLabels[item]);
+  if (labelKey) return getLocalized(filterValueLabels[labelKey]);
   if (typeof value === 'boolean') return value ? t('yes') : t('no');
   return humanizeFilterKey(normalizedValue);
 }
@@ -438,9 +468,15 @@ function getFilterValues(property, key) {
   return values.filter(item => item !== null && item !== undefined && item !== '');
 }
 
-function filterValueToken(value) {
+function filterValueToken(value, key = '') {
   if (typeof value === 'string') return value.trim().toLocaleLowerCase();
+  if (value && typeof value === 'object') return filterValueToken(getLocalized(value), key);
   return String(value);
+}
+
+function canonicalFilterValueToken(value, key) {
+  const token = filterValueToken(value, key);
+  return FILTER_VALUE_ALIASES[key]?.[token] || token;
 }
 
 function filterInputId(key, suffix = '') {
@@ -461,7 +497,7 @@ function collectFilterDefinitions() {
 
       const filter = filters.get(key);
       getFilterValues(property, key).forEach(value => {
-        filter.values.set(filterValueToken(value), value);
+        filter.values.set(canonicalFilterValueToken(value, key), value);
       });
     });
   });
@@ -503,7 +539,7 @@ function propertyRangeValue(property, key) {
 
 function renderFilterOptions(filter) {
   return filter.values.map(value => {
-    const token = filterValueToken(value);
+    const token = canonicalFilterValueToken(value, filter.key);
     const label = value === true && filter.values.length === 1 ? filter.label : getFilterValueLabel(value);
 
     return `
@@ -524,6 +560,43 @@ function renderRangeFilter(filter) {
   `;
 }
 
+function renderFilterBlock(filter) {
+  return `
+    <div class="filter-block dynamic-filter-block" data-filter-block="${escapeHtml(filter.key)}">
+      <h3>${escapeHtml(filter.label)}</h3>
+      ${filter.type === 'range' ? renderRangeFilter(filter) : renderFilterOptions(filter)}
+    </div>
+  `;
+}
+
+function renderFilterBlocks() {
+  const rangeGroupKeys = ['_price', '_area', '_landShare'];
+  const rangeGroupFilters = rangeGroupKeys
+    .map(key => filterDefinitions.find(filter => filter.key === key))
+    .filter(Boolean);
+  const rangeGroupSet = new Set(rangeGroupFilters.map(filter => filter.key));
+  const blocks = [];
+  let rangeGroupRendered = false;
+
+  filterDefinitions.forEach(filter => {
+    if (rangeGroupSet.has(filter.key)) {
+      if (!rangeGroupRendered) {
+        blocks.push(`
+          <div class="filter-range-group">
+            ${rangeGroupFilters.map(renderFilterBlock).join('')}
+          </div>
+        `);
+        rangeGroupRendered = true;
+      }
+      return;
+    }
+
+    blocks.push(renderFilterBlock(filter));
+  });
+
+  return blocks.join('');
+}
+
 function renderDynamicFilters() {
   const filters = document.querySelector('.filters');
   if (!filters) return;
@@ -535,12 +608,7 @@ function renderDynamicFilters() {
       <h3>${escapeHtml(t('districtSearch'))}</h3>
       <input class="filter-search" type="search" id="locationSearch" placeholder="${escapeHtml(t('districtSearchPlaceholder'))}">
     </div>
-    ${filterDefinitions.map(filter => `
-      <div class="filter-block dynamic-filter-block" data-filter-block="${escapeHtml(filter.key)}">
-        <h3>${escapeHtml(filter.label)}</h3>
-        ${filter.type === 'range' ? renderRangeFilter(filter) : renderFilterOptions(filter)}
-      </div>
-    `).join('')}
+    ${renderFilterBlocks()}
     <button class="filter-reset" id="resetFilters" type="button">${escapeHtml(t('resetFilters'))}</button>
   `;
 
@@ -611,6 +679,14 @@ function applyTranslations() {
 
   document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
     element.placeholder = t(element.dataset.i18nPlaceholder);
+  });
+
+  document.querySelectorAll('input[type="tel"][data-i18n-placeholder="phone"]').forEach(element => {
+    element.placeholder = '+905XXXXXXXXX';
+  });
+
+  document.querySelectorAll('.appointment-form textarea[data-i18n-placeholder="message"]').forEach(element => {
+    element.placeholder = t('appointmentMessageOptional');
   });
 
   document.title = currentLanguage === 'tr'
@@ -1014,7 +1090,7 @@ function getFilteredProperties() {
         if (!selectedValues.length) return true;
         if (!Object.prototype.hasOwnProperty.call(property, filter.key)) return false;
 
-        const propertyValues = getFilterValues(property, filter.key).map(filterValueToken);
+        const propertyValues = getFilterValues(property, filter.key).map(value => canonicalFilterValueToken(value, filter.key));
         return selectedValues.some(value => propertyValues.includes(value));
       });
     })
@@ -1425,10 +1501,97 @@ function renderCatalog() {
   startCardPreviews();
 }
 
+function collectCatalogFilterState() {
+  const state = {
+    locationQuery: document.getElementById('locationSearch')?.value || '',
+    sort: document.getElementById('sortSelect')?.value || '',
+    ranges: {},
+    selected: {}
+  };
+
+  document.querySelectorAll('.filters input[data-filter-key]').forEach(input => {
+    const key = input.dataset.filterKey;
+    if (!key) return;
+
+    if (input.dataset.filterRange) {
+      state.ranges[key] = state.ranges[key] || {};
+      state.ranges[key][input.dataset.filterRange] = input.value || '';
+      return;
+    }
+
+    if ((input.type === 'checkbox' || input.type === 'radio') && input.checked) {
+      state.selected[key] = state.selected[key] || [];
+      state.selected[key].push(input.value);
+    }
+  });
+
+  return state;
+}
+
+function persistCatalogFilterState() {
+  try {
+    localStorage.setItem(CATALOG_FILTERS_STORAGE_KEY, JSON.stringify(collectCatalogFilterState()));
+  } catch (error) {
+    // Filtering should continue even when browser storage is unavailable.
+  }
+}
+
+function restoreCatalogFilterState() {
+  let state = null;
+
+  try {
+    state = JSON.parse(localStorage.getItem(CATALOG_FILTERS_STORAGE_KEY) || 'null');
+  } catch (error) {
+    state = null;
+  }
+
+  if (!state || typeof state !== 'object') return;
+
+  const locationSearch = document.getElementById('locationSearch');
+  if (locationSearch && typeof state.locationQuery === 'string') {
+    locationSearch.value = state.locationQuery;
+  }
+
+  const sortSelect = document.getElementById('sortSelect');
+  if (sortSelect && typeof state.sort === 'string' && [...sortSelect.options].some(option => option.value === state.sort)) {
+    sortSelect.value = state.sort;
+  }
+
+  document.querySelectorAll('.filters input[data-filter-key]').forEach(input => {
+    const key = input.dataset.filterKey;
+    if (!key) return;
+
+    if (input.dataset.filterRange) {
+      const value = state.ranges?.[key]?.[input.dataset.filterRange];
+      if (typeof value === 'string' || typeof value === 'number') input.value = value;
+      return;
+    }
+
+    if (input.type === 'checkbox' || input.type === 'radio') {
+      const selectedValues = Array.isArray(state.selected?.[key]) ? state.selected[key] : [];
+      const selectedTokens = selectedValues.map(value => canonicalFilterValueToken(value, key));
+      input.checked = selectedTokens.includes(input.value);
+    }
+  });
+}
+
+function clearCatalogFilterState() {
+  try {
+    localStorage.removeItem(CATALOG_FILTERS_STORAGE_KEY);
+  } catch (error) {
+    // Nothing else is needed when storage cannot be changed.
+  }
+}
+
 function bindFilters() {
   document.querySelectorAll('.filters input, #sortSelect').forEach(element => {
-    element.addEventListener('input', renderCatalog);
-    element.addEventListener('change', renderCatalog);
+    const updateFilters = () => {
+      persistCatalogFilterState();
+      renderCatalog();
+    };
+
+    element.addEventListener('input', updateFilters);
+    element.addEventListener('change', updateFilters);
   });
 
   document.getElementById('resetFilters')?.addEventListener('click', () => {
@@ -1439,6 +1602,9 @@ function bindFilters() {
         input.value = '';
       }
     });
+    const sortSelect = document.getElementById('sortSelect');
+    if (sortSelect) sortSelect.value = 'newest';
+    clearCatalogFilterState();
     renderCatalog();
   });
 }
@@ -1529,6 +1695,7 @@ function featureRows(property) {
     ['floor', features.floor],
     ['bedrooms', features.bedrooms],
     ['bathrooms', features.bathrooms],
+    ['landShare', features.landShare ? `${features.landShare} m2` : null],
     ['furnished', features.furnished ? t('yes') : t('no')],
     ['parking', features.parking ? t('yes') : t('no')]
   ];
@@ -1733,7 +1900,17 @@ function renderAbout() {
         <h2>${escapeHtml(content.ctaTitle)}</h2>
         <p>${escapeHtml(content.ctaText)}</p>
       </div>
-      <button class="appointment-btn" id="aboutAppointment" type="button">${escapeHtml(t('appointment'))}</button>
+      <div class="about-cta-actions">
+        <button class="appointment-btn" id="aboutAppointment" type="button">${escapeHtml(t('appointment'))}</button>
+        <nav class="about-social-links" aria-label="Social links">
+          ${ABOUT_SOCIAL_LINKS.map(link => `
+            <a class="about-social-link ${escapeHtml(link.className)}" href="${escapeHtml(link.url)}" aria-label="${escapeHtml(link.name)}">
+              <i class="fa-brands ${escapeHtml(link.icon)}" aria-hidden="true"></i>
+              <span>${escapeHtml(link.name)}</span>
+            </a>
+          `).join('')}
+        </nav>
+      </div>
     </section>
   `;
 
@@ -1755,6 +1932,145 @@ function openAppointmentModal() {
   if (!appointmentOverlay) return;
   appointmentOverlay.classList.add('active');
   document.body.classList.add('modal-open');
+  appointmentOverlay.querySelector('input[type="tel"]')?.focus();
+}
+
+function normalizeTurkishPhone(value) {
+  let digits = String(value || '').replace(/\D/g, '');
+
+  if (digits.startsWith('90')) {
+    digits = digits.slice(2);
+  }
+
+  if (digits.startsWith('0')) {
+    digits = digits.slice(1);
+  }
+
+  return `+90${digits.slice(0, 10)}`;
+}
+
+function bindTurkishPhoneInput(input) {
+  if (!input) return;
+
+  input.setAttribute('inputmode', 'numeric');
+  input.setAttribute('autocomplete', 'tel');
+  input.setAttribute('maxlength', '13');
+  input.placeholder = '+905XXXXXXXXX';
+
+  const applyValue = () => {
+    input.value = normalizeTurkishPhone(input.value);
+  };
+
+  if (input.dataset.phoneBound === 'true') {
+    applyValue();
+    return;
+  }
+
+  input.dataset.phoneBound = 'true';
+
+  if (!input.value) {
+    input.value = '+90';
+  } else {
+    applyValue();
+  }
+
+  input.addEventListener('focus', applyValue);
+  input.addEventListener('input', applyValue);
+  input.addEventListener('keydown', event => {
+    const selectionStartsInPrefix = input.selectionStart !== null && input.selectionStart < 3;
+    const selectionEndsInPrefix = input.selectionEnd !== null && input.selectionEnd <= 3;
+    const isDeletingPrefix = (event.key === 'Backspace' && selectionEndsInPrefix) || (event.key === 'Delete' && selectionStartsInPrefix);
+
+    if (isDeletingPrefix) {
+      event.preventDefault();
+      input.setSelectionRange(3, 3);
+    }
+  });
+  input.addEventListener('blur', () => {
+    if (input.value === '+90') return;
+    applyValue();
+  });
+}
+
+function prepareAppointmentForm(form) {
+  if (!form) return;
+
+  const requiredFields = [
+    form.querySelector('input[type="date"]'),
+    form.querySelector('input[data-i18n-placeholder="firstName"]'),
+    form.querySelector('input[data-i18n-placeholder="lastName"]'),
+    form.querySelector('input[type="tel"]')
+  ];
+
+  requiredFields.forEach(field => {
+    field?.setAttribute('required', 'required');
+  });
+
+  const messageInput = form.querySelector('textarea[data-i18n-placeholder="message"]');
+  messageInput?.removeAttribute('required');
+  if (messageInput) {
+    messageInput.placeholder = t('appointmentMessageOptional');
+  }
+}
+
+async function sendAppointmentRequest(form) {
+  const dateInput = form.querySelector('input[type="date"]');
+  const firstNameInput = form.querySelector('input[data-i18n-placeholder="firstName"]');
+  const lastNameInput = form.querySelector('input[data-i18n-placeholder="lastName"]');
+  const phoneInput = form.querySelector('input[type="tel"]');
+  const messageInput = form.querySelector('textarea');
+  const date = String(dateInput?.value || '').trim();
+  const firstName = String(firstNameInput?.value || '').trim();
+  const lastName = String(lastNameInput?.value || '').trim();
+  const phone = normalizeTurkishPhone(phoneInput?.value || '');
+  const localPhoneDigits = phone.replace(/^\+90/, '');
+
+  if (!date) {
+    dateInput?.focus();
+    throw new Error('Date is required');
+  }
+
+  if (!firstName) {
+    firstNameInput?.focus();
+    throw new Error('First name is required');
+  }
+
+  if (!lastName) {
+    lastNameInput?.focus();
+    throw new Error('Last name is required');
+  }
+
+  if (localPhoneDigits.length !== 10) {
+    phoneInput?.focus();
+    throw new Error('Turkish phone number is required');
+  }
+
+  const response = await fetch(APPOINTMENT_ENDPOINT, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      action: 'appointment_request',
+      date,
+      firstName,
+      lastName,
+      phone,
+      message: messageInput?.value || '',
+      language: currentLanguage,
+      page: document.body.dataset.page || '',
+      url: window.location.href,
+      propertyId: new URLSearchParams(window.location.search).get('id') || ''
+    })
+  });
+
+  const data = await response.json().catch(() => ({}));
+
+  if (!response.ok) {
+    throw new Error(data.details || data.error || `Appointment request failed: ${response.status}`);
+  }
+
+  return data;
 }
 
 function bindAppointment() {
@@ -1763,10 +2079,15 @@ function bindAppointment() {
   const appointmentOverlay = document.getElementById('appointmentOverlay');
   const appointmentClose = document.getElementById('appointmentClose');
   const appointmentDate = document.getElementById('appointmentDate');
+  const appointmentForm = appointmentOverlay?.querySelector('.appointment-form');
+  const phoneInput = appointmentForm?.querySelector('input[type="tel"]');
 
   if (appointmentDate) {
     appointmentDate.min = new Date().toISOString().slice(0, 10);
   }
+
+  prepareAppointmentForm(appointmentForm);
+  bindTurkishPhoneInput(phoneInput);
 
   if (!appointmentOverlay || !appointmentClose) return;
 
@@ -1782,17 +2103,47 @@ function bindAppointment() {
   appointmentOverlay.addEventListener('click', event => {
     if (event.target === appointmentOverlay) closeAppointment();
   });
+
+  appointmentForm?.addEventListener('submit', async event => {
+    event.preventDefault();
+
+    const submitButton = appointmentForm.querySelector('button[type="submit"]');
+    const defaultButtonText = submitButton?.textContent || t('send');
+
+    try {
+      if (!appointmentForm.reportValidity()) return;
+
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = '...';
+      }
+
+      await sendAppointmentRequest(appointmentForm);
+      appointmentForm.reset();
+      bindTurkishPhoneInput(phoneInput);
+      closeAppointment();
+      alert(currentLanguage === 'ru' ? 'Заявка отправлена.' : 'Request sent.');
+    } catch (error) {
+      console.error('[Appointment] request failed', error);
+      alert(currentLanguage === 'ru' ? 'Не удалось отправить заявку. Проверьте телефон и попробуйте еще раз.' : 'Could not send the request. Please check the phone and try again.');
+    } finally {
+      if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.textContent = defaultButtonText;
+      }
+    }
+  });
 }
 
 async function loadProperties() {
-  const response = await fetch('./data/properties.json');
+  const response = await fetch('./data/properties.json', { cache: 'no-store' });
   if (!response.ok) throw new Error(`Properties request failed: ${response.status}`);
   const data = await response.json();
   properties = data.properties || [];
 }
 
 async function loadFilterSettings() {
-  const response = await fetch('./data/filter-settings.json');
+  const response = await fetch('./data/filter-settings.json', { cache: 'no-store' });
   if (!response.ok) throw new Error(`Filter settings request failed: ${response.status}`);
   const data = await response.json();
   filterLabels = data.filterLabels || {};
@@ -1812,6 +2163,7 @@ async function init() {
   await Promise.all([loadProperties(), loadFilterSettings(), loadRates()]);
   collectFilterDefinitions();
   renderDynamicFilters();
+  restoreCatalogFilterState();
   setupCatalogFilterToggle();
   loadLocalSavedProperties();
 

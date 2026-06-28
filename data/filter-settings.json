@@ -1,160 +1,245 @@
-{
-  "filterOrder": [
-    "_dealType",
-    "_propertyType",
-    "_district",
-    "_rooms",
-    "_price",
-    "_area",
-    "_parking",
-    "_furnished"
-  ],
-  "filterLabels": {
-    "_dealType": {
-      "tr": "Islem tipi",
-      "ru": "Тип сделки",
-      "en": "Deal type",
-      "fr": "Type d'offre",
-      "de": "Angebotstyp",
-      "ar": "Deal type"
-    },
-    "_propertyType": {
-      "tr": "Emlak tipi",
-      "ru": "Тип недвижимости",
-      "en": "Property type",
-      "fr": "Type de bien",
-      "de": "Immobilientyp",
-      "ar": "Property type"
-    },
-    "_district": {
-      "tr": "Bolge",
-      "ru": "Район",
-      "en": "District",
-      "fr": "Quartier",
-      "de": "Bezirk",
-      "ar": "District"
-    },
-    "_rooms": {
-      "tr": "Oda",
-      "ru": "Комнаты",
-      "en": "Rooms",
-      "fr": "Pieces",
-      "de": "Zimmer",
-      "ar": "Rooms"
-    },
-    "_price": {
-      "tr": "Fiyat",
-      "ru": "Стоимость",
-      "en": "Price",
-      "fr": "Prix",
-      "de": "Preis",
-      "ar": "Price"
-    },
-    "_area": {
-      "tr": "Alan (m2)",
-      "ru": "Площадь (м²)",
-      "en": "Area (m2)",
-      "fr": "Surface (m2)",
-      "de": "Flaeche (m2)",
-      "ar": "Area (m2)"
-    },
-    "_parking": {
-      "tr": "Otopark",
-      "ru": "Парковка",
-      "en": "Parking",
-      "fr": "Parking",
-      "de": "Parkplatz",
-      "ar": "Parking"
-    },
-    "_furnished": {
-      "tr": "Esyali",
-      "ru": "Мебель",
-      "en": "Furnished",
-      "fr": "Meuble",
-      "de": "Moebliert",
-      "ar": "Furnished"
-    }
-  },
-  "filterValueLabels": {
-    "sale": {
-      "tr": "Satin al",
-      "ru": "Купить",
-      "en": "Buy",
-      "fr": "Acheter",
-      "de": "Kaufen",
-      "ar": "Buy"
-    },
-    "rent": {
-      "tr": "Kirala",
-      "ru": "Арендовать",
-      "en": "Rent",
-      "fr": "Louer",
-      "de": "Mieten",
-      "ar": "Rent"
-    },
-    "land": {
-      "tr": "Arsa",
-      "ru": "Земля",
-      "en": "Land",
-      "fr": "Terrain",
-      "de": "Grundstueck",
-      "ar": "Land"
-    },
-    "apartment": {
-      "tr": "Daire",
-      "ru": "Квартира",
-      "en": "Apartment",
-      "fr": "Appartement",
-      "de": "Wohnung",
-      "ar": "Apartment"
-    },
-    "house": {
-      "tr": "Ev",
-      "ru": "Дом",
-      "en": "House",
-      "fr": "Maison",
-      "de": "Haus",
-      "ar": "House"
-    },
-    "ev": {
-      "tr": "Ev",
-      "ru": "Дом",
-      "en": "House",
-      "fr": "Maison",
-      "de": "Haus",
-      "ar": "House"
-    },
-    "villa": {
-      "tr": "Villa",
-      "ru": "Вилла",
-      "en": "Villa",
-      "fr": "Villa",
-      "de": "Villa",
-      "ar": "Villa"
-    },
-    "commercial": {
-      "tr": "Ticari",
-      "ru": "Коммерческая",
-      "en": "Commercial",
-      "fr": "Commercial",
-      "de": "Gewerbe",
-      "ar": "Commercial"
-    },
-    "true": {
-      "tr": "Var",
-      "ru": "Есть",
-      "en": "Yes",
-      "fr": "Oui",
-      "de": "Ja",
-      "ar": "Yes"
-    },
-    "false": {
-      "tr": "Yok",
-      "ru": "Нет",
-      "en": "No",
-      "fr": "Non",
-      "de": "Nein",
-      "ar": "No"
-    }
-  }
+﻿{
+    "filterOrder":  [
+                        "_dealType",
+                        "_propertyType",
+                        "_district",
+                        "_rooms",
+                        "_price",
+                        "_area",
+                        "_landShare",
+                        "_seaFront",
+                        "_view",
+                        "_parking",
+                        "_furnished",
+                        "_pool",
+                        "_bathhouse"
+                    ],
+    "filterLabels":  {
+                         "_dealType":  {
+                                           "tr":  "Islem tipi",
+                                           "ru":  "Тип сделки",
+                                           "en":  "Deal type",
+                                           "fr":  "Type d\u0027offre",
+                                           "de":  "Angebotstyp",
+                                           "ar":  "Deal type"
+                                       },
+                         "_propertyType":  {
+                                               "tr":  "Emlak tipi",
+                                               "ru":  "Тип недвижимости",
+                                               "en":  "Property type",
+                                               "fr":  "Type de bien",
+                                               "de":  "Immobilientyp",
+                                               "ar":  "Property type"
+                                           },
+                         "_district":  {
+                                           "tr":  "Bolge",
+                                           "ru":  "Район",
+                                           "en":  "District",
+                                           "fr":  "Quartier",
+                                           "de":  "Bezirk",
+                                           "ar":  "District"
+                                       },
+                         "_rooms":  {
+                                        "tr":  "Oda",
+                                        "ru":  "Комнаты",
+                                        "en":  "Rooms",
+                                        "fr":  "Pieces",
+                                        "de":  "Zimmer",
+                                        "ar":  "Rooms"
+                                    },
+                         "_price":  {
+                                        "tr":  "Fiyat",
+                                        "ru":  "Стоимость",
+                                        "en":  "Price",
+                                        "fr":  "Prix",
+                                        "de":  "Preis",
+                                        "ar":  "Price"
+                                    },
+                         "_area":  {
+                                       "tr":  "Alan (m2)",
+                                       "ru":  "Площадь (м²)",
+                                       "en":  "Area (m2)",
+                                       "fr":  "Surface (m2)",
+                                       "de":  "Flaeche (m2)",
+                                       "ar":  "Area (m2)"
+                                   },
+                         "_parking":  {
+                                          "tr":  "Otopark",
+                                          "ru":  "Парковка",
+                                          "en":  "Parking",
+                                          "fr":  "Parking",
+                                          "de":  "Parkplatz",
+                                          "ar":  "Parking"
+                                      },
+                         "_furnished":  {
+                                            "tr":  "Esyali",
+                                            "ru":  "Мебель",
+                                            "en":  "Furnished",
+                                            "fr":  "Meuble",
+                                            "de":  "Moebliert",
+                                            "ar":  "Furnished"
+                                        },
+                         "_pool":  {
+                                       "tr":  "Havuz",
+                                       "ru":  "Бассейн",
+                                       "en":  "Pool",
+                                       "fr":  "Piscine",
+                                       "de":  "Pool",
+                                       "ar":  "مسبح"
+                                   },
+                         "_bathhouse":  {
+                                            "tr":  "Hamam",
+                                            "ru":  "Баня",
+                                            "en":  "Bathhouse",
+                                            "fr":  "Bain",
+                                            "de":  "Bad",
+                                            "ar":  "حمام"
+                                        },
+                         "_landShare":  {
+                                            "tr":  "Arsa payı (m2)",
+                                            "ru":  "Доля земли (м²)",
+                                            "en":  "Land share (m2)",
+                                            "fr":  "Quote-part terrain (m2)",
+                                            "de":  "Grundanteil (m2)",
+                                            "ar":  "حصة الأرض (م2)"
+                                        },
+                         "_seaFront":  {
+                                           "tr":  "Denize sıfır",
+                                           "ru":  "Первая линия моря",
+                                           "en":  "Seafront",
+                                           "fr":  "Bord de mer",
+                                           "de":  "Direkt am Meer",
+                                           "ar":  "على البحر"
+                                       },
+                         "_view":  {
+                                       "tr":  "Manzara",
+                                       "ru":  "Вид",
+                                       "en":  "View",
+                                       "fr":  "Vue",
+                                       "de":  "Aussicht",
+                                       "ar":  "الإطلالة"
+                                   }
+                     },
+    "filterValueLabels":  {
+                              "sale":  {
+                                           "tr":  "Satin al",
+                                           "ru":  "Купить",
+                                           "en":  "Buy",
+                                           "fr":  "Acheter",
+                                           "de":  "Kaufen",
+                                           "ar":  "Buy"
+                                       },
+                              "rent":  {
+                                           "tr":  "Kirala",
+                                           "ru":  "Арендовать",
+                                           "en":  "Rent",
+                                           "fr":  "Louer",
+                                           "de":  "Mieten",
+                                           "ar":  "Rent"
+                                       },
+                              "land":  {
+                                           "tr":  "Arsa",
+                                           "ru":  "Земля",
+                                           "en":  "Land",
+                                           "fr":  "Terrain",
+                                           "de":  "Grundstueck",
+                                           "ar":  "Land"
+                                       },
+                              "apartment":  {
+                                                "tr":  "Daire",
+                                                "ru":  "Квартира",
+                                                "en":  "Apartment",
+                                                "fr":  "Appartement",
+                                                "de":  "Wohnung",
+                                                "ar":  "Apartment"
+                                            },
+                              "house":  {
+                                            "tr":  "Ev",
+                                            "ru":  "Дом",
+                                            "en":  "House",
+                                            "fr":  "Maison",
+                                            "de":  "Haus",
+                                            "ar":  "House"
+                                        },
+                              "ev":  {
+                                         "tr":  "Ev",
+                                         "ru":  "Дом",
+                                         "en":  "House",
+                                         "fr":  "Maison",
+                                         "de":  "Haus",
+                                         "ar":  "House"
+                                     },
+                              "villa":  {
+                                            "tr":  "Villa",
+                                            "ru":  "Вилла",
+                                            "en":  "Villa",
+                                            "fr":  "Villa",
+                                            "de":  "Villa",
+                                            "ar":  "Villa"
+                                        },
+                              "commercial":  {
+                                                 "tr":  "Ticari",
+                                                 "ru":  "Коммерческая",
+                                                 "en":  "Commercial",
+                                                 "fr":  "Commercial",
+                                                 "de":  "Gewerbe",
+                                                 "ar":  "Commercial"
+                                             },
+                              "pool":  {
+                                           "tr":  "Havuz",
+                                           "ru":  "Бассейн",
+                                           "en":  "Pool",
+                                           "fr":  "Piscine",
+                                           "de":  "Pool",
+                                           "ar":  "مسبح"
+                                       },
+                              "bathhouse":  {
+                                                "tr":  "Hamam",
+                                                "ru":  "Баня",
+                                                "en":  "Bathhouse",
+                                                "fr":  "Bain",
+                                                "de":  "Bad",
+                                                "ar":  "حمام"
+                                            },
+                              "true":  {
+                                           "tr":  "Var",
+                                           "ru":  "Есть",
+                                           "en":  "Yes",
+                                           "fr":  "Oui",
+                                           "de":  "Ja",
+                                           "ar":  "Yes"
+                                       },
+                              "false":  {
+                                            "tr":  "Yok",
+                                            "ru":  "Нет",
+                                            "en":  "No",
+                                            "fr":  "Non",
+                                            "de":  "Nein",
+                                            "ar":  "No"
+                                        },
+                              "sea":  {
+                                          "tr":  "Deniz",
+                                          "ru":  "Море",
+                                          "en":  "Sea",
+                                          "fr":  "Mer",
+                                          "de":  "Meer",
+                                          "ar":  "البحر"
+                                      },
+                              "kiyikislacik":  {
+                                                   "tr":  "Kıyıkışlacık",
+                                                   "ru":  "Kıyıkışlacık",
+                                                   "en":  "Kıyıkışlacık",
+                                                   "fr":  "Kıyıkışlacık",
+                                                   "de":  "Kıyıkışlacık",
+                                                   "ar":  "Kıyıkışlacık"
+                                               },
+                              "kıyıkışlacık":  {
+                                                   "tr":  "Kıyıkışlacık",
+                                                   "ru":  "Kıyıkışlacık",
+                                                   "en":  "Kıyıkışlacık",
+                                                   "fr":  "Kıyıkışlacık",
+                                                   "de":  "Kıyıkışlacık",
+                                                   "ar":  "Kıyıkışlacık"
+                                               }
+                          }
 }

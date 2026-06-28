@@ -1,618 +1,60 @@
 {
   "properties": [
     {
-      "id": "tr-antalya-konyaalti-hurma-001",
+      "id": "tr-milas-kiyikislacik-villa-1001",
       "objectNumber": "1001",
       "_dealType": "sale",
-      "_propertyType": "apartment",
-      "_district": "Konyaalti",
-      "_rooms": "2+1",
-      "_price": 158000,
-      "_area": 120,
-      "_parking": true,
-      "status": "sale",
-      "type": "apartment",
-      "title": {
-        "tr": "Konyaalti Hurma'da 2+1 daire",
-        "ru": "Квартира 2+1 в Хурме, Коньяалты",
-        "en": "2+1 apartment in Hurma, Konyaalti",
-        "fr": "Appartement 2+1 a Hurma, Konyaalti",
-        "de": "2+1 Wohnung in Hurma, Konyaalti",
-        "ar": "شقة 2+1 في هورما، كونيالتي"
-      },
-      "description": {
-        "tr": "Konyaalti'nin Hurma bolgesinde, marketlere, okullara ve toplu tasimaya yakin, balkonlu ve aydinlik bir daire.",
-        "ru": "Светлая квартира с балконом в районе Хурма, рядом с магазинами, школами и общественным транспортом.",
-        "en": "A bright apartment with a balcony in Hurma, close to shops, schools and public transport.",
-        "fr": "Appartement lumineux avec balcon a Hurma, proche des commerces, des ecoles et des transports.",
-        "de": "Helle Wohnung mit Balkon in Hurma, nahe Geschaeften, Schulen und oeffentlichen Verkehrsmitteln.",
-        "ar": "شقة مشرقة مع شرفة في هورما، قريبة من المتاجر والمدارس ووسائل النقل العام."
-      },
-      "location": {
-        "country": "Turkey",
-        "city": "Antalya",
-        "district": "Konyaalti",
-        "subdistrict": "Hurma",
-        "coordinates": {
-          "lat": 36.8636,
-          "lng": 30.6037
-        },
-        "display": {
-          "tr": "Konyaalti / Hurma",
-          "ru": "Коньяалты / Хурма",
-          "en": "Konyaalti / Hurma",
-          "fr": "Konyaalti / Hurma",
-          "de": "Konyaalti / Hurma",
-          "ar": "كونيالتي / هورما"
-        }
-      },
-      "price": {
-        "value": 158000,
-        "currency": "USD"
-      },
-      "area": {
-        "value": 120,
-        "unit": "m2"
-      },
-      "features": {
-        "rooms": "2+1",
-        "floor": 2,
-        "bedrooms": 2,
-        "bathrooms": 1,
-        "furnished": false,
-        "parking": true
-      },
-      "details": {
-        "tr": [
-          "120 m2",
-          "2. kat",
-          "Otopark"
-        ],
-        "ru": [
-          "120 м²",
-          "2 этаж",
-          "Парковка"
-        ],
-        "en": [
-          "120 m2",
-          "2nd floor",
-          "Parking"
-        ],
-        "fr": [
-          "120 m2",
-          "2e etage",
-          "Parking"
-        ],
-        "de": [
-          "120 m2",
-          "2. Etage",
-          "Parkplatz"
-        ],
-        "ar": [
-          "120 م²",
-          "الطابق 2",
-          "موقف سيارات"
-        ]
-      },
-      "media": {
-        "preview": [
-          "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=1200&auto=format&fit=crop",
-          "https://images.unsplash.com/photo-1560185127-6ed189bf02f4?q=80&w=1200&auto=format&fit=crop",
-          "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1200&auto=format&fit=crop"
-        ],
-        "gallery": [
-          "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=1600&auto=format&fit=crop",
-          "https://images.unsplash.com/photo-1560185127-6ed189bf02f4?q=80&w=1600&auto=format&fit=crop",
-          "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1600&auto=format&fit=crop",
-          "https://images.unsplash.com/photo-1560184897-ae75f418493e?q=80&w=1600&auto=format&fit=crop",
-          "https://images.unsplash.com/photo-1484154218962-a197022b5858?q=80&w=1600&auto=format&fit=crop"
-        ]
-      },
-      "isFeatured": true,
-      "createdAt": "2026-05-25",
-      "updatedAt": "2026-05-25"
-    },
-    {
-      "id": "tr-antalya-aksu-altintas-001",
-      "objectNumber": "1002",
-      "_dealType": "sale",
-      "_propertyType": "land",
-      "_district": "Aksu",
-      "_price": 230000,
-      "_area": 540,
-      "status": "sale",
-      "type": "land",
-      "title": {
-        "tr": "Altintas'ta yatirimlik arsa",
-        "ru": "Земельный участок в Алтынташе",
-        "en": "Investment land in Altintas",
-        "fr": "Terrain d'investissement a Altintas",
-        "de": "Investitionsgrundstueck in Altintas",
-        "ar": "أرض استثمارية في ألتينتاش"
-      },
-      "description": {
-        "tr": "Aksu Altintas bolgesinde, gelisen imar hattina yakin, villa veya butik proje icin uygun arsa.",
-        "ru": "Участок в развивающемся районе Алтынташ, подходит для виллы или небольшого инвестиционного проекта.",
-        "en": "A land plot in the growing Altintas area, suitable for a villa or a boutique investment project.",
-        "fr": "Terrain dans le quartier en developpement d'Altintas, adapte a une villa ou un petit projet.",
-        "de": "Grundstueck im wachsenden Gebiet Altintas, geeignet fuer eine Villa oder ein kleines Projekt.",
-        "ar": "قطعة أرض في منطقة ألتينتاش النامية، مناسبة لفيلا أو مشروع استثماري صغير."
-      },
-      "location": {
-        "country": "Turkey",
-        "city": "Antalya",
-        "district": "Aksu",
-        "subdistrict": "Altintas",
-        "coordinates": {
-          "lat": 36.9194,
-          "lng": 30.8138
-        },
-        "display": {
-          "tr": "Aksu / Altintas",
-          "ru": "Аксу / Алтынташ",
-          "en": "Aksu / Altintas",
-          "fr": "Aksu / Altintas",
-          "de": "Aksu / Altintas",
-          "ar": "أكسو / ألتينتاش"
-        }
-      },
-      "price": {
-        "value": 230000,
-        "currency": "USD"
-      },
-      "area": {
-        "value": 540,
-        "unit": "m2"
-      },
-      "features": {
-        "rooms": null,
-        "floor": null,
-        "bedrooms": null,
-        "bathrooms": null,
-        "furnished": false,
-        "parking": false
-      },
-      "details": {
-        "tr": [
-          "540 m2",
-          "Imar yolu",
-          "Yatirim"
-        ],
-        "ru": [
-          "540 м²",
-          "Дорога рядом",
-          "Инвестиция"
-        ],
-        "en": [
-          "540 m2",
-          "Road access",
-          "Investment"
-        ],
-        "fr": [
-          "540 m2",
-          "Acces route",
-          "Investissement"
-        ],
-        "de": [
-          "540 m2",
-          "Strassenzugang",
-          "Investition"
-        ],
-        "ar": [
-          "540 م²",
-          "طريق قريب",
-          "استثمار"
-        ]
-      },
-      "media": {
-        "preview": [
-          "https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1200&auto=format&fit=crop",
-          "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop",
-          "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=1200&auto=format&fit=crop"
-        ],
-        "gallery": [
-          "https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1600&auto=format&fit=crop",
-          "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop",
-          "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=1600&auto=format&fit=crop",
-          "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=1600&auto=format&fit=crop",
-          "https://images.unsplash.com/photo-1439853949127-fa647821eba0?q=80&w=1600&auto=format&fit=crop"
-        ]
-      },
-      "isFeatured": false,
-      "createdAt": "2026-05-25",
-      "updatedAt": "2026-05-25"
-    },
-    {
-      "id": "tr-antalya-muratpasa-guzeloba-001",
-      "objectNumber": "1003",
-      "_dealType": "rent",
-      "_propertyType": "apartment",
-      "_district": "Muratpasa",
-      "_rooms": "1+1",
-      "_price": 950,
-      "_area": 65,
-      "_furnished": true,
-      "status": "rent",
-      "type": "apartment",
-      "title": {
-        "tr": "Guzeloba'da esyali 1+1 kiralik",
-        "ru": "Меблированная квартира 1+1 в Гюзелоба",
-        "en": "Furnished 1+1 rental in Guzeloba",
-        "fr": "Location meublee 1+1 a Guzeloba",
-        "de": "Moeblierte 1+1 Mietwohnung in Guzeloba",
-        "ar": "شقة مفروشة 1+1 للايجار في غوزيلوبا"
-      },
-      "description": {
-        "tr": "Lara plajina ve sosyal alanlara yakin, esyali, bakimli ve hemen tasinmaya hazir kiralik daire.",
-        "ru": "Меблированная квартира рядом с пляжем Лара и городской инфраструктурой, готова к заселению.",
-        "en": "A furnished apartment near Lara beach and city amenities, ready to move in.",
-        "fr": "Appartement meuble proche de la plage de Lara et des commodites, pret a emmenager.",
-        "de": "Moeblierte Wohnung nahe Lara-Strand und Infrastruktur, sofort bezugsfertig.",
-        "ar": "شقة مفروشة بالقرب من شاطئ لارا والخدمات، جاهزة للسكن."
-      },
-      "location": {
-        "country": "Turkey",
-        "city": "Antalya",
-        "district": "Muratpasa",
-        "subdistrict": "Guzeloba",
-        "coordinates": {
-          "lat": 36.8527,
-          "lng": 30.7966
-        },
-        "display": {
-          "tr": "Muratpasa / Guzeloba",
-          "ru": "Муратпаша / Гюзелоба",
-          "en": "Muratpasa / Guzeloba",
-          "fr": "Muratpasa / Guzeloba",
-          "de": "Muratpasa / Guzeloba",
-          "ar": "مراد باشا / غوزيلوبا"
-        }
-      },
-      "price": {
-        "value": 950,
-        "currency": "USD",
-        "period": "month"
-      },
-      "area": {
-        "value": 65,
-        "unit": "m2"
-      },
-      "features": {
-        "rooms": "1+1",
-        "floor": 4,
-        "bedrooms": 1,
-        "bathrooms": 1,
-        "furnished": true,
-        "parking": false
-      },
-      "details": {
-        "tr": [
-          "65 m2",
-          "Esyali",
-          "Aylik kira"
-        ],
-        "ru": [
-          "65 м²",
-          "Меблирована",
-          "Помесячно"
-        ],
-        "en": [
-          "65 m2",
-          "Furnished",
-          "Monthly rent"
-        ],
-        "fr": [
-          "65 m2",
-          "Meuble",
-          "Loyer mensuel"
-        ],
-        "de": [
-          "65 m2",
-          "Moebliert",
-          "Monatsmiete"
-        ],
-        "ar": [
-          "65 م²",
-          "مفروشة",
-          "ايجار شهري"
-        ]
-      },
-      "media": {
-        "preview": [
-          "https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=1200&auto=format&fit=crop",
-          "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=1200&auto=format&fit=crop",
-          "https://images.unsplash.com/photo-1560448205-17d3a46c84de?q=80&w=1200&auto=format&fit=crop"
-        ],
-        "gallery": [
-          "https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=1600&auto=format&fit=crop",
-          "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=1600&auto=format&fit=crop",
-          "https://images.unsplash.com/photo-1560448205-17d3a46c84de?q=80&w=1600&auto=format&fit=crop",
-          "https://images.unsplash.com/photo-1560185008-b033106af5c3?q=80&w=1600&auto=format&fit=crop",
-          "https://images.unsplash.com/photo-1560185007-c5ca9d2c014d?q=80&w=1600&auto=format&fit=crop"
-        ]
-      },
-      "isFeatured": false,
-      "createdAt": "2026-05-25",
-      "updatedAt": "2026-05-25"
-    },
-    {
-      "id": "tr-antalya-konyaalti-hurma-001",
-      "objectNumber": "1001",
-      "_dealType": "sale",
-      "_propertyType": "Ev",
-      "_district": "Konyaalti",
-      "_rooms": "2+1",
-      "_price": 158000,
-      "_area": 120,
-      "_parking": true,
-      "status": "sale",
-      "type": "Ev",
-      "title": {
-        "tr": "Konyaalti Hurma'da 2+1 daire",
-        "ru": "Квартира 2+1 в Хурме, Коньяалты",
-        "en": "2+1 apartment in Hurma, Konyaalti",
-        "fr": "Appartement 2+1 a Hurma, Konyaalti",
-        "de": "2+1 Wohnung in Hurma, Konyaalti",
-        "ar": "شقة 2+1 في هورما، كونيالتي"
-      },
-      "description": {
-        "tr": "Konyaalti'nin Hurma bolgesinde, marketlere, okullara ve toplu tasimaya yakin, balkonlu ve aydinlik bir daire.",
-        "ru": "Светлая квартира с балконом в районе Хурма, рядом с магазинами, школами и общественным транспортом.",
-        "en": "A bright apartment with a balcony in Hurma, close to shops, schools and public transport.",
-        "fr": "Appartement lumineux avec balcon a Hurma, proche des commerces, des ecoles et des transports.",
-        "de": "Helle Wohnung mit Balkon in Hurma, nahe Geschaeften, Schulen und oeffentlichen Verkehrsmitteln.",
-        "ar": "شقة مشرقة مع شرفة في هورما، قريبة من المتاجر والمدارس ووسائل النقل العام."
-      },
-      "location": {
-        "country": "Turkey",
-        "city": "Antalya",
-        "district": "Konyaalti",
-        "subdistrict": "Hurma",
-        "coordinates": {
-          "lat": 36.8636,
-          "lng": 30.6037
-        },
-        "display": {
-          "tr": "Konyaalti / Hurma",
-          "ru": "Коньяалты / Хурма",
-          "en": "Konyaalti / Hurma",
-          "fr": "Konyaalti / Hurma",
-          "de": "Konyaalti / Hurma",
-          "ar": "كونيالتي / هورما"
-        }
-      },
-      "price": {
-        "value": 158000,
-        "currency": "USD"
-      },
-      "area": {
-        "value": 120,
-        "unit": "m2"
-      },
-      "features": {
-        "rooms": "2+1",
-        "floor": 2,
-        "bedrooms": 2,
-        "bathrooms": 1,
-        "furnished": false,
-        "parking": true
-      },
-      "details": {
-        "tr": [
-          "120 m2",
-          "2. kat",
-          "Otopark"
-        ],
-        "ru": [
-          "120 м²",
-          "2 этаж",
-          "Парковка"
-        ],
-        "en": [
-          "120 m2",
-          "2nd floor",
-          "Parking"
-        ],
-        "fr": [
-          "120 m2",
-          "2e etage",
-          "Parking"
-        ],
-        "de": [
-          "120 m2",
-          "2. Etage",
-          "Parkplatz"
-        ],
-        "ar": [
-          "120 م²",
-          "الطابق 2",
-          "موقف سيارات"
-        ]
-      },
-      "media": {
-        "preview": [
-          "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=1200&auto=format&fit=crop",
-          "https://images.unsplash.com/photo-1560185127-6ed189bf02f4?q=80&w=1200&auto=format&fit=crop",
-          "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1200&auto=format&fit=crop"
-        ],
-        "gallery": [
-          "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=1600&auto=format&fit=crop",
-          "https://images.unsplash.com/photo-1560185127-6ed189bf02f4?q=80&w=1600&auto=format&fit=crop",
-          "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1600&auto=format&fit=crop",
-          "https://images.unsplash.com/photo-1560184897-ae75f418493e?q=80&w=1600&auto=format&fit=crop",
-          "https://images.unsplash.com/photo-1484154218962-a197022b5858?q=80&w=1600&auto=format&fit=crop"
-        ]
-      },
-      "isFeatured": true,
-      "createdAt": "2026-05-25",
-      "updatedAt": "2026-05-25"
-    },
-    {
-      "id": "tr-kemer-kemer-apartment-1004",
-      "objectNumber": "1004",
-      "_dealType": "sale",
-      "_propertyType": "apartment",
-      "_district": "Kemer",
-      "_rooms": "5+2",
-      "_price": 500000,
-      "_area": 130,
-      "status": "sale",
-      "type": "apartment",
-      "title": {
-        "tr": "Kemer'de 5+2 satilik daire",
-        "ru": "Квартира 5+2 в Кемере",
-        "en": "5+2 apartment for sale in Kemer",
-        "fr": "Appartement 5+2 a vendre a Kemer",
-        "de": "5+2 Wohnung zum Verkauf in Kemer",
-        "ar": "شقة 5+2 للبيع في كيمر"
-      },
-      "description": {
-        "tr": "Kemer'de 130 m2 alana sahip, 5+2 planli satilik daire.",
-        "ru": "Просторная квартира 5+2 площадью 130 м² на продажу в Кемере.",
-        "en": "A spacious 5+2 apartment with 130 m2 of living area for sale in Kemer.",
-        "fr": "Appartement spacieux 5+2 de 130 m2 a vendre a Kemer.",
-        "de": "Grosszuegige 5+2 Wohnung mit 130 m2 Wohnflaeche zum Verkauf in Kemer.",
-        "ar": "شقة واسعة 5+2 بمساحة 130 م2 للبيع في كيمر."
-      },
-      "location": {
-        "country": "Turkey",
-        "city": "Kemer",
-        "district": "Kemer",
-        "subdistrict": "",
-        "coordinates": {
-          "lat": null,
-          "lng": null
-        },
-        "display": {
-          "tr": "Kemer",
-          "ru": "Кемер",
-          "en": "Kemer",
-          "fr": "Kemer",
-          "de": "Kemer",
-          "ar": "كيمر"
-        }
-      },
-      "price": {
-        "value": 500000,
-        "currency": "USD"
-      },
-      "area": {
-        "value": 130,
-        "unit": "m2"
-      },
-      "features": {
-        "rooms": "5+2",
-        "floor": null,
-        "bedrooms": 5,
-        "bathrooms": null,
-        "furnished": null,
-        "parking": null
-      },
-      "details": {
-        "tr": [
-          "130 m2",
-          "5+2",
-          "Satilik"
-        ],
-        "ru": [
-          "130 м²",
-          "5+2",
-          "Продажа"
-        ],
-        "en": [
-          "130 m2",
-          "5+2",
-          "For sale"
-        ],
-        "fr": [
-          "130 m2",
-          "5+2",
-          "A vendre"
-        ],
-        "de": [
-          "130 m2",
-          "5+2",
-          "Zum Verkauf"
-        ],
-        "ar": [
-          "130 م2",
-          "5+2",
-          "للبيع"
-        ]
-      },
-      "media": {
-        "preview": [
-          "https://placehold.co/1200x800?text=Property+1004+Photo+1",
-          "https://placehold.co/1200x800?text=Property+1004+Photo+2",
-          "https://placehold.co/1200x800?text=Property+1004+Photo+3"
-        ],
-        "gallery": [
-          "https://placehold.co/1600x1000?text=Property+1004+Photo+1",
-          "https://placehold.co/1600x1000?text=Property+1004+Photo+2",
-          "https://placehold.co/1600x1000?text=Property+1004+Photo+3",
-          "https://placehold.co/1600x1000?text=Property+1004+Photo+4",
-          "https://placehold.co/1600x1000?text=Property+1004+Photo+5",
-          "https://placehold.co/1600x1000?text=Property+1004+Photo+6",
-          "https://placehold.co/1600x1000?text=Property+1004+Photo+7",
-          "https://placehold.co/1600x1000?text=Property+1004+Photo+8"
-        ]
-      },
-      "isFeatured": false,
-      "createdAt": "2026-05-28",
-      "updatedAt": "2026-05-28"
-    },
-    {
-      "id": "tr-antalya-muratpasa-apartment-1005",
-      "objectNumber": "1005",
-      "_dealType": "sale",
-      "_propertyType": "apartment",
-      "_district": "Muratpasa",
+      "_propertyType": "villa",
+      "_district": "Kıyıkışlacık",
       "_rooms": "3+1",
-      "_price": 1213466,
-      "_area": 176,
-      "_parking": true,
+      "_price": 4218370,
+      "_area": 350,
+      "_furnished": true,
+      "_seaFront": true,
+      "_view": "sea",
+      "_landShare": 380,
       "status": "sale",
-      "type": "apartment",
+      "type": "villa",
       "title": {
-        "tr": "Muratpasa'da 3+1 satilik daire",
-        "ru": "Квартира 3+1 в Муратпаше",
-        "en": "3+1 apartment for sale in Muratpasa",
-        "fr": "Appartement 3+1 a vendre a Muratpasa",
-        "de": "3+1 Wohnung zum Verkauf in Muratpasa",
-        "ar": "شقة 3+1 للبيع في مراد باشا"
+        "tr": "Casapunto Kıyıkışlacık'ta denize sıfır 3+1 villa",
+        "ru": "Вилла Casapunto 3+1 на первой линии моря в Kıyıkışlacık",
+        "en": "Casapunto seafront 3+1 villa in Kıyıkışlacık",
+        "fr": "Villa Casapunto 3+1 en bord de mer a Kıyıkışlacık",
+        "de": "Casapunto 3+1 Villa direkt am Meer in Kıyıkışlacık",
+        "ar": "فيلا Casapunto 3+1 على البحر في Kıyıkışlacık"
       },
       "description": {
-        "tr": "Antalya Muratpasa'da 176 m2 alana sahip, mobilyasiz ve otoparkli 3+1 satilik daire.",
-        "ru": "Квартира 3+1 площадью 176 м² на продажу в районе Муратпаша, Анталия. Объект без мебели, парковка есть.",
-        "en": "A 3+1 apartment with 176 m2 of living area for sale in Muratpasa, Antalya. The property is unfurnished and includes parking.",
-        "fr": "Appartement 3+1 de 176 m2 a vendre a Muratpasa, Antalya. Le bien est non meuble et dispose d'un parking.",
-        "de": "3+1 Wohnung mit 176 m2 Wohnflaeche zum Verkauf in Muratpasa, Antalya. Die Immobilie ist unmoebliert und verfuegt ueber einen Parkplatz.",
-        "ar": "شقة 3+1 بمساحة 176 م2 للبيع في مراد باشا، أنطاليا. العقار غير مفروش ويتوفر موقف سيارات."
+        "tr": "Kıyıkışlacık'ta denize sıfır konumda, 380 m2 arsa payı ve 350 m2 bina kullanım alanına sahip mobilyalı 3+1 Casapunto villa.",
+        "ru": "Меблированная вилла Casapunto 3+1 на первой линии моря в Kıyıkışlacık. Доля земли 380 м², площадь использования здания 350 м².",
+        "en": "A furnished Casapunto 3+1 seafront villa in Kıyıkışlacık with a 380 m2 land share and 350 m2 of building usage area.",
+        "fr": "Villa Casapunto meublee 3+1 en bord de mer a Kıyıkışlacık, avec 380 m2 de quote-part de terrain et 350 m2 de surface de batiment.",
+        "de": "Moeblierte Casapunto 3+1 Villa direkt am Meer in Kıyıkışlacık mit 380 m2 Grundstuecksanteil und 350 m2 Nutzflaeche.",
+        "ar": "فيلا Casapunto مفروشة 3+1 على البحر في Kıyıkışlacık، بحصة أرض 380 م2 ومساحة استخدام مبنى 350 م2."
       },
       "location": {
         "country": "Turkey",
-        "city": "Antalya",
-        "district": "Muratpasa",
+        "city": "Milas",
+        "district": "Kıyıkışlacık",
         "subdistrict": "",
         "coordinates": {
-          "lat": null,
-          "lng": null
+          "lat": 37.27778,
+          "lng": 27.58639
         },
         "display": {
-          "tr": "Antalya / Muratpasa",
-          "ru": "Анталия / Муратпаша",
-          "en": "Antalya / Muratpasa",
-          "fr": "Antalya / Muratpasa",
-          "de": "Antalya / Muratpasa",
-          "ar": "أنطاليا / مراد باشا"
+          "tr": "Muğla / Milas / Kıyıkışlacık",
+          "ru": "Muğla / Milas / Kıyıkışlacık",
+          "en": "Muğla / Milas / Kıyıkışlacık",
+          "fr": "Muğla / Milas / Kıyıkışlacık",
+          "de": "Muğla / Milas / Kıyıkışlacık",
+          "ar": "Muğla / Milas / Kıyıkışlacık"
         }
       },
       "price": {
-        "value": 1213466,
+        "value": 4218370,
         "currency": "USD"
       },
       "area": {
-        "value": 176,
+        "value": 350,
         "unit": "m2"
       },
       "features": {
@@ -620,182 +62,245 @@
         "floor": null,
         "bedrooms": 3,
         "bathrooms": null,
-        "furnished": false,
-        "parking": true
+        "furnished": true,
+        "parking": false,
+        "landShare": 380
       },
       "details": {
         "tr": [
-          "176 m2",
+          "350 m2",
           "3+1",
-          "Otopark"
+          "Denize sıfır",
+          "380 m2 arsa payı"
         ],
         "ru": [
-          "176 м²",
+          "350 м²",
           "3+1",
-          "Парковка"
+          "Первая линия моря",
+          "380 м² доля земли"
         ],
         "en": [
-          "176 m2",
+          "350 m2",
           "3+1",
-          "Parking"
+          "Seafront",
+          "380 m2 land share"
         ],
         "fr": [
-          "176 m2",
+          "350 m2",
           "3+1",
-          "Parking"
+          "Bord de mer",
+          "380 m2 de terrain"
         ],
         "de": [
-          "176 m2",
+          "350 m2",
           "3+1",
-          "Parkplatz"
+          "Direkt am Meer",
+          "380 m2 Grundanteil"
         ],
         "ar": [
-          "176 م2",
+          "350 م2",
           "3+1",
-          "موقف سيارات"
+          "على البحر",
+          "حصة أرض 380 م2"
         ]
       },
       "media": {
         "preview": [
-          "image/1005/1.jpg",
-          "image/1005/2.jpg",
-          "image/1005/3.jpg"
+          "image/1001/1.jpg",
+          "image/1001/2.jpg",
+          "image/1001/3.jpg"
         ],
         "gallery": [
-          "image/1005/1.jpg",
-          "image/1005/2.jpg",
-          "image/1005/3.jpg",
-          "image/1005/4.jpg",
-          "image/1005/5.jpg",
-          "image/1005/6.jpg"
+          "image/1001/1.jpg",
+          "image/1001/2.jpg",
+          "image/1001/3.jpg",
+          "image/1001/4.jpg",
+          "image/1001/5.jpg",
+          "image/1001/6.jpg",
+          "image/1001/7.jpg",
+          "image/1001/8.jpg",
+          "image/1001/9.jpg",
+          "image/1001/10.jpg",
+          "image/1001/11.jpg",
+          "image/1001/12.jpg",
+          "image/1001/13.jpg",
+          "image/1001/14.jpg",
+          "image/1001/15.jpg",
+          "image/1001/16.jpg",
+          "image/1001/17.jpg",
+          "image/1001/18.jpg",
+          "image/1001/19.jpg",
+          "image/1001/20.jpg",
+          "image/1001/21.jpg",
+          "image/1001/22.jpg",
+          "image/1001/23.jpg",
+          "image/1001/24.jpg",
+          "image/1001/25.jpg",
+          "image/1001/26.jpg",
+          "image/1001/27.jpg",
+          "image/1001/28.jpg",
+          "image/1001/29.jpg",
+          "image/1001/30.jpg"
         ]
       },
       "isFeatured": false,
-      "createdAt": "2026-06-04",
-      "updatedAt": "2026-06-04"
+      "createdAt": "2026-06-28",
+      "updatedAt": "2026-06-28"
     },
     {
-      "id": "tr-antalya-sarisu-house-1006",
-      "objectNumber": "1006",
-      "_dealType": "rent",
-      "_propertyType": "house",
-      "_district": "Sarisu",
-      "_rooms": "4+1",
-      "_price": 2000,
-      "_area": 120,
+      "id": "tr-milas-kiyikislacik-villa-1002",
+      "objectNumber": "1002",
+      "_dealType": "sale",
+      "_propertyType": "villa",
+      "_district": "Kıyıkışlacık",
+      "_rooms": "3+1",
+      "_price": 9120800,
+      "_area": 450,
       "_furnished": true,
-      "_pool": true,
-      "_bathhouse": true,
-      "status": "rent",
-      "type": "house",
+      "_seaFront": true,
+      "_view": "sea",
+      "_landShare": 650,
+      "status": "sale",
+      "type": "villa",
       "title": {
-        "tr": "Sarisu'da havuzlu 4+1 kiralik ev",
-        "ru": "Дом 4+1 с бассейном в Сарысу",
-        "en": "4+1 house with pool for rent in Sarisu",
-        "fr": "Maison 4+1 avec piscine a louer a Sarisu",
-        "de": "4+1 Haus mit Pool zur Miete in Sarisu",
-        "ar": "منزل 4+1 مع مسبح للايجار في ساريسو"
+        "tr": "Casablanca Kıyıkışlacık'ta denize sıfır 3+1 villa",
+        "ru": "Вилла Casablanca 3+1 на первой линии моря в Kıyıkışlacık",
+        "en": "Casablanca seafront 3+1 villa in Kıyıkışlacık",
+        "fr": "Villa Casablanca 3+1 en bord de mer a Kıyıkışlacık",
+        "de": "Casablanca 3+1 Villa direkt am Meer in Kıyıkışlacık",
+        "ar": "فيلا Casablanca 3+1 على البحر في Kıyıkışlacık"
       },
       "description": {
-        "tr": "Antalya Sarisu'da 120 m2 alana sahip, mobilyali 4+1 kiralik ev. Evde havuz, dinlenme alani ve hamam bulunur.",
-        "ru": "Меблированный дом 4+1 площадью 120 м² в аренду в районе Сарысу, Анталия. На территории есть бассейн, зона отдыха и баня.",
-        "en": "A furnished 4+1 house with 120 m2 of living area for rent in Sarisu, Antalya. The property includes a pool, a relaxation area and a bathhouse.",
-        "fr": "Maison meublee 4+1 de 120 m2 a louer a Sarisu, Antalya. Le bien dispose d'une piscine, d'un espace detente et d'un bain.",
-        "de": "Moebliertes 4+1 Haus mit 120 m2 Wohnflaeche zur Miete in Sarisu, Antalya. Die Immobilie verfuegt ueber einen Pool, einen Ruhebereich und ein Bad.",
-        "ar": "منزل مفروش 4+1 بمساحة 120 م2 للايجار في ساريسو، أنطاليا. يحتوي العقار على مسبح ومنطقة استراحة وحمام."
+        "tr": "Kıyıkışlacık'ta denize sıfır konumda, 650 m2 arsa payı ve 450 m2 bina kullanım alanına sahip mobilyalı 3+1 Casablanca villa.",
+        "ru": "Меблированная вилла Casablanca 3+1 на первой линии моря в Kıyıkışlacık. Доля земли 650 м², площадь использования здания 450 м².",
+        "en": "A furnished Casablanca 3+1 seafront villa in Kıyıkışlacık with a 650 m2 land share and 450 m2 of building usage area.",
+        "fr": "Villa Casablanca meublee 3+1 en bord de mer a Kıyıkışlacık, avec 650 m2 de quote-part de terrain et 450 m2 de surface de batiment.",
+        "de": "Moeblierte Casablanca 3+1 Villa direkt am Meer in Kıyıkışlacık mit 650 m2 Grundstuecksanteil und 450 m2 Nutzflaeche.",
+        "ar": "فيلا Casablanca مفروشة 3+1 على البحر في Kıyıkışlacık، بحصة أرض 650 م2 ومساحة استخدام مبنى 450 م2."
       },
       "location": {
         "country": "Turkey",
-        "city": "Antalya",
-        "district": "Sarisu",
+        "city": "Milas",
+        "district": "Kıyıkışlacık",
         "subdistrict": "",
         "coordinates": {
-          "lat": null,
-          "lng": null
+          "lat": 37.27778,
+          "lng": 27.58639
         },
         "display": {
-          "tr": "Antalya / Sarisu",
-          "ru": "Анталия / Сарысу",
-          "en": "Antalya / Sarisu",
-          "fr": "Antalya / Sarisu",
-          "de": "Antalya / Sarisu",
-          "ar": "أنطاليا / ساريسو"
+          "tr": "Muğla / Milas / Kıyıkışlacık",
+          "ru": "Muğla / Milas / Kıyıkışlacık",
+          "en": "Muğla / Milas / Kıyıkışlacık",
+          "fr": "Muğla / Milas / Kıyıkışlacık",
+          "de": "Muğla / Milas / Kıyıkışlacık",
+          "ar": "Muğla / Milas / Kıyıkışlacık"
         }
       },
       "price": {
-        "value": 2000,
-        "currency": "USD",
-        "period": "month"
+        "value": 9120800,
+        "currency": "USD"
       },
       "area": {
-        "value": 120,
+        "value": 450,
         "unit": "m2"
       },
       "features": {
-        "rooms": "4+1",
+        "rooms": "3+1",
         "floor": null,
-        "bedrooms": 4,
+        "bedrooms": 3,
         "bathrooms": null,
         "furnished": true,
-        "parking": false
+        "parking": false,
+        "landShare": 650
       },
       "details": {
         "tr": [
-          "120 m2",
-          "4+1",
-          "Havuz",
-          "Hamam"
+          "450 m2",
+          "3+1",
+          "Denize sıfır",
+          "650 m2 arsa payı"
         ],
         "ru": [
-          "120 м²",
-          "4+1",
-          "Бассейн",
-          "Баня"
+          "450 м²",
+          "3+1",
+          "Первая линия моря",
+          "650 м² доля земли"
         ],
         "en": [
-          "120 m2",
-          "4+1",
-          "Pool",
-          "Bathhouse"
+          "450 m2",
+          "3+1",
+          "Seafront",
+          "650 m2 land share"
         ],
         "fr": [
-          "120 m2",
-          "4+1",
-          "Piscine",
-          "Bain"
+          "450 m2",
+          "3+1",
+          "Bord de mer",
+          "650 m2 de terrain"
         ],
         "de": [
-          "120 m2",
-          "4+1",
-          "Pool",
-          "Bad"
+          "450 m2",
+          "3+1",
+          "Direkt am Meer",
+          "650 m2 Grundanteil"
         ],
         "ar": [
-          "120 م2",
-          "4+1",
-          "مسبح",
-          "حمام"
+          "450 م2",
+          "3+1",
+          "على البحر",
+          "حصة أرض 650 م2"
         ]
       },
       "media": {
         "preview": [
-          "image/1006/1.jpg",
-          "image/1006/2.jpg",
-          "image/1006/3.jpg"
+          "image/1002/1.jpg",
+          "image/1002/2.jpg",
+          "image/1002/3.jpg"
         ],
         "gallery": [
-          "image/1006/1.jpg",
-          "image/1006/2.jpg",
-          "image/1006/3.jpg",
-          "image/1006/4.jpg",
-          "image/1006/5.jpg",
-          "image/1006/6.jpg",
-          "image/1006/7.jpg"
+          "image/1002/1.jpg",
+          "image/1002/2.jpg",
+          "image/1002/3.jpg",
+          "image/1002/4.jpg",
+          "image/1002/5.jpg",
+          "image/1002/6.jpg",
+          "image/1002/7.jpg",
+          "image/1002/8.jpg",
+          "image/1002/9.jpg",
+          "image/1002/10.jpg",
+          "image/1002/11.jpg",
+          "image/1002/12.jpg",
+          "image/1002/13.jpg",
+          "image/1002/14.jpg",
+          "image/1002/15.jpg",
+          "image/1002/16.jpg",
+          "image/1002/17.jpg",
+          "image/1002/18.jpg",
+          "image/1002/19.jpg",
+          "image/1002/20.jpg",
+          "image/1002/21.jpg",
+          "image/1002/22.jpg",
+          "image/1002/23.jpg",
+          "image/1002/24.jpg",
+          "image/1002/25.jpg",
+          "image/1002/26.jpg",
+          "image/1002/27.jpg",
+          "image/1002/28.jpg",
+          "image/1002/29.jpg",
+          "image/1002/30.jpg",
+          "image/1002/31.jpg",
+          "image/1002/32.jpg",
+          "image/1002/33.jpg",
+          "image/1002/34.jpg",
+          "image/1002/35.jpg",
+          "image/1002/36.jpg",
+          "image/1002/37.jpg",
+          "image/1002/38.jpg"
         ]
       },
       "isFeatured": false,
-      "createdAt": "2026-06-04",
-      "updatedAt": "2026-06-04"
+      "createdAt": "2026-06-28",
+      "updatedAt": "2026-06-28"
     }
   ]
 }

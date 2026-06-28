@@ -293,7 +293,26 @@ function formatTelegramLead({ phone, history, preferences, language, page, url, 
   return lines.join('\n').slice(0, 3900);
 }
 
-async function sendTelegramLead(env, lead) {
+function formatTelegramAppointment({ date, firstName, lastName, phone, message, language, page, url, propertyId }) {
+  const fullName = [firstName, lastName].filter(Boolean).join(' ');
+  const lines = [
+    '<b>Новая запись с сайта</b>',
+    '',
+    `Дата: ${escapeTelegramHtml(date || 'не указана')}`,
+    `Имя: ${escapeTelegramHtml(fullName || 'не указано')}`,
+    `Телефон / WhatsApp: <code>${escapeTelegramHtml(phone)}</code>`,
+    `Сообщение: ${escapeTelegramHtml(message || 'не указано')}`,
+    '',
+    `Язык: ${escapeTelegramHtml(language || 'unknown')}`,
+    `Страница: ${escapeTelegramHtml(page || 'unknown')}`,
+    `URL: ${escapeTelegramHtml(url || 'unknown')}`,
+    `ID объекта: ${escapeTelegramHtml(propertyId || 'none')}`
+  ];
+
+  return lines.join('\n').slice(0, 3900);
+}
+
+async function sendTelegramMessage(env, text) {
   if (!env.TELEGRAM_BOT_TOKEN || !env.TELEGRAM_CHAT_ID) {
     return Response.json(
       { error: 'Telegram secrets are missing' },
@@ -308,7 +327,7 @@ async function sendTelegramLead(env, lead) {
     },
     body: JSON.stringify({
       chat_id: env.TELEGRAM_CHAT_ID,
-      text: formatTelegramLead(lead),
+      text,
       parse_mode: 'HTML',
       disable_web_page_preview: true
     })
@@ -330,6 +349,10 @@ async function sendTelegramLead(env, lead) {
     { ok: true },
     { headers: corsHeaders() }
   );
+}
+
+async function sendTelegramLead(env, lead) {
+  return sendTelegramMessage(env, formatTelegramLead(lead));
 }
 
 async function handleCallbackRequest(body, env) {
@@ -357,6 +380,37 @@ async function handleCallbackRequest(body, env) {
     url,
     propertyId
   });
+}
+
+async function handleAppointmentRequest(body, env) {
+  const date = String(body.date || '').trim().slice(0, 40);
+  const firstName = String(body.firstName || '').trim().slice(0, 80);
+  const lastName = String(body.lastName || '').trim().slice(0, 80);
+  const phone = String(body.phone || '').trim().slice(0, 80);
+  const message = String(body.message || '').trim().slice(0, 800);
+  const language = String(body.language || 'ru').trim();
+  const page = String(body.page || '').trim();
+  const url = String(body.url || '').trim();
+  const propertyId = String(body.propertyId || '').trim();
+
+  if (!phone) {
+    return Response.json(
+      { error: 'Phone is required' },
+      { status: 400, headers: corsHeaders() }
+    );
+  }
+
+  return sendTelegramMessage(env, formatTelegramAppointment({
+    date,
+    firstName,
+    lastName,
+    phone,
+    message,
+    language,
+    page,
+    url,
+    propertyId
+  }));
 }
 
 async function handleAssistantMessage(body, env) {
@@ -548,6 +602,10 @@ export default {
 
     if (body.action === 'callback_request') {
       return handleCallbackRequest(body, env);
+    }
+
+    if (body.action === 'appointment_request') {
+      return handleAppointmentRequest(body, env);
     }
 
     return handleAssistantMessage(body, env);
