@@ -1371,6 +1371,7 @@ function bindLightbox() {
   let startX = 0;
   let startY = 0;
   let currentX = 0;
+  let swipeStartTime = 0;
   let swipeDirection = 0;
   let swiping = false;
 
@@ -1380,6 +1381,7 @@ function bindLightbox() {
     startX = touch.clientX;
     startY = touch.clientY;
     currentX = touch.clientX;
+    swipeStartTime = Date.now();
     swipeDirection = 0;
     swiping = true;
     image.classList.add('is-dragging');
@@ -1417,10 +1419,14 @@ function bindLightbox() {
     if (!swiping || !image) return;
 
     const deltaX = currentX - startX;
+    const swipeThreshold = (image.getBoundingClientRect().width || window.innerWidth || 0) * 0.5;
+    const elapsed = Math.max(Date.now() - swipeStartTime, 1);
+    const swipeVelocity = Math.abs(deltaX) / elapsed;
+    const isQuickSwipe = Math.abs(deltaX) > 40 && swipeVelocity > 0.45;
     swiping = false;
     image.classList.remove('is-dragging');
 
-    if (Math.abs(deltaX) < 55) {
+    if (!isQuickSwipe && Math.abs(deltaX) <= swipeThreshold) {
       cancelLightboxSwipe(swipeDirection || (deltaX < 0 ? 1 : -1));
       return;
     }
@@ -1586,7 +1592,7 @@ function createSavedUi() {
 function renderPropertyCard(property) {
   const title = getLocalized(property.title);
   const location = getLocalized(property.location?.display);
-  const description = getLocalized(property.description);
+  const description = getLocalized(property.summary) || getLocalized(property.description);
   const details = getLocalized(property.details) || [];
   const preview = propertyPreviewImages(property);
   const detailUrl = `property.html?id=${encodeURIComponent(property.id)}&lang=${currentLanguage}`;
@@ -1760,6 +1766,7 @@ function startCardPreviews() {
     let activeIndex = 0;
     let startX = 0;
     let startY = 0;
+    let swipeStartTime = 0;
     let isDragging = false;
     let didSwipe = false;
 
@@ -1773,6 +1780,7 @@ function startCardPreviews() {
     const startSwipe = (x, y) => {
       startX = x;
       startY = y;
+      swipeStartTime = Date.now();
       isDragging = true;
       didSwipe = false;
     };
@@ -1782,9 +1790,13 @@ function startCardPreviews() {
 
       const deltaX = x - startX;
       const deltaY = y - startY;
+      const swipeThreshold = (media.getBoundingClientRect().width || 0) * 0.5;
+      const elapsed = Math.max(Date.now() - swipeStartTime, 1);
+      const swipeVelocity = Math.abs(deltaX) / elapsed;
+      const isQuickSwipe = Math.abs(deltaX) > 40 && swipeVelocity > 0.45;
       isDragging = false;
 
-      if (Math.abs(deltaX) < 45 || Math.abs(deltaX) < Math.abs(deltaY) * 1.2) return;
+      if ((!isQuickSwipe && Math.abs(deltaX) <= swipeThreshold) || Math.abs(deltaX) < Math.abs(deltaY) * 1.2) return;
 
       didSwipe = true;
       showImage(activeIndex + (deltaX < 0 ? 1 : -1));
@@ -1831,14 +1843,15 @@ function startCardPreviews() {
 
 function featureRows(property) {
   const features = property.features || {};
+  const booleanFeature = value => typeof value === 'boolean' ? (value ? t('yes') : t('no')) : null;
   const rows = [
     ['rooms', features.rooms],
     ['floor', features.floor],
     ['bedrooms', features.bedrooms],
     ['bathrooms', features.bathrooms],
     ['landShare', features.landShare ? `${features.landShare} m2` : null],
-    ['furnished', features.furnished ? t('yes') : t('no')],
-    ['parking', features.parking ? t('yes') : t('no')]
+    ['furnished', booleanFeature(features.furnished)],
+    ['parking', booleanFeature(features.parking)]
   ];
 
   return rows

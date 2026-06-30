@@ -31,6 +31,14 @@
         "de": "Moeblierte Casapunto 3+1 Villa direkt am Meer in Kıyıkışlacık mit 380 m2 Grundstuecksanteil und 350 m2 Nutzflaeche.",
         "ar": "فيلا Casapunto مفروشة 3+1 على البحر في Kıyıkışlacık، بحصة أرض 380 م2 ومساحة استخدام مبنى 350 م2."
       },
+      "summary": {
+        "tr": "Denize sıfır mobilyalı 3+1 villa.",
+        "ru": "Меблированная вилла 3+1 на первой линии моря.",
+        "en": "Furnished 3+1 seafront villa.",
+        "fr": "Villa meublee 3+1 en bord de mer.",
+        "de": "Moeblierte 3+1 Villa direkt am Meer.",
+        "ar": "فيلا مفروشة 3+1 على البحر."
+      },
       "location": {
         "country": "Turkey",
         "city": "Milas",
@@ -178,6 +186,14 @@
         "de": "Moeblierte Casablanca 3+1 Villa direkt am Meer in Kıyıkışlacık mit 650 m2 Grundstuecksanteil und 450 m2 Nutzflaeche.",
         "ar": "فيلا Casablanca مفروشة 3+1 على البحر في Kıyıkışlacık، بحصة أرض 650 م2 ومساحة استخدام مبنى 450 م2."
       },
+      "summary": {
+        "tr": "Denize sıfır mobilyalı 3+1 villa.",
+        "ru": "Меблированная вилла 3+1 на первой линии моря.",
+        "en": "Furnished 3+1 seafront villa.",
+        "fr": "Villa meublee 3+1 en bord de mer.",
+        "de": "Moeblierte 3+1 Villa direkt am Meer.",
+        "ar": "فيلا مفروشة 3+1 على البحر."
+      },
       "location": {
         "country": "Turkey",
         "city": "Milas",
@@ -301,6 +317,150 @@
       "isFeatured": false,
       "createdAt": "2026-06-28",
       "updatedAt": "2026-06-28"
+    },
+    {
+      "id": "tr-milas-kiyikislacik-land-1003",
+      "objectNumber": "1003",
+      "_dealType": "sale",
+      "_propertyType": "land",
+      "_district": "Kıyıkışlacık",
+      "_price": 28485000,
+      "_area": 59116,
+      "_seaFront": true,
+      "_view": "sea",
+      "status": "sale",
+      "type": "land",
+      "title": {
+        "tr": "Port Kıyıkışlacık denize sıfır yatırım arazisi",
+        "ru": "Земля на первой линии моря в Port Kıyıkışlacık",
+        "en": "Seafront investment land in Port Kıyıkışlacık",
+        "fr": "Terrain d'investissement en bord de mer a Port Kıyıkışlacık",
+        "de": "Investitionsgrundstueck direkt am Meer in Port Kıyıkışlacık",
+        "ar": "أرض استثمارية على البحر في Port Kıyıkışlacık"
+      },
+      "description": {
+        "tr": "Port Kıyıkışlacık bölgesinde denize sıfır konumda, yat limanı inşaatına uygun hazır projeli ve devlet onaylı yatırım arazisi. Tapulu toplam alan 59.116 m2 olup 28.388 m2 ve 30.728 m2 deed parsellerinden oluşur. Proje, yatlar için marina, iskele, servis alanları ve ticari kullanım potansiyeli sunar; ayrıca 7.096 m2 ve 20.618 m2 ek alanlarla marina büyütme imkanı bulunur.",
+        "ru": "Земля на первой линии моря в Port Kıyıkışlacık с готовым проектом под яхтенный порт и государственным разрешением на строительство портовой инфраструктуры. Основная оформленная площадь по двум DEED-участкам составляет 59 116 м²: 28 388 м² и 30 728 м². Проект предусматривает марину для яхт, причалы, сервисные зоны и коммерческое использование; дополнительно на схеме указаны участки 7 096 м² и 20 618 м² с потенциалом расширения марины.",
+        "en": "Seafront land in Port Kıyıkışlacık with a ready yacht port project and government approval for port infrastructure development. The registered deed area totals 59,116 m2 across two deed parcels: 28,388 m2 and 30,728 m2. The project allows for a yacht marina, piers, service areas and commercial use, with additional 7,096 m2 and 20,618 m2 areas shown on the plan for marina expansion potential.",
+        "fr": "Terrain en bord de mer a Port Kıyıkışlacık avec projet pret pour un port de plaisance et autorisation de l'Etat pour le developpement d'infrastructures portuaires. La surface titree totale est de 59 116 m2 sur deux parcelles deed: 28 388 m2 et 30 728 m2. Le projet prevoit une marina pour yachts, des pontons, des zones de service et un usage commercial, avec des zones supplementaires de 7 096 m2 et 20 618 m2 pour une extension potentielle.",
+        "de": "Grundstueck direkt am Meer in Port Kıyıkışlacık mit fertigem Yacht-Hafenprojekt und staatlicher Genehmigung fuer den Bau von Hafeninfrastruktur. Die eingetragene Deed-Flaeche betraegt insgesamt 59.116 m2 auf zwei Parzellen: 28.388 m2 und 30.728 m2. Das Projekt umfasst eine Yacht-Marina, Stege, Servicebereiche und gewerbliche Nutzung; zusaetzlich zeigen 7.096 m2 und 20.618 m2 Flaechen Potenzial zur Marina-Erweiterung.",
+        "ar": "أرض على البحر في Port Kıyıkışlacık مع مشروع جاهز لميناء يخوت وموافقة حكومية لبناء بنية تحتية للميناء. تبلغ مساحة السندات المسجلة 59,116 م2 على قطعتين: 28,388 م2 و30,728 م2. يتيح المشروع إنشاء مارينا لليخوت وأرصفة ومناطق خدمات واستخدام تجاري، مع مساحات إضافية 7,096 م2 و20,618 م2 لإمكانية توسعة المارينا."
+      },
+      "summary": {
+        "tr": "Devlet onaylı hazır marina projesine sahip denize sıfır arazi.",
+        "ru": "Земля у моря с готовым проектом яхтенного порта и госразрешением.",
+        "en": "Seafront land with a ready yacht port project and government approval.",
+        "fr": "Terrain en bord de mer avec projet de marina pret et autorisation de l'Etat.",
+        "de": "Grundstueck direkt am Meer mit fertigem Yacht-Hafenprojekt und Genehmigung.",
+        "ar": "أرض على البحر مع مشروع ميناء يخوت جاهز وموافقة حكومية."
+      },
+      "location": {
+        "country": "Turkey",
+        "city": "Milas",
+        "district": "Kıyıkışlacık",
+        "subdistrict": "Port Kıyıkışlacık",
+        "coordinates": {
+          "lat": 37.2829,
+          "lng": 27.5918
+        },
+        "display": {
+          "tr": "Muğla / Milas / Kıyıkışlacık",
+          "ru": "Muğla / Milas / Kıyıkışlacık",
+          "en": "Muğla / Milas / Kıyıkışlacık",
+          "fr": "Muğla / Milas / Kıyıkışlacık",
+          "de": "Muğla / Milas / Kıyıkışlacık",
+          "ar": "Muğla / Milas / Kıyıkışlacık"
+        }
+      },
+      "price": {
+        "value": 28485000,
+        "currency": "USD"
+      },
+      "area": {
+        "value": 59116,
+        "unit": "m2"
+      },
+      "features": {
+        "rooms": null,
+        "floor": null,
+        "bedrooms": null,
+        "bathrooms": null,
+        "furnished": null,
+        "parking": null,
+        "deedParcels": [
+          "28388 m2",
+          "30728 m2"
+        ],
+        "optionalAreas": [
+          "7096 m2",
+          "20618 m2"
+        ]
+      },
+      "details": {
+        "tr": [
+          "59.116 m2",
+          "Denize sıfır",
+          "Hazır marina projesi",
+          "Devlet onaylı"
+        ],
+        "ru": [
+          "59 116 м²",
+          "Первая линия моря",
+          "Готовый проект марины",
+          "Разрешение государства"
+        ],
+        "en": [
+          "59,116 m2",
+          "Seafront",
+          "Ready marina project",
+          "Government approval"
+        ],
+        "fr": [
+          "59 116 m2",
+          "Bord de mer",
+          "Projet marina pret",
+          "Autorisation de l'Etat"
+        ],
+        "de": [
+          "59.116 m2",
+          "Direkt am Meer",
+          "Fertiges Marina-Projekt",
+          "Staatliche Genehmigung"
+        ],
+        "ar": [
+          "59,116 م2",
+          "على البحر",
+          "مشروع مارينا جاهز",
+          "موافقة حكومية"
+        ]
+      },
+      "media": {
+        "preview": [
+          "image/1003/1.jpg",
+          "image/1003/2.jpg",
+          "image/1003/3.jpg"
+        ],
+        "gallery": [
+          "image/1003/1.jpg",
+          "image/1003/2.jpg",
+          "image/1003/3.jpg",
+          "image/1003/4.jpg",
+          "image/1003/5.jpg",
+          "image/1003/6.jpg",
+          "image/1003/7.jpg",
+          "image/1003/8.jpg",
+          "image/1003/9.jpg",
+          "image/1003/10.jpg",
+          "image/1003/11.jpg",
+          "image/1003/12.jpg",
+          "image/1003/13.jpg",
+          "image/1003/14.jpg",
+          "image/1003/15.jpg"
+        ]
+      },
+      "isFeatured": false,
+      "createdAt": "2026-06-30",
+      "updatedAt": "2026-06-30"
     }
   ]
 }
