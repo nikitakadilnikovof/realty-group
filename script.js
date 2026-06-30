@@ -336,6 +336,7 @@ let currentCurrency = localStorage.getItem('currency') || 'USD';
 let savedPropertyIds = new Set();
 let lightboxImages = [];
 let lightboxIndex = 0;
+let lightboxAnimating = false;
 let detailGalleryImages = [];
 let detailGalleryTitle = '';
 let detailGalleryVisibleLimit = 0;
@@ -1086,7 +1087,9 @@ function getFilteredProperties() {
           return (!hasMin || value >= min) && (!hasMax || value <= max);
         }
 
-        const selectedValues = [...document.querySelectorAll(`[data-filter-key="${filter.key}"]:checked`)].map(input => input.value);
+        const selectedValues = [...document.querySelectorAll(`[data-filter-key="${filter.key}"]:checked`)]
+          .map(input => input.value)
+          .filter(value => value !== 'all');
         if (!selectedValues.length) return true;
         if (!Object.prototype.hasOwnProperty.call(property, filter.key)) return false;
 
@@ -1209,17 +1212,67 @@ async function shareProperty(propertyId) {
   }
 }
 
-function showLightboxImage() {
+function setLightboxImageContent() {
   const image = document.getElementById('lightboxImage');
   const counter = document.getElementById('lightboxCounter');
   if (!image || !lightboxImages.length) return;
 
   const current = lightboxImages[lightboxIndex];
-  image.classList.remove('is-dragging');
-  image.style.transform = '';
   image.src = current.src;
   image.alt = current.alt;
   if (counter) counter.textContent = `${lightboxIndex + 1} / ${lightboxImages.length}`;
+}
+
+function getLightboxPreviewImage() {
+  const image = document.getElementById('lightboxImage');
+  if (!image) return null;
+
+  let preview = document.getElementById('lightboxPreviewImage');
+  if (preview) return preview;
+
+  preview = document.createElement('img');
+  preview.id = 'lightboxPreviewImage';
+  preview.className = 'lightbox-preview-image';
+  preview.alt = '';
+  preview.setAttribute('aria-hidden', 'true');
+  image.insertAdjacentElement('afterend', preview);
+  return preview;
+}
+
+function lightboxOffsetTransform(offset) {
+  return `translate3d(calc(${offset.vw}vw + ${offset.px}px), 0, 0)`;
+}
+
+function prepareLightboxPreview(direction, primed = false) {
+  const preview = getLightboxPreviewImage();
+  if (!preview || !lightboxImages.length) return null;
+
+  const nextIndex = (lightboxIndex + direction + lightboxImages.length) % lightboxImages.length;
+  const next = lightboxImages[nextIndex];
+  preview.src = next.src;
+  preview.alt = '';
+  preview.classList.toggle('is-priming', primed);
+  preview.classList.add('is-active');
+  preview.style.transform = lightboxOffsetTransform({ vw: direction * 100, px: 0 });
+  return preview;
+}
+
+function hideLightboxPreview() {
+  const preview = document.getElementById('lightboxPreviewImage');
+  if (!preview) return;
+
+  preview.classList.remove('is-active', 'is-dragging', 'is-sliding', 'is-priming');
+  preview.style.transform = '';
+}
+
+function showLightboxImage() {
+  const image = document.getElementById('lightboxImage');
+  if (!image || !lightboxImages.length) return;
+
+  image.classList.remove('is-dragging', 'is-sliding', 'is-priming');
+  image.style.transform = '';
+  hideLightboxPreview();
+  setLightboxImageContent();
 }
 
 function openLightbox(index) {
@@ -1234,12 +1287,83 @@ function openLightbox(index) {
 function closeLightbox() {
   document.getElementById('galleryLightbox')?.classList.remove('active');
   document.body.classList.remove('modal-open');
+  lightboxAnimating = false;
+  hideLightboxPreview();
+}
+
+function cancelLightboxSwipe(direction) {
+  const image = document.getElementById('lightboxImage');
+  const preview = document.getElementById('lightboxPreviewImage');
+  if (!image) return;
+
+  lightboxAnimating = true;
+  image.classList.remove('is-dragging');
+  image.style.transform = 'translate3d(0, 0, 0)';
+
+  if (preview?.classList.contains('is-active')) {
+    preview.classList.remove('is-dragging');
+    preview.style.transform = `translate3d(${direction * 100}vw, 0, 0)`;
+  }
+
+  window.setTimeout(() => {
+    hideLightboxPreview();
+    image.style.transform = '';
+    lightboxAnimating = false;
+  }, 280);
+}
+
+function finishLightboxTransition(direction) {
+  const image = document.getElementById('lightboxImage');
+  if (!image || !lightboxImages.length) return;
+
+  lightboxIndex = (lightboxIndex + direction + lightboxImages.length) % lightboxImages.length;
+  image.classList.add('is-priming');
+  image.classList.remove('is-dragging', 'is-sliding');
+  image.style.transition = 'none';
+  image.style.transform = 'translate3d(0, 0, 0)';
+  setLightboxImageContent();
+  hideLightboxPreview();
+  image.offsetHeight;
+  image.style.transform = '';
+
+  window.requestAnimationFrame(() => {
+    image.classList.remove('is-priming');
+    image.style.transition = '';
+  });
+}
+
+function animateLightboxSlide(direction) {
+  const image = document.getElementById('lightboxImage');
+  if (!image || !lightboxImages.length || lightboxAnimating) return;
+
+  const activePreview = document.getElementById('lightboxPreviewImage');
+  const preview = activePreview?.classList.contains('is-active')
+    ? activePreview
+    : prepareLightboxPreview(direction, true);
+  if (!preview) return;
+
+  lightboxAnimating = true;
+  image.classList.remove('is-dragging', 'is-priming');
+  image.classList.add('is-sliding');
+  preview.classList.remove('is-dragging');
+  preview.classList.add('is-sliding');
+
+  window.requestAnimationFrame(() => {
+    window.requestAnimationFrame(() => {
+      preview.classList.remove('is-priming');
+      image.style.transform = `translate3d(${-direction * 100}vw, 0, 0)`;
+      preview.style.transform = 'translate3d(0, 0, 0)';
+
+      window.setTimeout(() => {
+        finishLightboxTransition(direction);
+        lightboxAnimating = false;
+      }, 280);
+    });
+  });
 }
 
 function moveLightbox(direction) {
-  if (!lightboxImages.length) return;
-  lightboxIndex = (lightboxIndex + direction + lightboxImages.length) % lightboxImages.length;
-  showLightboxImage();
+  animateLightboxSlide(direction);
 }
 
 function bindLightbox() {
@@ -1247,20 +1371,22 @@ function bindLightbox() {
   let startX = 0;
   let startY = 0;
   let currentX = 0;
+  let swipeDirection = 0;
   let swiping = false;
 
   const startSwipe = event => {
     const touch = event.changedTouches?.[0];
-    if (!touch || !image) return;
+    if (!touch || !image || lightboxAnimating) return;
     startX = touch.clientX;
     startY = touch.clientY;
     currentX = touch.clientX;
+    swipeDirection = 0;
     swiping = true;
     image.classList.add('is-dragging');
   };
 
   const moveSwipe = event => {
-    if (!swiping || !image) return;
+    if (!swiping || !image || lightboxAnimating) return;
 
     const touch = event.changedTouches?.[0];
     if (!touch) return;
@@ -1272,7 +1398,19 @@ function bindLightbox() {
     if (Math.abs(deltaX) < Math.abs(deltaY)) return;
 
     event.preventDefault();
-    image.style.transform = `translateX(${deltaX * 0.35}px)`;
+    const nextDirection = deltaX < 0 ? 1 : -1;
+    if (nextDirection !== swipeDirection) {
+      swipeDirection = nextDirection;
+      const nextPreview = prepareLightboxPreview(swipeDirection);
+      nextPreview?.classList.add('is-dragging');
+    }
+
+    const preview = document.getElementById('lightboxPreviewImage');
+    image.style.transform = `translate3d(${deltaX}px, 0, 0)`;
+
+    if (preview?.classList.contains('is-active')) {
+      preview.style.transform = lightboxOffsetTransform({ vw: swipeDirection * 100, px: deltaX });
+    }
   };
 
   const endSwipe = () => {
@@ -1281,10 +1419,13 @@ function bindLightbox() {
     const deltaX = currentX - startX;
     swiping = false;
     image.classList.remove('is-dragging');
-    image.style.transform = '';
 
-    if (Math.abs(deltaX) < 55) return;
-    moveLightbox(deltaX < 0 ? 1 : -1);
+    if (Math.abs(deltaX) < 55) {
+      cancelLightboxSwipe(swipeDirection || (deltaX < 0 ? 1 : -1));
+      return;
+    }
+
+    animateLightboxSlide(deltaX < 0 ? 1 : -1);
   };
 
   document.getElementById('lightboxClose')?.addEventListener('click', closeLightbox);

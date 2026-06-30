@@ -1855,15 +1855,28 @@ button {
 }
 
 .gallery-lightbox img {
+  position: absolute;
+  inset: 0;
+  margin: auto;
   max-width: 100vw;
   max-height: 100vh;
   object-fit: contain;
   touch-action: pan-y;
-  transition: transform 0.22s ease;
+  transition: transform 0.28s cubic-bezier(0.22, 0.61, 0.36, 1);
   user-select: none;
+  will-change: transform;
 }
 
-.gallery-lightbox img.is-dragging {
+.gallery-lightbox img.lightbox-preview-image {
+  display: none;
+}
+
+.gallery-lightbox img.lightbox-preview-image.is-active {
+  display: block;
+}
+
+.gallery-lightbox img.is-dragging,
+.gallery-lightbox img.is-priming {
   transition: none;
 }
 
